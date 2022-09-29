@@ -7,6 +7,8 @@ Tyler:
     - Circle class
     - Rectangle class
     - Triangle class
+    - RGB Values
+    - drawFractal method
 
 Connor:
     - 

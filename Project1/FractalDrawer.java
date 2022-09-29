@@ -58,8 +58,6 @@ public class FractalDrawer {
         }
     }
 
-
-    // TODO:
     // drawCircleFractal draws a circle fractal using recursive techniques
     public void drawCircleFractal(double radius, double x, double y, Canvas can, int level) {
         // RGB Values
@@ -85,8 +83,6 @@ public class FractalDrawer {
         }
     }
 
-
-    //TODO:
     // drawRectangleFractal draws a rectangle fractal using recursive techniques
     public void drawRectangleFractal(double width, double height, double x, double y, Canvas can, int level) {
         // RGB Values
@@ -113,9 +109,6 @@ public class FractalDrawer {
         }
     }
 
-    //TODO:
-    // main should ask user for shape input, and then draw the corresponding fractal.
-    // should print area of fractal
     public static void main(String[] args){
         Scanner scanna = new Scanner(System.in);
         FractalDrawer drawer = new FractalDrawer();
@@ -126,11 +119,6 @@ public class FractalDrawer {
         System.out.println("shapetype: " + shapetype);
         drawer.drawFractal(shapetype);
     
-       
-        
-
-
-
-        //scanna.close();
+        scanna.close();
     }
 }
