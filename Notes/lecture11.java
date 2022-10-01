@@ -1,19 +1,22 @@
+/*
+
 package Notes;
+
 
 public class lecture11 {
 
-//     Copying vs Cloning:
+    Copying vs Cloning:
 
-// What is a memory leak?
-// 	• When unused stuff does not return memory to be reused
-// 	• When you don’t allocate space manually, it creates more opportunities for memory to be wasted
+What is a memory leak?
+	• When unused stuff does not return memory to be reused
+	• When you don’t allocate space manually, it creates more opportunities for memory to be wasted
 
-// Copy:
-// 	• Supply 2 objects one that is the original and one that will be the copy
+Copy:
+	• Supply 2 objects one that is the original and one that will be the copy
 
-// Cloning:
-// 	• Supply only the original. The second is manufactured by the clone method 
-// 	• A non static cloning method needs no arguments it just makes itself again 
+Cloning:
+	• Supply only the original. The second is manufactured by the clone method 
+	• A non static cloning method needs no arguments it just makes itself again 
 
 
     // create the static method
@@ -52,13 +55,15 @@ public class lecture11 {
         
     }
 
-//     When you create an array of objects it starts with nothing in it.
+    When you create an array of objects it starts with nothing in it.
 
-// This is a shallow clone creating method.
-// Points to the same objects in memory as the first array that was cloned.
+This is a shallow clone creating method.
+Points to the same objects in memory as the first array that was cloned.
 
-// To create a deep clone you have to create a new object for each object in the original array.
-// To do this you have to call a clone method for each object inside of the array to create new objects in memory.
+To create a deep clone you have to create a new object for each object in the original array.
+To do this you have to call a clone method for each object inside of the array to create new objects in memory.
 
     
 }
+
+*/
