@@ -8,8 +8,8 @@ public class Hist2{
 
     public Hist2(int initLowerbound, int initUpperbound) {
         if(initUpperbound < initLowerbound){
-            lowerbound = initUpperbound
-            upperbound = initLowerbound
+            lowerbound = initUpperbound;
+            upperbound = initLowerbound;
         }else{
             lowerbound = initLowerbound;
             upperbound = initUpperbound;
