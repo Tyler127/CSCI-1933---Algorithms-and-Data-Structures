@@ -1,6 +1,6 @@
 Group Members:
 Tyler Larson - lars6653
-Connor Kanten - 
+Connor Kanten - Kante060
 
 Contributions:
 Tyler:
