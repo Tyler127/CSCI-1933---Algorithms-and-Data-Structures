@@ -1,6 +1,3 @@
-import java.util.Scanner;//imports scanner class
-import java.util.Arrays; // import the ArrayList class
-import java.util.HashMap;//Imports "dictionaries"
 public class Histogram{
     public int upperbound;
     public int lowerbound;

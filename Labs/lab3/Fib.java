@@ -35,6 +35,7 @@ public class Fib {
         int n = fibScan.nextInt();
         System.out.println("Recursive: " + fibonacciRecursive(n));
         System.out.println("Iterative: " + fibonacciIterative(n));
+        fibScan.close();
     
     }
 }

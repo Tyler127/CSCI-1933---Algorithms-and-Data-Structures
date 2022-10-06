@@ -47,5 +47,6 @@ public class Max {
         int n = maxScan.nextInt();
         System.out.println("Recursive: " + recursiveMaxDigit(n));
         System.out.println("Iterative: " + iterativeMaxDigit(n));
+        maxScan.close();
     }
 }
