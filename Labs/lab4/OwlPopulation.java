@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.util.Arrays;
 
 public class OwlPopulation {
     private String fileName;
@@ -24,7 +22,7 @@ public class OwlPopulation {
         scanner = new Scanner(f);
         int counta = 0;
 
-        //TODO: Populate the data with owls constructed from the lines of the file given
+        //Populates the data with owls constructed from the lines of the file given
         while(scanner.hasNextLine()){
             String s = scanner.nextLine();
             String[] stuff = s.split(",");
@@ -40,7 +38,7 @@ public class OwlPopulation {
     }
 
     public OwlPopulation(String fileName) throws FileNotFoundException {
-        //TODO: Populate the class variables in OwlPopulation
+        // Populates the class variables in OwlPopulation
         this.fileName = fileName;
         populateData();
     }
@@ -90,61 +88,82 @@ public class OwlPopulation {
     }
 
     public boolean containsOwl(Owl other){
-        //TODO: method you can implement as a helper function to your merge method
+        // Tests if any element in this.data is equal to any item in other.data
+        for (int i = 0; i < data.length; i++) {
+            if (data[i].equals(other)) {
+                return true;
+            }
+        }
         return false;
     }
+
+    // public void scanDupes(OwlPopulation small, OwlPopulation, big){
+
+    // }
 	
     public void merge(OwlPopulation other){
-        
-        ////make list size of other(LIST@), iterate over OTHER data and test against THIS
-        ////add uniques to LIST@, then iterate over LIST@ and remove NULLS
-        ////add length of LIST@ to length of THIS and make new OWL[] and add everything to it
-        ////replace THIS data
 
-        Owl[] listA = new Owl[other.data.length];
-        int unique = 0;
-        for(int i = 0; i <= other.data.length; i++){
-            Owl currOwl = other.data[i];
-            int dups = 0;
-            for(int j = 0; j<= this.data.length; j++){
-                if(currOwl.equals(this.data[j])){
-                    dups += 1;
-                }
-            if(dups == 0){
-                listA[i] = currOwl;
-                unique += 1;
+        // Creates a new array to store the owls in
+        Owl[] owlStorage = new Owl[this.data.length + other.data.length];
+
+        // Used to count the current working index of owlStorage
+        int usedSpaceCounter = 0;
+
+        // Used to count the amount of duplicates found between the two arrays
+        int dupes = 0;
+
+        // Searches for dupes between the two arrays being merged and 
+        // adds the non-dupes to owlStorage
+        for (int i = 0; i < other.data.length; i++){
+            if (containsOwl(other.data[i])){
+                //System.out.println("Truers in chat " + i);
+                dupes += 1;
+            } 
+            else {
+                //System.out.println("falsers at " + i);
+                // Subtract dupes from i to prevent nulls being added
+                // to owlStorage from skipping indexes when a dupe is found
+                owlStorage[i-dupes] = other.data[i];
+                usedSpaceCounter += 1;
             }
         }
+        //System.out.println("owlStorage length: " + usedSpaceCounter);
+
+        // Renamed to make more sense
+        int indexofStorage = usedSpaceCounter;
+
+        // Adds all elements of this.data to owlStorage starting at the length of 
+        // the usedSpaceCounter of owlStorage which is the index of the first open spot in the array
+        for (int i = 0; i < this.data.length; i++){
+            owlStorage[indexofStorage + i] = this.data[i];
+            //System.out.println("index " + i + " of this.data added to index " + (indexofStorage + i) + " of owlStorage");
         }
-        Owl[] listB = new Owl[unique];
-        int counta = 0;
-        for(int k = 0; k <= listA.length; k++){
-            if(listA[k] != null){
-                listB[counta] = listA[k];
-                counta += 1;
+
+        // Counts the amount of nulls that appear at the end of the owlStorage array
+        int nullCounter = 0;
+        for(int i = 0; i < owlStorage.length; i++) {
+            if(owlStorage[i] == null) {
+                nullCounter++;
+                //System.out.println("finalOutput null at: " + i);
             }
         }
-        Owl[] listFinal = new Owl[listB.length + this.data.length];
-        int counta2 = 0;
-        for (int x = 0; x <= this.data.length; x ++){
-            listFinal[counta2] = this.data[x];
-            counta2 += 1;
+        //System.out.println("finalOutput nulls: " + nullCounter);
+
+        // Therefore the actual space used in owlStorage that is not nulls is this:
+        int finalSpaceUsed = owlStorage.length - nullCounter;
+
+        // Creates a new output array that will be the exact length of used space
+        Owl[] finalOutput = new Owl[finalSpaceUsed];
+
+        // Loops through owlStorage only for the length of finalSpacedUsed
+        // so that there is no nulls
+        for (int i = 0; i < finalSpaceUsed; i++){
+            finalOutput[i] = owlStorage[i];
         }
-        for(int y = 0; y <= listB.length; y ++){
-            listFinal[counta2] = listB[y];
-            counta2 += 1;
-        }
-        this.data = listFinal;
+        //System.out.println("finalOutput array length: " + finalOutput.length);
 
-        //TODO: a brief overview of what you can do to implement this method is given below:
-
-        //1) determine (and store) the distinct owls in the other population.
-       
-        //2) make a new data array to hold the correct number of owls for the merged population
-        //3) copy over the distinct owls from each population to the data array
-
-
-        //4) set the new data array to "this" data (where is the merged population? what happens to the original populations?)
+        // Reassigns the input array to the output
+        this.data = finalOutput;
     }
 
     public int popSize(){
@@ -168,14 +187,17 @@ public class OwlPopulation {
             //System.out.println(pop2.popSize());
             // System.out.println("pop2 avg. age: " + pop2.averageAge());
             //System.out.println(pop2.toString());
-            Owl[] ssu = new Owl[2];
-            System.out.println(Arrays.toString(ssu));
+
+            //Owl[] ssu = new Owl[2];
+            //System.out.println(Arrays.toString(ssu));
 
 
             pop1.merge(pop2);
             System.out.println(pop1);
             System.out.println(pop1.popSize());
+
         }
+
         catch (FileNotFoundException f){
             System.out.println("File not found.");
         }
