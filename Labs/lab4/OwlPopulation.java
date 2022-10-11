@@ -14,7 +14,8 @@ public class OwlPopulation {
         int numLines = 0;
         while(scanner.hasNextLine()){
             numLines++;
-            String s = scanner.nextLine();
+
+            scanner.nextLine();
         }
         scanner.close();
 
