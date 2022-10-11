@@ -56,7 +56,7 @@ class Bookshelf{
      */
     public String toString(){
         String wurds = "";
-        for(int i = 0; i < this.BookList.length; i ++){
+        for (int i = 0; i < this.BookList.length; i ++){
             String temp = this.BookList[i].toString() + "\n";
             wurds = wurds + temp;
         }
@@ -66,7 +66,7 @@ class Bookshelf{
     public void sort(char sortBy){
         System.out.println("running");
         int actualLength = this.BookList.length;
-        for(int z = 0; z < this.BookList.length; z++){
+        for (int z = 0; z < this.BookList.length; z++){
             if(this.BookList[z] == null){
                 actualLength = actualLength - 1;
             }
@@ -74,21 +74,35 @@ class Bookshelf{
 
         int i, j, minIndex;
         Book temp;
-        for(i = 0; i < actualLength; i++){
+        for (i = 0; i < actualLength; i++){
             minIndex = i;
-            for(j = i+1; j < actualLength - 1; j++){
-                //System.out.println(this.BookList[j].compareTo(this.BookList[minIndex], sortBy));
-                
-                System.out.println(this.BookList[j].getAuthor() + " compared to " + this.BookList[minIndex].getAuthor() + " equals " + this.BookList[j].compareTo(this.BookList[minIndex], sortBy));
+            //System.out.println("i author " + this.BookList[minIndex].getAuthor());
+            for (j = i+1; j < actualLength; j++){
+                //System.out.println("    j author " + this.BookList[j].getAuthor());
                 if(this.BookList[minIndex].compareTo(this.BookList[j], sortBy) > 0){
                     minIndex = j;
                 }
             }
             temp = this.BookList[minIndex];
             this.BookList[minIndex] = this.BookList[i];
-            System.out.println(this.BookList[minIndex].getAuthor());
             this.BookList[i] = temp;
         }
+
+        // int i, j;
+        // Book temp;
+        // for(i = 0; i < actualLength; i++){
+        //     System.out.println("i author " + this.BookList[i].getAuthor());
+        //     for(j = i+1; j < actualLength; j++){
+        //         System.out.println("    j author " + this.BookList[j].getAuthor());
+        //         //System.out.println(this.BookList[j].compareTo(this.BookList[minIndex], sortBy));
+        //         // flip sign to make backwards
+        //         if (this.BookList[i].compareTo(this.BookList[j], sortBy) > 0){
+        //             temp = this.BookList[i];
+        //             this.BookList[i] = this.BookList[j];
+        //             this.BookList[j] = temp;
+        //         }
+        //     }
+        // }
     }
     
 
@@ -104,10 +118,12 @@ class Bookshelf{
 
         Bookshelf bs = new Bookshelf(5);
     bs.add(new Book("Eragon", "Christopher Paolini", 10.0));
+
     bs.add(new Book("The Fellowship of the Ring", "J.R.R. Tolkein", 10.0));
     bs.add(new Book("Twilight", "Stephenie Meyer", 0.0));
     bs.add(new Book("The Diary of a Wimpy Kid", "Jeff Kinney", 0.0));
     bs.add(new Book("Dracula", "Bram Stoker", 7.5));
+
     // System.out.println(bs.sort('a'));
     bs.sort('a');
     System.out.println(bs);
