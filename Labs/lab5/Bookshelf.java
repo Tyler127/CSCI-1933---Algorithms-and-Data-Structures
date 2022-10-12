@@ -63,6 +63,11 @@ class Bookshelf{
         return wurds;
     }
 
+    /**
+     * sorts list of books by specified paramater
+     * @param sortBy a character that specifies how the list is sorted; Author, Title, or Rating
+     * returns nothing, only edits and organizes the list itself
+     */
     public void sort(char sortBy){
         System.out.println("running");
         int actualLength = this.BookList.length;
