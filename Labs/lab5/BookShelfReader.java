@@ -4,6 +4,11 @@ import java.io.FilenameFilter;
 import java.io.PrintWriter;
 
 public class BookShelfReader {
+    /**
+     * turns books in a given file into a bookshelf object
+     * @param fileName name of file to be read
+     * @return bookshelf object containing books from file
+     */
     public static Bookshelf readBooksFromFile(String fileName){
         Bookshelf bookShelfEins = new Bookshelf(20);
         //String cutName = fileName.substring(0, fileName.length() - 4);
@@ -29,6 +34,12 @@ public class BookShelfReader {
         }
 
     }
+
+    /**
+     * writes the .toString of a bookshelf to a text file
+     * @param b booksheld to be written to file
+     * @param fileName desired name of file to be written to
+     */
     public static void writeShelfToFile(Bookshelf b, String fileName){
         PrintWriter p = null; // declare p outside try-catch block
         try {
