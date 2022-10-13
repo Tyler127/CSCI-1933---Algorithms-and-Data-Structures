@@ -57,8 +57,10 @@ class Bookshelf{
     public String toString(){
         String wurds = "";
         for (int i = 0; i < this.BookList.length; i ++){
+            if(this.BookList[i] != null){
             String temp = this.BookList[i].toString() + "\n";
             wurds = wurds + temp;
+            }
         }
         return wurds;
     }
