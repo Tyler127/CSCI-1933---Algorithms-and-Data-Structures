@@ -43,19 +43,23 @@ public class Board {
 
     // Game functionality methods:
 
-    // cant verify this works until veritfy vertical is done then can test this with moving pawns
-    //TODO: finish movePiece
-    // Moves a Piece object from one cell in the board to another, provided that
-    // this movement is legal. Returns a boolean to signify success or failure.
+    /**
+     * Moves a Piece object from one cell in the board to another, provided that the movement is legal.
+     * @param startRow     The row of the start position.
+     * @param startCol    The column of the start position.
+     * @param endRow The row of the end position.
+     * @param endCol The column of the end position.
+     * @return true if the piece is successfully moved and false if the piece was not moved.
+     * @author Tyler
+     */
     public boolean movePiece(int startRow, int startCol, int endRow, int endCol) {
         Piece movingPiece = this.getPiece(startRow, startCol);
-        Piece pieceToReplace = this.getPiece(endRow, endCol);
-
         
         // Case 1: The move is legal. The piece is replaced.
         if (movingPiece.isMoveLegal(this, endRow, endCol)){
             this.setPiece(endRow, endCol, movingPiece);
             this.setPiece(startRow, startCol, null);
+            return true;
         }
 
         // Case 2: the move is illegal. Nothing happens.
@@ -157,6 +161,33 @@ public class Board {
     // - Player's color and color of 'start' Piece match.
     // - Destination contains either no Piece or a Piece of the opposite color.
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
+        boolean inBounds= false;
+        boolean containPieces = false;
+        boolean colorsMatch = false;
+        boolean destinationCheck = false;
+        Piece startPiece = this.getPiece(startRow, startCol);
+        Piece endPiece = this.getPiece(endRow, endCol);
+
+        // true if piece is within the boards bounds
+        if (startRow <= 7 && startRow >= 0 && endRow <= 7 && endRow >= 0) {
+            inBounds = true;
+        }w
+        // true if the both locations are pieces
+        if (startPiece != null && endPiece != null) {
+            containPieces = true;
+        }
+
+        // true if current color matches the piece being moved
+        if ((startPiece.getIsBlack() == true && isBlack == true) || (startPiece.getIsBlack() == false && isBlack == false)) {
+            colorsMatch = true;
+        }
+
+        // true if the other location is empty or the opposite color
+        if (endPiece == null || endPiece.getIsBlack() != startPiece.getIsBlack()) {
+            destinationCheck = true;
+        }
+
+        if (inBounds == true && )
         return false;
     }
 
@@ -289,11 +320,15 @@ public class Board {
         }
     }
 
-    //TODO: verifyDiagonal
-    // Checks whether a given 'start' and 'end' position are a valid diagonal move.
-    // Returns a boolean to signify whether:
-    // - The path from 'start' to 'end' is diagonal... change in row and col.
-    // - All spaces directly between 'start' and 'end' are empty, i.e., null.
+    /**
+     * Checks whether a given 'start' and 'end' position are a valid diagonal move.
+     * @param startRow     The row of the start position.
+     * @param startCol    The column of the start position.
+     * @param endRow The row of the end position.
+     * @param endCol The column of the end position.
+     * @return true if the diagonal move will move to open space or move onto a piece. false if attempting to move past a piece.
+     * @author Tyler
+     */
     public boolean verifyDiagonal(int startRow, int startCol, int endRow, int endCol) {
         int rowDistance = Math.abs(startRow - endRow);
         int colDistance = Math.abs(startCol - endCol);
