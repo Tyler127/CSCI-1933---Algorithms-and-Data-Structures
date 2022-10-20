@@ -1,0 +1,120 @@
+// Constructs a "Whatever" object
+private int data;
+public Whatever(int initData) {
+    this.data = intiData;
+}
+public static void setData(int newData) {
+    this.data = newData;
+}
+
+// Computes the sum of the numbers the user enters
+Scanner s = new Scanner(System.in);
+int sum = 0;
+while (s.hasNext()) {
+    String data = s.next();
+        if (data == "stop") {
+            break;
+    }
+    else{
+        int num = Integer.parseInt(data);
+        sum += num;
+    }
+}
+System.out.println("The sum is:" + sum);
+
+//Assume Ingredient class constructor takes in the amount of the ingredient
+Ingredient[] recipe;
+Ingredient eggs = new Ingredient(12);
+Ingredient flour = new Ingredient(100);
+Ingredient butter = Ingredient(5);
+recipe = new Ingredient[3];
+recipe[0] = eggs;
+recipe[1] = flour;
+recipe[2] = butter;
+for(int i=0; i<recipe.length;i++){
+    System.out.println(recipe[i].getAmount());
+}
+
+
+public class Whatever {
+    private int data;
+        public Whatever(int newData) {
+        data = newData;
+    }
+    public void setData(int newData) {
+        data = newData;
+    }
+    public int getData() {
+return data;
+}
+public static void doWhatever(Whatever w, int i, int d) {
+System.out.println("doWhatever(1): w: "+w.getData()+", i: "+i+"; d: "
++d);
+w.setData(i);
+d = i;
+i = d;
+System.out.println("doWhatever(2): w: "+w.getData()+", i: "+i+"; d: "
++d);
+}
+public static void main(String[] args) {
+Whatever w = new Whatever(1);
+int i = 2;
+double d = 3;
+System.out.println("main(1): w: "+w.getData()+", i: "+i+"; d: "+d);
+doWhatever(w, i, (int)d);
+System.out.println("main(2): w: "+w.getData()+", i: "+i+"; d: "+d);
+w = new Whatever(i);
+d = i / 4;
+System.out.println("main(3): w: "+w.getData()+", i: "+i+"; d: "+d);
+}
+}
+
+
+
+public static int powerK(int k, int n){
+    if(n == 0){
+        return k;
+    }else{
+        return k * powerK(k, n-1);
+    }
+}
+
+public static int powerKIterative(int k, int n){
+    int finalNum = 0;
+    while(n > 0){
+        finalNum =finalNum * k;
+        n = n - 1;
+    }
+    return finalNum;
+}
+
+public static double[][] addArr(int[][] arr1, int[][] arr2){
+    int[][] newList = new int[arr1.length()][arr1[0].length()];
+    if(arr1.length() != arr2.length()){
+        return arr1;
+    }else{
+        for(int i = 0; i < arr1.length(); i++){
+            for(int j = 0; j < arr1.length(); j++){
+                newList[i][j] = arr1[i][j] + arr2[i][j];
+            }
+        }
+        return newList;
+    }
+}
+
+public static int greatestCommonDivisor(int a, int b){
+    if(a > b){
+        int bigNum = a;
+        int smallNum = b;
+    }else{
+        int bigNum = b;
+        int smallNum = a;
+    }
+    int remain = 1;
+    while(remain != 0){
+        remain = bigNum % smallNum;
+        bigNum = smallNum;
+        smallNum = remain;
+    }
+    return smallNum;
+}
