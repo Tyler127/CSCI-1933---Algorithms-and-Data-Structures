@@ -1,23 +1,64 @@
+import java.util.Scanner;
+
 public class Game {
     public static void main(String[] args) {
         //Board gameBoard = new Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-        Board gameBoard = new Board("8/pppppppp/8/8/8/1p111111/PPPPPPPP/8");
-        System.out.println(gameBoard.toString());
+        Board gameBoardTesting = new Board("8/pppppppp/8/8/8/1p111111/PPPPPPPP/8");
+        System.out.println(gameBoardTesting.toString());
 
 
        
 
-        gameBoard.movePiece(6, 0, 5, 1);
-        System.out.println(gameBoard.toString());
+        gameBoardTesting.movePiece(6, 0, 5, 1);
+        System.out.println(gameBoardTesting.toString());
 
         //System.out.println(gameBoard.verifyHorizontal(2, 0, 2, 7)); // False
+        
+
+
+        // ------------Game code below comment out to run test cases-----------------------
         // chcp 65001
-
-
         boolean gameOver = false;
-        System.out.println("Welcome to Chess! White goes first.")
-        System.out.println("    Input a move ")
+        Board gameBoard = new Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+        Scanner scanna = new Scanner(System.in);
+        boolean isBlack = false;
+
+        System.out.println("Welcome to Chess!");
+        System.out.println("    When imputting a piece's coordinates enter them in the form of row(space)column like so: 5 4");
+            
         while (gameOver == false) {
+            boolean validMove = false;
+            int startPieceRow;
+            int startPieceCol;
+            int endLocationRow;
+            int endLocationCol;
+
+            if (isBlack) {
+                System.out.println("Black's Turn:");
+            } else {
+                System.out.println("White's Turn:");
+            }
+
+            // Continues looping until a valid input is submitted
+            while (validMove == false) {
+                System.out.println("    Input the coordinates of the piece you want to move.");
+                String input = scanna.nextLine();
+
+                // TODO: parse string for inputs to verify Sand D
+
+                // Will make loop stop if valid move
+                if (gameBoard.verifySourceAndDestination(0, 0, 0, 0, isBlack)) {
+                    validMove = true;
+                }
+                System.out.println("Invalid move. Try inputting a different move!");
+            }
+
+            // Will continue the loop if game is not over
+            if (gameBoard.isGameOver()) {
+                System.out.println("Congratulations! You won chess ez clap!!")
+                gameOver = true;
+            }
+
 
         }
 

@@ -103,16 +103,32 @@ public class Board {
     public String toString() {
         String finalString = "Board: \n" + "   \uFF10 \uFF11 \uFF12 \uFF13 \uFF14 \uFF15 \uFF16 \uFF17 \n"; // Creates column labels
         for (int i = 0; i < board.length; i++){
-            // Creates row labels
+            // Creates row labels 
             switch (i) {
-                case 0: finalString = finalString + "\uFF10" + "|"; break;
-                case 1: finalString = finalString + "\uFF11" + "|"; break;
-                case 2: finalString = finalString + "\uFF12" + "|"; break;
-                case 3: finalString = finalString + "\uFF13" + "|"; break;
-                case 4: finalString = finalString + "\uFF14" + "|"; break;
-                case 5: finalString = finalString + "\uFF15" + "|"; break;
-                case 6: finalString = finalString + "\uFF16" + "|"; break;
-                case 7: finalString = finalString + "\uFF17" + "|"; break;
+                case 0: 
+                    finalString = finalString + "\uFF10" + "|"; 
+                    break;
+                case 1: 
+                    finalString = finalString + "\uFF11" + "|"; 
+                    break;
+                case 2: 
+                    finalString = finalString + "\uFF12" + "|"; 
+                    break;
+                case 3: 
+                    finalString = finalString + "\uFF13" + "|"; 
+                    break;
+                case 4: 
+                    finalString = finalString + "\uFF14" + "|"; 
+                    break;
+                case 5: 
+                    finalString = finalString + "\uFF15" + "|"; 
+                    break;
+                case 6: 
+                    finalString = finalString + "\uFF16" + "|"; 
+                    break;
+                case 7: 
+                    finalString = finalString + "\uFF17" + "|"; 
+                    break;
             }
 
             // Creates chess piece icons and null space 
@@ -154,24 +170,17 @@ public class Board {
     // Movement helper functions
 
     //TODO: verifySoureandDesitnation
-    // Ensure that the player's chosen move is even remotely legal.
-    // Returns a boolean to signify whether:
-    // - 'start' and 'end' fall within the array's bounds.
-    // - Both contain a Piece object, i.e., not null.
-    // - Player's color and color of 'start' Piece match.
-    // - Destination contains either no Piece or a Piece of the opposite color.
 
-
-//     – startRow, startCol, endRow, endCol must be within the bounds of the board.
-// – The start position must contain a piece.
-// – The color of the starting piece must match the color provided to this function.
-// – The destination location must either contain no piece or must contain a piece of the
-// opposite color. (a piece of the opposite color is said to be “captured” when this piece
-// moves to the end location)
+    // Conditions:
+    // done – startRow, startCol, endRow, endCol must be within the bounds of the board.
+    // done – The start position must contain a piece.
+    // done – The color of the starting piece must match the color provided to this function.
+    // done – The destination location must either contain no piece or must contain a piece of the
+    //         opposite color. (a piece of the opposite color is said to be “captured” when this piece
+    //          moves to the end location)
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
         boolean inBounds= false;
-        boolean containPieces = false;
-        boolean colorsMatch = false;
+        boolean startPieceValid = false;
         boolean destinationCheck = false;
         Piece startPiece = this.getPiece(startRow, startCol);
         Piece endPiece = this.getPiece(endRow, endCol);
@@ -181,9 +190,12 @@ public class Board {
             inBounds = true;
         }
 
-        // true if current color matches the piece being moved
-        if ((startPiece.getIsBlack() == true && isBlack == true) || (startPiece.getIsBlack() == false && isBlack == false)) {
-            colorsMatch = true;
+        // true if start contains a piece and matches input color
+        if (startPiece != null) {
+            // true if current color matches the piece being moved
+            if ((startPiece.getIsBlack() == true && isBlack == true) || (startPiece.getIsBlack() == false && isBlack == false)) {
+                startPieceValid = true;
+            }
         }
 
         // true if the other location is empty or the opposite color
@@ -191,7 +203,9 @@ public class Board {
             destinationCheck = true;
         }
 
-        if (inBounds == true && )
+        if (inBounds == true && startPieceValid == true && destinationCheck == true) {
+            return true;
+        }
         return false;
     }
 
@@ -288,17 +302,15 @@ public class Board {
         int testPosition;
         // Case 0: Not a vertical move.
         if (startCol != endCol) {
-            return false; // Obviously not vertical.
+            return false; 
         }
 
         // Case 1: If the move is going up
         if (startRow < endRow){
             distance = endRow - startRow; // checks only spaces in between
-            //System.out.println("Distance: " + distance);
             // Iterates for the amount of distance wanted to move. Determines if a piece is in the way of the move
             for (int i = 0; i < distance; i++){
                 testPosition = startRow + i + 1; // works from the startRow + 1 because otherwise would start testing on startCol
-                //System.out.println("tstpos: " + testPosition);
                 if (board[testPosition][startCol] != null){
                     if (testPosition == endRow){
                         return true; // Case 1.1: There is a piece at the desired movement location, move is valid
@@ -310,7 +322,7 @@ public class Board {
         } 
         // Case 2: If the move is going down
         else {
-            distance = startRow - endRow; // reversed distance calulation to keep the number positive
+            distance = startRow - endRow; 
             for (int i = 0; i < distance; i++){
                 testPosition = startRow - i - 1; // works from the startRow - 1 instead
                 if (board[testPosition][startCol] != null){
