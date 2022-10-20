@@ -160,6 +160,14 @@ public class Board {
     // - Both contain a Piece object, i.e., not null.
     // - Player's color and color of 'start' Piece match.
     // - Destination contains either no Piece or a Piece of the opposite color.
+
+
+//     – startRow, startCol, endRow, endCol must be within the bounds of the board.
+// – The start position must contain a piece.
+// – The color of the starting piece must match the color provided to this function.
+// – The destination location must either contain no piece or must contain a piece of the
+// opposite color. (a piece of the opposite color is said to be “captured” when this piece
+// moves to the end location)
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
         boolean inBounds= false;
         boolean containPieces = false;
@@ -171,10 +179,6 @@ public class Board {
         // true if piece is within the boards bounds
         if (startRow <= 7 && startRow >= 0 && endRow <= 7 && endRow >= 0) {
             inBounds = true;
-        }w
-        // true if the both locations are pieces
-        if (startPiece != null && endPiece != null) {
-            containPieces = true;
         }
 
         // true if current color matches the piece being moved

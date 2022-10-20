@@ -14,7 +14,12 @@ public class Game {
         // chcp 65001
 
 
+        boolean gameOver = false;
+        System.out.println("Welcome to Chess! White goes first.")
+        System.out.println("    Input a move ")
+        while (gameOver == false) {
 
+        }
 
 
 
