@@ -1,6 +1,17 @@
 import java.util.Scanner;
 
 public class Game {
+
+    public static int[] coordsInterpreter(String str){
+        String[] inputList = str.split(" ");
+        int[] coordsList = new int[2];
+        for(int j = 0; j < 2;j++){
+            coordsList[j] = Integer.parseInt(inputList[j]);
+        }
+        System.out.println(Integer.toString(coordsList[0]));
+        System.out.println(Integer.toString(coordsList[1]));
+        return coordsList;
+    }
     public static void main(String[] args) {
         //Board gameBoard = new Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
         Board gameBoardTesting = new Board("8/pppppppp/8/8/8/1p111111/PPPPPPPP/8");
@@ -32,10 +43,6 @@ public class Game {
             
         while (gameOver == false) {
             boolean validMove = false;
-            int startPieceRow;
-            int startPieceCol;
-            int endLocationRow;
-            int endLocationCol;
 
             if (isBlack) {
                 System.out.println("Black's Turn:");
@@ -48,7 +55,14 @@ public class Game {
                 System.out.println("    Input the coordinates of the piece you want to move.");
                 String input = scanna.nextLine();
 
-                // TODO: parse string for inputs to verify Sand D
+                System.out.println("    Input the coordinates of the piece you want to move.");
+                String input2 = scanna.nextLine();
+
+                // TODO: parse string for inputs to verify S and D
+                int[] startCoords = coordsInterpreter(input);
+                int[] endCoords = coordsInterpreter(input2);
+
+                gameBoard.verifySourceAndDestination(startCoords[0], startCoords[1], endCoords[0], endCoords[1], gameBoard.getPiece(startCoords[0], startCoords[1]).getIsBlack());
 
                 // Will make loop stop if valid move
                 if (gameBoard.verifySourceAndDestination(0, 0, 0, 0, isBlack)) {
