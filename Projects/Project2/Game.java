@@ -9,11 +9,15 @@ public class Game {
 
        
 
-        gameBoardTesting.movePiece(6, 0, 5, 1);
-        System.out.println(gameBoardTesting.toString());
+        // gameBoardTesting.movePiece(6, 0, 5, 1);
+        // System.out.println(gameBoardTesting.toString());
 
-        //System.out.println(gameBoard.verifyHorizontal(2, 0, 2, 7)); // False
+        // no piece at start
+        System.out.println(gameBoardTesting.verifySourceAndDestination(2, 0, 2, 7, true)); // False
         
+        // black to empty
+        System.out.println(gameBoardTesting.verifySourceAndDestination(1, 0, 2, 7, true)); // True
+
 
 
         // ------------Game code below comment out to run test cases-----------------------
@@ -49,13 +53,14 @@ public class Game {
                 // Will make loop stop if valid move
                 if (gameBoard.verifySourceAndDestination(0, 0, 0, 0, isBlack)) {
                     validMove = true;
+                } else {
+                    System.out.println("Invalid move. Try inputting a different move!");
                 }
-                System.out.println("Invalid move. Try inputting a different move!");
             }
 
             // Will continue the loop if game is not over
             if (gameBoard.isGameOver()) {
-                System.out.println("Congratulations! You won chess ez clap!!")
+                System.out.println("Congratulations! You won chess ez clap!!");
                 gameOver = true;
             }
 

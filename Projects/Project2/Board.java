@@ -188,6 +188,10 @@ public class Board {
         // true if piece is within the boards bounds
         if (startRow <= 7 && startRow >= 0 && endRow <= 7 && endRow >= 0) {
             inBounds = true;
+        } 
+        else {
+            System.out.println("out of bounds");
+
         }
 
         // true if start contains a piece and matches input color
@@ -197,10 +201,18 @@ public class Board {
                 startPieceValid = true;
             }
         }
+        else {
+            System.out.println("no piece or wrong color");
+
+        }
 
         // true if the other location is empty or the opposite color
         if (endPiece == null || endPiece.getIsBlack() != startPiece.getIsBlack()) {
             destinationCheck = true;
+        }
+        else {
+            System.out.println("end location invalid");
+
         }
 
         if (inBounds == true && startPieceValid == true && destinationCheck == true) {
