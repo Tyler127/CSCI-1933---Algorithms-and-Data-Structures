@@ -247,6 +247,22 @@ public class Board {
         if (startRow - 1 == endRow && startCol == endCol){
             return true;
         }
+        //Case 5: diag up right
+        if(startRow - 1 == endRow && startCol - 1 == endCol){
+            return true;
+        }
+        //Case 6: diag up left
+        if(startRow - 1 == endRow && startCol + 1 == endCol){
+            return true;
+        }
+        //Case 7: diag down right
+        if(startRow + 1 == endRow && startCol - 1 == endCol){
+            return true;
+        }
+        //Case 8: diag down left
+        if(startRow + 1 == endRow && startCol + 1 == endCol){
+            return true;
+        }
         return false;
     }
 
