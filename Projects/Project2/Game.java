@@ -14,15 +14,15 @@ public class Game {
     }
     public static void main(String[] args) {
         //Board gameBoard = new Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-        Board gameBoardTesting = new Board("8/pppppppp/8/1p111111/1K111111/11111111/PPPPPPPP/8");
+        Board gameBoardTesting = new Board("8/pppppppp/8/11111111/11N11111/11111111/PPPPPPPP/8");
         System.out.println(gameBoardTesting.toString());
 
 
        
         //tested empty destination, enemy in destination, friendly in destination, and invalid input
-        gameBoardTesting.movePiece(4, 1, 3, 4);
+        gameBoardTesting.movePiece(4, 2, 5, 4);
         System.out.println(gameBoardTesting.toString());
-        //pieces tested for isMoveLegal:Bishop, King
+        //pieces tested for isMoveLegal:Bishop, King, Queen, Rook, Knight
 
         // no piece at start
         //System.out.println(gameBoardTesting.verifySourceAndDestination(2, 0, 2, 7, true)); // False
