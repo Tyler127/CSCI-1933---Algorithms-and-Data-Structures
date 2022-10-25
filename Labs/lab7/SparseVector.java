@@ -73,6 +73,12 @@ public class SparseVector {
 		if (x.length == 1) {
 			return (currNodeX.getValue() * currNodeY.getValue());
 		}
+		System.out.println("next x " + currNodeX.getNext());
+		System.out.println("next y " + currNodeY.getNext());
+
+		if (currNodeX.getNext() == null && currNodeY.getNext() == null) {
+			return total += (currNodeX.getValue() * currNodeY.getValue());
+		}
 		
 		while(currNodeX.getNext() != null && currNodeY.getNext() != null){
 			if(currNodeX.getIndex() < currNodeY.getIndex()){
@@ -102,8 +108,10 @@ public class SparseVector {
 		SparseVector vec2 = new SparseVector(2);
 		vec.addElement(0, 10.0);
 		vec.addElement(1, 3);
+		vec.addElement(2, 1);
 		vec2.addElement(0, 2);
 		vec2.addElement(1, 3);
+		vec2.addElement(2, 1);
 		
 		//System.out.println(vec);
 		
