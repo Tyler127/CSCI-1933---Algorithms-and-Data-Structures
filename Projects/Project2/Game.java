@@ -62,10 +62,10 @@ public class Game {
 
                 // Loops until a valid set of inputs are recieved
                  while (validInputs == false) {
-                    System.out.println("    Input the coordinates of the piece you want to move.");
+                    System.out.println("    PIECE TO MOVE:");
                     input = scanna.nextLine();
 
-                    System.out.println("    Input the coordinates of where you want it to move.");
+                    System.out.println("    DESTINATION:");
                     input2 = scanna.nextLine();
 
                     if (input.length() == 3 && input2.length() == 3) {
