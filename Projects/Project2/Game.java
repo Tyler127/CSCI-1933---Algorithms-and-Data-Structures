@@ -64,9 +64,7 @@ public class Game {
 
                 // Turns inputs into arrays of integers
                 int[] startCoords = coordsInterpreter(input);
-                System.out.println("start coords" + Arrays.toString(startCoords));
                 int[] endCoords = coordsInterpreter(input2);
-                System.out.println("end coords" + Arrays.toString(endCoords));
 
                 // Makes loop stop if valid move also will move piece and reprint the board
                 if (gameBoard.verifySourceAndDestination(startCoords[0], startCoords[1], endCoords[0], endCoords[1], isBlack)) {

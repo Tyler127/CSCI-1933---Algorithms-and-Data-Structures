@@ -199,7 +199,7 @@ public class Board {
             return false;
         }
 
-        // creates these piece holders so invalid row and col inputs aren't used to make them
+        // creates these piece holders here so invalid row and col inputs aren't used to make them
         Piece startPiece = this.getPiece(startRow, startCol);
         Piece endPiece = this.getPiece(endRow, endCol);
 
