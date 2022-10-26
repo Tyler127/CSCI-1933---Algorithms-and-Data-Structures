@@ -59,6 +59,13 @@ public class Board {
         if (movingPiece.isMoveLegal(this, endRow, endCol)){
             this.setPiece(endRow, endCol, movingPiece);
             this.setPiece(startRow, startCol, null);
+            //if pawn is moving to back row of enemy will be changed to queen, is PAWN PROMOTION
+            if (movingPiece.getCharacter() == '\u265f' && endRow == 7){//Black Pawn, lowercase p
+                movingPiece.setCharacter('\u265b');//black queen
+            }//white pawn, uppercase P
+            else if(movingPiece.getCharacter() == '\u2659' && endRow == 0){
+                movingPiece.setCharacter('\u2655');//white queen
+            }
             return true;
         }
 
