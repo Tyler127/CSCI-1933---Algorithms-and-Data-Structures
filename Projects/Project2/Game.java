@@ -48,6 +48,8 @@ public class Game {
         while (gameOver == false) {
             boolean validMove = false;
             boolean validInputs = false;
+            String input = "";
+            String input2 = "";
 
             if (isBlack) {
                 System.out.println("Black's Turn:");
@@ -55,25 +57,31 @@ public class Game {
                 System.out.println("White's Turn:");
             }
 
-            // Continues looping until a valid input is submitted
+            // Continues looping until a valid move is submitted
             while (validMove == false) {
-                
 
-                // if (input.length() != 3 && input2.length() != 3) {
-                //     System.out.println("    Input the coordinates of the piece you want to move.");
-                //     String input = scanna.nextLine();
+                // Loops until a valid set of inputs are recieved
+                 while (validInputs == false) {
+                    System.out.println("    Input the coordinates of the piece you want to move.");
+                    input = scanna.nextLine();
 
-                //     System.out.println("    Input the coordinates of where you want it to move.");
-                //     String input2 = scanna.nextLine();
+                    System.out.println("    Input the coordinates of where you want it to move.");
+                    input2 = scanna.nextLine();
 
-                //     System.out.println("Invalid input ")
-                // }
+                    if (input.length() == 3 && input2.length() == 3) {
+                        if (Character.isDigit(input.charAt(0)) && Character.isDigit(input.charAt(2))) {
+                            if (Character.isDigit(input2.charAt(0)) && Character.isDigit(input2.charAt(2))) {
+                                if (Character.isWhitespace(input.charAt(1)) && Character.isWhitespace(input2.charAt(1))) {
+                                    validInputs = true;
+                                }
+                            }
+                        } 
+                    } 
 
-                System.out.println("    Input the coordinates of the piece you want to move.");
-                String input = scanna.nextLine();
-
-                System.out.println("    Input the coordinates of where you want it to move.");
-                String input2 = scanna.nextLine();
+                    if (validInputs != true) {
+                        System.out.println("Invalid input format! Try Again!");
+                    }
+                }
 
                 // Turns inputs into arrays of integers
                 int[] startCoords = coordsInterpreter(input);
