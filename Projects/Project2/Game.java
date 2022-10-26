@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Game {
 
@@ -62,7 +63,9 @@ public class Game {
 
                 // TODO: parse string for inputs to verify S and D
                 int[] startCoords = coordsInterpreter(input);
+                System.out.println("start coords" + Arrays.toString(startCoords));
                 int[] endCoords = coordsInterpreter(input2);
+                System.out.println("end coords" + Arrays.toString(endCoords));
 
                 gameBoard.verifySourceAndDestination(startCoords[0], startCoords[1], endCoords[0], endCoords[1], gameBoard.getPiece(startCoords[0], startCoords[1]).getIsBlack());
 
