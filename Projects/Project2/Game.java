@@ -8,8 +8,8 @@ public class Game {
         for(int j = 0; j < 2;j++){
             coordsList[j] = Integer.parseInt(inputList[j]);
         }
-        System.out.println(Integer.toString(coordsList[0]));
-        System.out.println(Integer.toString(coordsList[1]));
+        //System.out.println(Integer.toString(coordsList[0]));
+        //System.out.println(Integer.toString(coordsList[1]));
         return coordsList;
     }
     public static void main(String[] args) {
@@ -35,13 +35,14 @@ public class Game {
         // ------------Game code below comment out to run test cases-----------------------
         // chcp 65001
         boolean gameOver = false;
-        Board gameBoard = new Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
-        System.out.println(gameBoard.toString());
-        Scanner scanna = new Scanner(System.in);
         boolean isBlack = false;
+        Scanner scanna = new Scanner(System.in);
+        Board gameBoard = new Board("rnbqkbnr/pppppppp/11R11111/8/8/8/PPPPPPPP/RNBQKBNR");
 
         System.out.println("Welcome to Chess!");
         System.out.println("    When imputting a piece's coordinates enter them in the form of row(space)column like so: 5 4");
+
+        System.out.println(gameBoard.toString());
             
         while (gameOver == false) {
             boolean validMove = false;
@@ -60,15 +61,15 @@ public class Game {
                 System.out.println("    Input the coordinates of where you want it to move.");
                 String input2 = scanna.nextLine();
 
-                // TODO: parse string for inputs to verify S and D
+                // Turns inputs into arrays of integers
                 int[] startCoords = coordsInterpreter(input);
                 int[] endCoords = coordsInterpreter(input2);
 
-                gameBoard.verifySourceAndDestination(startCoords[0], startCoords[1], endCoords[0], endCoords[1], gameBoard.getPiece(startCoords[0], startCoords[1]).getIsBlack());
-
-                // Will make loop stop if valid move
-                if (gameBoard.verifySourceAndDestination(0, 0, 0, 0, isBlack)) {
+                // Makes loop stop if valid move also will move piece and reprint the board
+                if (gameBoard.verifySourceAndDestination(startCoords[0], startCoords[1], endCoords[0], endCoords[1], isBlack)) {
                     validMove = true;
+                    gameBoard.movePiece(startCoords[0], startCoords[1], endCoords[0], endCoords[1]);
+                    System.out.println(gameBoard.toString());
                 } else {
                     System.out.println("Invalid move. Try inputting a different move!");
                 }
@@ -79,9 +80,13 @@ public class Game {
                 System.out.println("Congratulations! You won chess ez clap!!");
                 scanna.close();
                 gameOver = true;
+            } else {
+                if (isBlack) {
+                    isBlack = false;
+                } else {
+                    isBlack = true;
+                }
             }
-
-
         }
 
 

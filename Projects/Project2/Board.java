@@ -189,8 +189,6 @@ public class Board {
         boolean inBounds= false;
         boolean startPieceValid = false;
         boolean destinationCheck = false;
-        Piece startPiece = this.getPiece(startRow, startCol);
-        Piece endPiece = this.getPiece(endRow, endCol);
 
         // true if piece is within the boards bounds
         if (startRow <= 7 && startRow >= 0 && endRow <= 7 && endRow >= 0) {
@@ -198,8 +196,12 @@ public class Board {
         } 
         else {
             System.out.println("out of bounds");
-
+            return false;
         }
+
+        // creates these piece holders so invalid row and col inputs aren't used to make them
+        Piece startPiece = this.getPiece(startRow, startCol);
+        Piece endPiece = this.getPiece(endRow, endCol);
 
         // true if start contains a piece and matches input color
         if (startPiece != null) {
@@ -210,7 +212,7 @@ public class Board {
         }
         else {
             System.out.println("no piece or wrong color");
-
+            return false;
         }
 
         // true if the other location is empty or the opposite color
@@ -219,12 +221,9 @@ public class Board {
         }
         else {
             System.out.println("end location invalid");
-
+            return false;
         }
 
-        if (inBounds == true && startPieceValid == true && destinationCheck == true) {
-            return true;
-        }
         return false;
     }
 
