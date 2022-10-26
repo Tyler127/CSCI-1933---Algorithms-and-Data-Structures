@@ -47,6 +47,7 @@ public class Game {
             
         while (gameOver == false) {
             boolean validMove = false;
+            boolean validInputs = false;
 
             if (isBlack) {
                 System.out.println("Black's Turn:");
@@ -56,6 +57,18 @@ public class Game {
 
             // Continues looping until a valid input is submitted
             while (validMove == false) {
+                
+
+                // if (input.length() != 3 && input2.length() != 3) {
+                //     System.out.println("    Input the coordinates of the piece you want to move.");
+                //     String input = scanna.nextLine();
+
+                //     System.out.println("    Input the coordinates of where you want it to move.");
+                //     String input2 = scanna.nextLine();
+
+                //     System.out.println("Invalid input ")
+                // }
+
                 System.out.println("    Input the coordinates of the piece you want to move.");
                 String input = scanna.nextLine();
 
