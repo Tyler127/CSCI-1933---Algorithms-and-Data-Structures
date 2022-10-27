@@ -68,6 +68,7 @@ public class Game {
                     System.out.println("    DESTINATION:");
                     input2 = scanna.nextLine();
 
+                    // Outside Source #1
                     if (input.length() == 3 && input2.length() == 3) {
                         if (Character.isDigit(input.charAt(0)) && Character.isDigit(input.charAt(2))) {
                             if (Character.isDigit(input2.charAt(0)) && Character.isDigit(input2.charAt(2))) {

@@ -10,8 +10,6 @@ public class Board {
     }
 
 
-
-
     
     // Accessor Methods:
 
@@ -20,7 +18,6 @@ public class Board {
      * @param row     The row of the board.
      * @param col    The column of the board.
      * @return The Piece object stored at [row][col] or null
-     * @author Tyler
      */
     public Piece getPiece(int row, int col) {
         return board[row][col];
@@ -31,7 +28,6 @@ public class Board {
      * @param row     The row of the board.
      * @param col    The column of the board.
      * @param piece The piece to be placed at [row][col]
-     * @author Tyler
      */
     public void setPiece(int row, int col, Piece piece) {
         board[row][col] = piece;
@@ -50,7 +46,6 @@ public class Board {
      * @param endRow The row of the end position.
      * @param endCol The column of the end position.
      * @return true if the piece is successfully moved and false if the piece was not moved.
-     * @author Tyler
      */
     public boolean movePiece(int startRow, int startCol, int endRow, int endCol) {
         Piece movingPiece = this.getPiece(startRow, startCol);
@@ -76,7 +71,6 @@ public class Board {
      /**
      * Determines whether the game has been ended, i.e., if one player's King has been captured.
      * @return false if both kings remain. true if less than two kings remains.
-     * @author Tyler
      */
     public boolean isGameOver() {
         int kingCount = 0;
@@ -105,10 +99,9 @@ public class Board {
     /**
      * Creates a string of the board to display in the terminal.
      * @return The board string
-     * @author Tyler
      */
     public String toString() {
-        String finalString = "Board: \n" + "   \uFF10 \uFF11 \uFF12 \uFF13 \uFF14 \uFF15 \uFF16 \uFF17 \n"; // Creates column labels
+        String finalString = "   \uFF10 \uFF11 \uFF12 \uFF13 \uFF14 \uFF15 \uFF16 \uFF17 \n"; // Creates column labels
         for (int i = 0; i < board.length; i++){
             // Creates row labels 
             switch (i) {
@@ -160,7 +153,6 @@ public class Board {
 
     /**
      * Sets every cell of the array to null. For debugging and grading purposes.
-     * @author Tyler
      */
     public void clear() {
         for (int i = 0; i < board.length; i++){
@@ -176,15 +168,18 @@ public class Board {
 
     // Movement helper functions
 
-    //TODO: verifySoureandDesitnation
-
-    // Conditions:
-    // done – startRow, startCol, endRow, endCol must be within the bounds of the board.
-    // done – The start position must contain a piece.
-    // done – The color of the starting piece must match the color provided to this function.
-    // done – The destination location must either contain no piece or must contain a piece of the
-    //         opposite color. (a piece of the opposite color is said to be “captured” when this piece
-    //          moves to the end location)
+     /**
+     * Checks to ensure the following: 
+     * 1. The given coordinates are within the boards boundaries.
+     * 2. The start position contains a piece.
+     * 3. Start piece color matches the isBlack parameter.
+     * 4. The destination is either empty or a piece of opposite color.
+     * @param startRow     The row of the start position.
+     * @param startCol    The column of the start position.
+     * @param endRow The row of the end position.
+     * @param endCol The column of the end position.
+     * @return true if all 4 conditions are true. false if any is not true.
+     */
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
         boolean inBounds= false;
         boolean startPieceValid = false;
@@ -243,7 +238,6 @@ public class Board {
      * @param endRow The row of the end position.
      * @param endCol The column of the end position.
      * @return true if the positions are adjacent. false if they are not.
-     * @author Tyler
      */
     public boolean verifyAdjacent(int startRow, int startCol, int endRow, int endCol) {
         // Case 1: Move Right
@@ -288,7 +282,6 @@ public class Board {
      * @param endRow The row of the end position.
      * @param endCol The column of the end position.
      * @return true if the horizontal move will move to open space or move onto a piece. false if attempting to move past a piece.
-     * @author Tyler
      */
     public boolean verifyHorizontal(int startRow, int startCol, int endRow, int endCol) {
         int distance; 
@@ -338,7 +331,6 @@ public class Board {
      * @param endRow The row of the end position.
      * @param endCol The column of the end position.
      * @return true if the vertical move will move to open space or move onto a piece. false if attempting to move past a piece.
-     * @author Tyler
      */
     public boolean verifyVertical(int startRow, int startCol, int endRow, int endCol) {
         int distance; 
@@ -386,7 +378,6 @@ public class Board {
      * @param endRow The row of the end position.
      * @param endCol The column of the end position.
      * @return true if the diagonal move will move to open space or move onto a piece. false if attempting to move past a piece.
-     * @author Tyler
      */
     public boolean verifyDiagonal(int startRow, int startCol, int endRow, int endCol) {
         int rowDistance = Math.abs(startRow - endRow);
@@ -434,48 +425,5 @@ public class Board {
         }
         System.out.println("c1 no piece in way:");
         return true; // Case 1.3: There is no piece in the way. Move is valid.
-        
-
-         // working version of case 1
-        //   // Case 1: Diagonal towards upper left or upper right
-        //   if (endRow < startRow && endCol < startCol || endRow < startRow && endCol > startCol){
-        //     for (int i = 0; i < distance; i++){
-        //         testRowAndCol = startRow - 1 - i;
-        //         if (board[testRowAndCol][testRowAndCol] != null){
-        //             if (testRowAndCol == endRow){
-        //                 System.out.println("c1 piece at locaiton:");
-        //                 return true; // Case 1.1: There is a piece at the desired move location. Move is valid.
-        //             }
-        //             System.out.println("c1 Piece in way:");
-        //             return false; // Case 1.2: There is a piece in the way. Move is invalid.
-        //         }
-        //     }
-        //     System.out.println("c1 no piece in way:");
-        //     return true; // Case 1.3: There is no piece in the way. Move is valid.
-        //  }
-        // // Case 2: Diagonal towards lower left or lower right
-        // else if (endRow < startRow && endCol > startCol){
-        //     for (int i = 0; i < distance; i++){
-        //         testRowAndCol = startRow + 1 + i;
-        //         if (board[testRowAndCol][testRowAndCol] != null){
-        //             if (testRowAndCol == endRow){
-        //                 System.out.println("c2 piece at locaiton:");
-        //                 return true; // Case 1.1: There is a piece at the desired move location. Move is valid.
-        //             }
-        //             System.out.println("c2 Piece in way:");
-        //             return false; // Case 1.2: There is a piece in the way. Move is invalid.
-        //         }
-        //     }
-        //     System.out.println("c2 no piece in way:");
-        //     return true; // Case 1.3: There is no piece in the way. Move is valid.
-        // }
-        
-        
-        // else {
-        //     System.out.println("system fail:");
-        //     return false;
-        // }
-
-      
     }
 }
