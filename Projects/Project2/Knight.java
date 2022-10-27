@@ -8,7 +8,7 @@ public class Knight {
         this.col = col;
         this.isBlack = isBlack;
     }
-    public boolean horseLaw(int startRow, int startCol, int endRow, int endCol){
+    public boolean horseLaw(int startRow, int startCol, int endRow, int endCol){//made to account for knight unique movement
         //8 possible spaces, with a 2 1 displacement
         //both "up" options, ROW is up(minus)/down(plus), COL is left(minus)/right(plus)
         if((startRow + 2 == endRow && startCol + 1 == endCol) || (startRow + 2 == endRow && startCol - 1 == endCol)){
