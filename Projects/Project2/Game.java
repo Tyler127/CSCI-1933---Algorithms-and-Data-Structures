@@ -59,7 +59,7 @@ public class Game {
 
             // Continues looping until a valid move is submitted
             while (validMove == false) {
-
+                validInputs = false;
                 // Loops until a valid set of inputs are recieved
                  while (validInputs == false) {
                     System.out.println("    PIECE TO MOVE:");
