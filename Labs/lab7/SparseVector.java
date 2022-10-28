@@ -62,60 +62,85 @@ public class SparseVector {
 		double total = 0.0;
 		Node currNodeX = x.head;
 		Node currNodeY = y.head;
-		if(x.length != y.length){
-			System.out.println("lengths not equal");
+		int tracker = 0;
+
+		if(x.length != y.length || x.head == null || y.head == null){
+			System.out.println("lengths not equal or list is empty");
 			return 0.0;
-		}
-		if(x.head == null || y.head == null){
-			System.out.println("1 or more lists empty");
-			return 0.0;
-		}
-		if (x.length == 1) {
+		}else if(x.length == 1 && currNodeX.getIndex() == currNodeY.getIndex()){
 			return (currNodeX.getValue() * currNodeY.getValue());
 		}
-		System.out.println("next x " + currNodeX.getNext());
-		System.out.println("next y " + currNodeY.getNext());
+		System.out.println("1st checks passed, continuing");
 
-		if (currNodeX.getNext() == null && currNodeY.getNext() == null) {
-			return total += (currNodeX.getValue() * currNodeY.getValue());
+		while(tracker < x.length){
+			while(currNodeX.getIndex() != currNodeY.getIndex()){
+				if(currNodeX.getNext() != null & currNodeX.getIndex() < currNodeY.getIndex()){
+					currNodeX = currNodeX.getNext();
+					System.out.println("x smaller index");
+					tracker++;
+					break;
+				}
+				else if(currNodeY.getNext() != null & currNodeY.getIndex() < currNodeX.getIndex()){
+					currNodeY = currNodeY.getNext();
+					System.out.println("y is smaller index");
+					tracker++;
+					break;
+				}
+				else if(currNodeX.getNext() == null || currNodeY.getNext() == null){
+					return total;
+				}
+			}
+
+			//System.out.println("x value " + currNodeX.getValue());
+			//System.out.println("y value" + currNodeY.getValue());
+			double scoobert = currNodeX.getValue() * currNodeY.getValue();
+			//System.out.println("zoinks " + scoobert);
+			total = total + scoobert;
+			//System.out.println("total" + total);
+			tracker ++;
+
+
+			if(currNodeX.getNext() == null){
+				return total;
+			}
+			else if(currNodeY.getNext() == null){
+				return total;
+			}
+			currNodeX = currNodeX.getNext();
+			currNodeY = currNodeY.getNext();
 		}
-		
-		while(currNodeX.getNext() != null && currNodeY.getNext() != null){
-			if(currNodeX.getIndex() < currNodeY.getIndex()){
-				currNodeX = currNodeX.getNext();
-				System.out.println("x is less than");
-			}
-			else if(currNodeY.getIndex() < currNodeX.getIndex()){
-				currNodeY = currNodeY.getNext();
-				System.out.println("y is less than");
-			}
-			else{
-				double scubby = currNodeX.getValue() * currNodeY.getValue();
-				System.out.println(scubby);
-				total += scubby;
-				currNodeX = currNodeX.getNext();
-				currNodeY = currNodeY.getNext();
-				System.out.println(currNodeX.getValue());
-			}
-		}
+
 		return total;
+		
 	}
 
 
 	// TODO: Test out your code here!
 	public static void main(String[] args) {
-		SparseVector vec = new SparseVector(2);
-		SparseVector vec2 = new SparseVector(2);
-		vec.addElement(0, 10.0);
-		vec.addElement(1, 3);
-		vec.addElement(2, 1);
-		vec2.addElement(0, 2);
-		vec2.addElement(1, 3);
-		vec2.addElement(2, 1);
+		// SparseVector vec = new SparseVector(4);
+		// SparseVector vec2 = new SparseVector(4);
+		// vec.addElement(0, 2.0);
+		// vec.addElement(1, 0.0);
+		// vec.addElement(2, 4.0);
+		// vec.addElement(3, 0.0);
+		// vec2.addElement(0, 4.0);
+		// vec2.addElement(1, 2.0);
+		// vec2.addElement(2, 2.0);
+		// vec2.addElement(3, 0.0);
 		
 		//System.out.println(vec);
 		
-		double x = SparseVector.dot(vec, vec2);
-		System.out.println(x);
+		//double x = SparseVector.dot(vec, vec2);
+		//System.out.println(x);
+
+		SparseVector x = new SparseVector(100000000);
+		x.addElement(0, 1.0);
+		x.addElement(10000000, 3.0);
+		x.addElement(10000001, -2.0);
+		SparseVector y = new SparseVector(100000000);
+		y.addElement(0, 2.0);
+		y.addElement(10000001, -4.0);
+		double result = dot(x, y);
+		System.out.println(result);
 	}
 }
