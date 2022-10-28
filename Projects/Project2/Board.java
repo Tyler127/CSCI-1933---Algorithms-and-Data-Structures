@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.Scanner;
 public class Board {
 
     // Instance variables
@@ -54,13 +55,51 @@ public class Board {
         if (movingPiece.isMoveLegal(this, endRow, endCol)){
             this.setPiece(endRow, endCol, movingPiece);
             this.setPiece(startRow, startCol, null);
-            //if pawn is moving to back row of enemy will be changed to queen, is PAWN PROMOTION
-            if (movingPiece.getCharacter() == '\u265f' && endRow == 7){//Black Pawn, lowercase p
-                movingPiece.setCharacter('\u265b');//black queen
-            }//white pawn, uppercase P
-            else if(movingPiece.getCharacter() == '\u2659' && endRow == 0){
-                movingPiece.setCharacter('\u2655');//white queen
-            }
+            //Scanner promoScanner = new Scanner(System.in);
+            //if pawn is moving to back row of enemy will be changed to any piece but King, is PAWN PROMOTION
+            // if (movingPiece.getCharacter() == '\u265f' && endRow == 7){//Black Pawn, lowercase p
+            //     System.out.println("Black, your Pawn is available for promotion, what do you choose?");
+            //     System.out.println("Queen(Q or q), Knight(N or n), Bishop(B or b), or Rook(R or r)");
+            //     String promoInput = promoScanner.nextLine();
+            //     switch (promoInput){
+            //         case "Q":
+            //         case "q": movingPiece.setCharacter('\u265b');//black queen
+
+            //         case "N":
+            //         case "n": movingPiece.setCharacter('\u265e');//black knight
+
+            //         case "B":
+            //         case "b":movingPiece.setCharacter('\u265d');//black bishop
+
+            //         case "R":
+            //         case "r":movingPiece.setCharacter('\u265c');//black rook
+            //     }
+            //     promoScanner.close();
+            //     return true;
+            //     //movingPiece.setCharacter('\u265b');//black queen
+            // }//white pawn, uppercase P
+            // else if(movingPiece.getCharacter() == '\u2659' && endRow == 0){
+            //     System.out.println("White, your Pawn is available for promotion, what do you choose?");
+            //     System.out.println("Queen(Q or q), Knight(N or n), Bishop(B or b), or Rook(R or r)");
+            //     String promoInput = promoScanner.nextLine();
+            //     switch (promoInput){
+            //         case "Q":
+            //         case "q": movingPiece.setCharacter('\u2655');//white queen
+
+            //         case "N":
+            //         case "n": movingPiece.setCharacter('\u2658');//white knight
+
+            //         case "B":
+            //         case "b":movingPiece.setCharacter('\u2657');//white bishop
+
+            //         case "R":
+            //         case "r":movingPiece.setCharacter('\u2656');// rook
+            //     }
+            //     promoScanner.close();
+            //     return true;
+            //     //movingPiece.setCharacter('\u2655');//white queen
+            // }
+            // promoScanner.close();
             return true;
         }
 
