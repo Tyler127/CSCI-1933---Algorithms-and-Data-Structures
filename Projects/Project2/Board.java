@@ -237,6 +237,7 @@ public class Board {
      * @return true if all 4 conditions are true. false if any is not true.
      */
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
+        // These variables aren't used for any statements but were used to debug.
         boolean inBounds= false;
         boolean startPieceValid = false;
         boolean destinationCheck = false;

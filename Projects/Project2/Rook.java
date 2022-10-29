@@ -9,7 +9,6 @@ public class Rook {
         this.isBlack = isBlack;
     }
     
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
         //empty space horizontal or vertical
         if((board.verifyHorizontal(this.row, this.col, endRow, endCol) || board.verifyVertical(this.row, this.col, endRow, endCol)) && board.getPiece(endRow, endCol) == null){

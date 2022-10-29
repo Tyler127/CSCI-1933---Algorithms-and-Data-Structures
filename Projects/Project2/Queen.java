@@ -9,8 +9,6 @@ public class Queen {
         this.isBlack = isBlack;
     }
 
-
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
         //All directions
         if((board.verifyHorizontal(this.row, this.col, endRow, endCol) || board.verifyVertical(this.row, this.col, endRow, endCol) || board.verifyDiagonal(this.row, this.col, endRow, endCol)) && board.getPiece(endRow, endCol) == null){

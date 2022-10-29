@@ -31,7 +31,6 @@ public class Knight {
         }
     }
 
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
         //moving in L to empty space
         if(this.horseLaw(this.row, this.col, endRow, endCol) && board.getPiece(endRow, endCol) == null){
