@@ -38,7 +38,7 @@ public class Game {
         boolean gameOver = false;
         boolean isBlack = false;
         Scanner scanna = new Scanner(System.in);
-        Board gameBoard = new Board("rnbqkbnr/pppppppp/11R11111/8/8/8/PPPPPPPP/RNBQKBNR");
+        Board gameBoard = new Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
 
         System.out.println("Welcome to Chess!");
         System.out.println("    When imputting a piece's coordinates enter them in the form of row(space)column like so: 5 4");
