@@ -9,7 +9,6 @@ public class King {
         this.isBlack = isBlack;
     }
 
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
         //moving adjacent into empty space
         if(board.verifyAdjacent(this.row, this.col, endRow, endCol) && board.getPiece(endRow, endCol) == null){

@@ -9,7 +9,6 @@ public class Bishop {
         this.isBlack = isBlack;
     }
 
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
         //needed cases: diagforright diagforleft, diagbackright, diagbackleft
 
