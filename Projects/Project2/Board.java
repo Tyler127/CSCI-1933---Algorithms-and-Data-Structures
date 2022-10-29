@@ -64,20 +64,24 @@ public class Board {
                 String promoInput = promoScanner.nextLine();
                 switch (promoInput){
                     case "Q":
-                    case "q": movingPiece.setCharacter('\u265b');//black queen
-                    break;
+                    case "q": 
+                        movingPiece.setCharacter('\u265b');//black queen
+                        break;
 
                     case "N":
-                    case "n": movingPiece.setCharacter('\u265e');//black knight
-                    break;
+                    case "n": 
+                        movingPiece.setCharacter('\u265e');//black knight
+                        break;
 
                     case "B":
-                    case "b":movingPiece.setCharacter('\u265d');//black bishop
-                    break;
+                    case "b":
+                        movingPiece.setCharacter('\u265d');//black bishop
+                        break;
 
                     case "R":
-                    case "r":movingPiece.setCharacter('\u265c');//black rook
-                    break;
+                    case "r":
+                        movingPiece.setCharacter('\u265c');//black rook
+                        break;
                 }
                 //promoScanner.close();
                 return true;
@@ -89,20 +93,24 @@ public class Board {
                 String promoInput = promoScanner.nextLine();
                 switch (promoInput){
                     case "Q":
-                    case "q": movingPiece.setCharacter('\u2655');//white queen
-                    break;
+                    case "q": 
+                        movingPiece.setCharacter('\u2655');//white queen
+                        break;
 
                     case "N":
-                    case "n": movingPiece.setCharacter('\u2658');//white knight
-                    break;
+                    case "n": 
+                        movingPiece.setCharacter('\u2658');//white knight
+                        break;
 
                     case "B":
-                    case "b":movingPiece.setCharacter('\u2657');//white bishop
-                    break;
+                    case "b":
+                        movingPiece.setCharacter('\u2657');//white bishop
+                        break;
 
                     case "R":
-                    case "r":movingPiece.setCharacter('\u2656');// rook
-                    break;
+                    case "r":
+                        movingPiece.setCharacter('\u2656');// rook
+                        break;
                 }
                 //promoScanner.close();
                 return true;
@@ -241,7 +249,7 @@ public class Board {
             inBounds = true;
         } 
         else {
-            System.out.println("out of bounds");
+            System.out.println("Error: Out of Bounds");
             return false;
         }
 
@@ -255,7 +263,7 @@ public class Board {
             startPieceNotNull = true;
         }
         else {
-            System.out.println("start piece is null");
+            System.out.println("Error: Start Piece is Null");
             return false;
         }
 
@@ -264,7 +272,7 @@ public class Board {
             startPieceValid = true;
         }
         else {
-            System.out.println("invalid color");
+            System.out.println("Error: Invalid Color");
             return false;
         }
 
@@ -273,7 +281,7 @@ public class Board {
             destinationCheck = true;
         }
         else {
-            System.out.println("end location invalid");
+            System.out.println("Error: End Location Invalid");
             return false;
         }
 
@@ -435,7 +443,7 @@ public class Board {
         int distance = rowDistance;
         int testRow = -1;
         int testCol = -1;
-        System.out.println("start location: " + startRow +  " " + startCol);
+
         // In order to be a diagonal move, row and col distance must be equivalent
         if (rowDistance != colDistance){
             return false; // Case 0: Not a diagonal move.
@@ -462,18 +470,13 @@ public class Board {
                 testCol = startCol + 1 + i;
             }
 
-
-            System.out.println("test location: " + testRow +  " " + testCol);
             if (board[testRow][testCol] != null){
                 if (testRow == endRow && testCol == endCol){
-                    System.out.println("c1 piece at locaiton:");
                     return true; // Case 1.1: There is a piece at the desired move location. Move is valid.
                 }
-                System.out.println("c1 Piece in way:");
                 return false; // Case 1.2: There is a piece in the way. Move is invalid.
             }
         }
-        System.out.println("c1 no piece in way:");
         return true; // Case 1.3: There is no piece in the way. Move is valid.
     }
 }
