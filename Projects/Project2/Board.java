@@ -255,7 +255,6 @@ public class Board {
 
         // creates these piece holders here so invalid row and col inputs aren't used to make them
         Piece startPiece = this.getPiece(startRow, startCol);
-        System.out.println(startPiece);
         Piece endPiece = this.getPiece(endRow, endCol);
 
         // true if start contains a piece and matches input color
