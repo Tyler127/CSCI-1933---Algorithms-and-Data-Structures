@@ -10,6 +10,7 @@ Tyler:
 Connor:
     - Piece .isMoveLegal() methods
     - User input interpreter
+    - Pawn promotion
 
 How to Compile/Run:
     - Use chcp 65001 in terminal to enable Unicode characters
