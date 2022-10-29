@@ -243,6 +243,7 @@ public class Board {
         boolean startPieceValid = false;
         boolean destinationCheck = false;
         boolean startPieceNotNull = false;
+        boolean startPieceValidMove = false;
 
         // true if piece is within the boards bounds
         if (startRow <= 7 && startRow >= 0 && endRow <= 7 && endRow >= 0) {
@@ -281,6 +282,15 @@ public class Board {
         }
         else {
             System.out.println("Error: End Location Invalid");
+            return false;
+        }
+
+        // true if piece has a valid move
+        if (startPiece.isMoveLegal(this, endRow, endCol)) {
+            startPieceValidMove = true;
+        }
+        else {
+            System.out.println("Error: Piece Move not Legal");
             return false;
         }
 

@@ -105,7 +105,7 @@ public class Game {
 
             // Will continue the loop if game is not over
             if (gameBoard.isGameOver()) {
-                System.out.println("Congratulations! You won chess ez clap!!");
+                System.out.println("Congratulations! You win chess!");
                 scanna.close();
                 gameOver = true;
             } else {
