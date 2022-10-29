@@ -44,12 +44,17 @@ public class Game {
         System.out.println("    When imputting a piece's coordinates enter them in the form of row(space)column like so: 5 4");
 
         System.out.println(gameBoard.toString());
+
+        int[] startCoords = null;
+        int[] endCoords = null;
             
         while (gameOver == false) {
             boolean validMove = false;
             boolean validInputs = false;
             String input = "";
             String input2 = "";
+            startCoords = null;
+            endCoords = null;
 
             if (isBlack) {
                 System.out.println("Black's Turn:");
@@ -85,8 +90,8 @@ public class Game {
                 }
 
                 // Turns inputs into arrays of integers
-                int[] startCoords = coordsInterpreter(input);
-                int[] endCoords = coordsInterpreter(input2);
+                startCoords = coordsInterpreter(input);
+                endCoords = coordsInterpreter(input2);
 
                 // Makes loop stop if valid move also will move piece and reprint the board
                 if (gameBoard.verifySourceAndDestination(startCoords[0], startCoords[1], endCoords[0], endCoords[1], isBlack)) {
