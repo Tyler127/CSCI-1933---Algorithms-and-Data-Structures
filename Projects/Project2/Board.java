@@ -56,12 +56,13 @@ public class Board {
             this.setPiece(endRow, endCol, movingPiece);
             movingPiece.setPosition(endRow, endCol);
             this.setPiece(startRow, startCol, null);
-            Scanner promoScanner = new Scanner(System.in);
+            Scanner promoScanner = new Scanner(System.in);//scanner is not closed because it closes the scanner in game for unknown reason
             //if pawn is moving to back row of enemy will be changed to any piece but King, is PAWN PROMOTION
             if (movingPiece.getCharacter() == '\u265f' && endRow == 7){//Black Pawn, lowercase p
                 System.out.println("Black, your Pawn is available for promotion, what do you choose?");
                 System.out.println("Queen(Q or q), Knight(N or n), Bishop(B or b), or Rook(R or r)");
                 String promoInput = promoScanner.nextLine();
+
                 switch (promoInput){
                     case "Q":
                     case "q": 
@@ -83,9 +84,8 @@ public class Board {
                         movingPiece.setCharacter('\u265c');//black rook
                         break;
                 }
-                //promoScanner.close();
                 return true;
-                //movingPiece.setCharacter('\u265b');//black queen
+
             }//white pawn, uppercase P
             else if(movingPiece.getCharacter() == '\u2659' && endRow == 0){
                 System.out.println("White, your Pawn is available for promotion, what do you choose?");
@@ -112,12 +112,10 @@ public class Board {
                         movingPiece.setCharacter('\u2656');// rook
                         break;
                 }
-                //promoScanner.close();
                 return true;
-                //movingPiece.setCharacter('\u2655');//white queen
             }
+
             else{
-                //promoScanner.close();
                 return true;
             }
         }
