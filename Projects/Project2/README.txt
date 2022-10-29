@@ -18,12 +18,13 @@ How to Compile/Run:
     - Compiled with Java Runtime Version 19
 
 Assumptions:
-    - 
+    - N/A
 
 Additional Features:
     - N/A
 
 Bugs and Defects:
+    - None known
 
 Outside Sources:
     - 1. Documentation for Character class - https://docs.oracle.com/javase/6/docs/api/java/lang/Character.html#isWhitespace%28char%29 
