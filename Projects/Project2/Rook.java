@@ -9,11 +9,18 @@ public class Rook {
         this.isBlack = isBlack;
     }
     
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
-
-        return false;
+        //empty space horizontal or vertical
+        if((board.verifyHorizontal(this.row, this.col, endRow, endCol) || board.verifyVertical(this.row, this.col, endRow, endCol)) && board.getPiece(endRow, endCol) == null){
+            return true;
+        }
+        //space w/ opposing
+        else if((board.verifyHorizontal(this.row, this.col, endRow, endCol) || board.verifyVertical(this.row, this.col, endRow, endCol)) && board.getPiece(endRow, endCol) != null && board.getPiece(endRow, endCol).getIsBlack() != this.isBlack){
+            return true;
+        }
+        //space w/ friendly or not horizontal or vertical
+        else{
+            return false;
+        }
     }
-
-
 }

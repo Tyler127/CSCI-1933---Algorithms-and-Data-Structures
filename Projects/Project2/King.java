@@ -9,9 +9,18 @@ public class King {
         this.isBlack = isBlack;
     }
 
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
-
-        return false;
+        //moving adjacent into empty space
+        if(board.verifyAdjacent(this.row, this.col, endRow, endCol) && board.getPiece(endRow, endCol) == null){
+            return true;
+        }
+        //move adjacent into space w/ opposing piece
+        else if(board.verifyAdjacent(this.row, this.col, endRow, endCol) && board.getPiece(endRow, endCol) != null && board.getPiece(endRow, endCol).getIsBlack() != this.isBlack){
+            return true;
+        }
+        //if attempted space is not adjacent or is occupied by friendly
+        else{
+            return false;
+        }
     }
 }

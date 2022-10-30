@@ -1,0 +1,84 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Fib",
+            "request": "launch",
+            "mainClass": "Fib",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Game",
+            "request": "launch",
+            "mainClass": "Game",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Hist2",
+            "request": "launch",
+            "mainClass": "Hist2",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Histogram",
+            "request": "launch",
+            "mainClass": "Histogram",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch HistogramApp",
+            "request": "launch",
+            "mainClass": "HistogramApp",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Max",
+            "request": "launch",
+            "mainClass": "Max",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Owl",
+            "request": "launch",
+            "mainClass": "Owl",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch OwlPopulation",
+            "request": "launch",
+            "mainClass": "OwlPopulation",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch SparseVector",
+            "request": "launch",
+            "mainClass": "SparseVector",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch testArray",
+            "request": "launch",
+            "mainClass": "testArray",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        }
+    ]
+}

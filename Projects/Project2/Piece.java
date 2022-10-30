@@ -81,6 +81,13 @@ public class Piece {
     public char getCharacter(){
         return this.character;
     }
+    /**
+     * edits character to change piece type, used for promotion
+     * @param c new piece type
+     */
+    public void setCharacter(char c){
+        this.character = c;
+    }
 
     /**
      * Return the color of the piece.

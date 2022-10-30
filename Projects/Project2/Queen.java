@@ -9,10 +9,17 @@ public class Queen {
         this.isBlack = isBlack;
     }
 
-
-    // TODO: isMoveLegal
     public boolean isMoveLegal(Board board, int endRow, int endCol){
-
-        return false;
+        //All directions
+        if((board.verifyHorizontal(this.row, this.col, endRow, endCol) || board.verifyVertical(this.row, this.col, endRow, endCol) || board.verifyDiagonal(this.row, this.col, endRow, endCol)) && board.getPiece(endRow, endCol) == null){
+            return true;
+        }
+        // all directions but enemy in end space
+        else if((board.verifyHorizontal(this.row, this.col, endRow, endCol) || board.verifyVertical(this.row, this.col, endRow, endCol) || board.verifyDiagonal(this.row, this.col, endRow, endCol)) && board.getPiece(endRow, endCol) != null && board.getPiece(endRow, endCol).getIsBlack() != this.isBlack){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
