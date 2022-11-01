@@ -9,6 +9,15 @@ public class VehicleSorter {
 
 		//TODO: add vehicle objects of different types to your list
 		//	e.g. vehicles.add(new Vehicle());
+		Vehicle car = new Car();
+		Vehicle betterCar = new Car(50.0);
+		Vehicle train = new Train();
+		Vehicle helicopter = new Helicopter();
+
+		vehicles.add(car);
+		vehicles.add(betterCar);
+		vehicles.add(train);
+		vehicles.add(helicopter);
 
 
 
