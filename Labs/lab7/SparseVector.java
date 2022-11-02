@@ -1,6 +1,6 @@
 public class SparseVector {
 
-	private Node head;
+	private Lab7Node head;
 	private int length;
 
 	public SparseVector(int len){
@@ -12,7 +12,7 @@ public class SparseVector {
 	public String toString(){
 
 		String result = "";
-		Node currNode = head;
+		Lab7Node currNode = head;
 		int currIndex = 0;
 		while( currNode != null ){
 			int idx = currNode.getIndex();
@@ -32,20 +32,19 @@ public class SparseVector {
 		return result;
 	}
 
-	// TODO: Implement me for milestone 2
 	public void addElement(int index, double value){
-		Node currNode = head;
+		Lab7Node currNode = head;
 		if(index > this.length){
 			System.out.println("invalid index");
 		}
 		if(currNode == null){
-			head = new Node(index, value);
+			head = new Lab7Node(index, value);
 			//System.out.println("null head, " + value + " added at index " + index);
 		}else{
 		while(currNode.getIndex() < index){
 			if(currNode.getIndex() != index){
 				if (currNode.getNext() == null){
-					Node newNode = new Node(index, value);
+					Lab7Node newNode = new Lab7Node(index, value);
 					currNode.setNext(newNode);
 					//System.out.println("new node set at index " + index);
 				}else{
@@ -57,11 +56,10 @@ public class SparseVector {
 		}
 	}
 
-	// TODO: Implement me for milestone 4
 	public static double dot( SparseVector x, SparseVector y ){
 		double total = 0.0;
-		Node currNodeX = x.head;
-		Node currNodeY = y.head;
+		Lab7Node currNodeX = x.head;
+		Lab7Node currNodeY = y.head;
 		int tracker = 0;
 
 		if(x.length != y.length || x.head == null || y.head == null){
@@ -114,8 +112,6 @@ public class SparseVector {
 		
 	}
 
-
-	// TODO: Test out your code here!
 	public static void main(String[] args) {
 		// SparseVector vec = new SparseVector(4);
 		// SparseVector vec2 = new SparseVector(4);

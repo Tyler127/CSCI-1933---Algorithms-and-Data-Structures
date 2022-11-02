@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 
+@SuppressWarnings("all")
 public class Canvas extends JApplet {
 
 	
