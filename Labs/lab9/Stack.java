@@ -1,20 +1,23 @@
 public class Stack<T extends Comparable<T>> {
     private int size;
     private int inStack;
-    private Node<T> head = new Node<T>(null, null);
     private Node<T> top;
     public Stack(){this.size = 5;}
 
     public Stack(int size){this.size = size;}
 
+    public T getTopData(){return top.getData();}
+
     public T pop()throws StackException{
-        if(head.getNext() == null){
+        if(top == null){
             throw new StackException(size);
         }
-        Node<T> currTop = this.top;
-        this.top = top.getNext();
-        head.setNext(top.getNext());
-        return currTop.getData();
+        T currData = top.getData();
+        Node<T> saveNewTop = top.getNext();
+        this.top.setNext(null);
+        top = saveNewTop;
+        
+        return currData;
     }
 
     public void push(T item)throws StackException{
@@ -22,9 +25,8 @@ public class Stack<T extends Comparable<T>> {
             throw new StackException(size);
         }
         Node<T> newNode = new Node<T>(item);
-        newNode.setNext(head.getNext());
-        head.setNext(newNode);
-        top = head.getNext();
+        newNode.setNext(top);
+        top = newNode;
         inStack += 1;
     }
 }
