@@ -285,7 +285,31 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     }
 
     public static void main(String[] args) {
-        // LinkedList<Integer> list = new LinkedList<Integer>();
+    //     LinkedList<String> list = new LinkedList<String>();
+        
+
+    //     list.add("0");
+    //     list.add("1");
+    //     //list.add("2");
+    //     list.add("3");
+    //     list.add("4");
+    //     list.add("5");
+    //     list.add("6");
+        
+    //     // System.out.println(list.remove(0));
+
+    //     System.out.println(list);
+    //    list.add(16, "7");
+    //     System.out.println(list);
+
+
+    //     System.out.println("Size: " + list.size());
+    //     System.out.println("isSorted: " + list.isSorted());
+
+
+
+
+         // LinkedList<Integer> list = new LinkedList<Integer>();
         // //System.out.println(list);
 
         // list.add(3);
@@ -300,44 +324,19 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         // list.clear();
         // System.out.println(list);
         // System.out.println(list.size());
-
-
-        LinkedList<String> list = new LinkedList<String>();
-        //System.out.println(list);
-
-        
-        list.add("0");
-        list.add("1");
-        //list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        
-        // System.out.println(list.remove(0));
-
-        System.out.println(list);
-       list.add(6, "7");
-        System.out.println(list);
-
-    //    System.out.println(list);
+         //    System.out.println(list);
     //    System.out.println(list.indexOf("3"));
     //    System.out.println(list.indexOf("conna moment"));
     //    System.out.println(list.indexOf("0"));
     //    System.out.println(list.indexOf("dddd"));
     //    System.out.println(list.indexOf(null));
     //    list.add(2, "susgayballs");
-     
-       
         // list.equalTo("conna moment");
         // System.out.println(list);
         // System.out.println(list.get(6));
         // System.out.println(list.get(7));
         // System.out.println(list.get(0));
         // System.out.println(list.get(2));
-
-        System.out.println("Size: " + list.size());
-        System.out.println("isSorted: " + list.isSorted());
       
     }
     
