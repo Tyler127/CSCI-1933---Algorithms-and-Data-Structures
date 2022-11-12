@@ -1,3 +1,4 @@
+@SuppressWarnings("all")
 public class ArrayList<T extends Comparable<T>> implements List<T> {
 
     @Override

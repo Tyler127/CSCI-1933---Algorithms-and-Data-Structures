@@ -1,3 +1,5 @@
+
+
 import javax.print.attribute.IntegerSyntax;
 
 public class LinkedList<T extends Comparable<T>> implements List<T> {
@@ -25,10 +27,8 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             if (currentNode.getNext() != null) {
                 outputString += ", ";
             }            
-
             currentNode = currentNode.getNext();
         }
-
         return outputString;
     }
 
@@ -36,7 +36,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     public boolean add(T element) {
         Node<T> currentNode = this.head;
         Node<T> newNode = new Node<T>(element);
-        T dataPrevious = null;
 
         // Case 1: element is null
         if (element == null) {
@@ -55,21 +54,13 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             while (currentNode.getNext() != null) {
                 currentNode = currentNode.getNext();
             }
-
             currentNode.setNext(newNode); // set next for last element to the new Node
-            dataPrevious = currentNode.getData();
-            //System.out.println("New Element: " + element + " dataPrevious: " + dataPrevious);
-
-            // Checks if element is bigger than the current last item. if not, order is broken
-            if (element.compareTo(dataPrevious) > 0 && this.isSorted == true) {
-                this.isSorted = true;
-            }
-            else {
-                this.isSorted = false;
-            }
         }
-            
+        //System.out.println("    added element: " + element);
+        //System.out.println("        add presortcheck update: " + this.isSorted);
+        
         this.size += 1;
+        updateSorted();
         return true;
     }
     
@@ -77,63 +68,37 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     public boolean add(int index, T element) {
         Node<T> currentNode = this.head; // start on head so if index = 0 element can become first Node such that head points to newNode
         Node<T> newNode = new Node<T>(element);
-        T dataPrevious = null;
-        T dataNext = null;
 
         // Case 1: element is null
         if (element == null) {
             return false;
         }
 
-        // Case 2: Adding first Node
+        // Case 2: Index bigger than list size or below zero
+        if (index >= this.size || index < 0) {
+            //System.out.println("fail");
+            return false;
+        }
+
+        // Case 3: Adding first Node
         if (this.size == 0 && index == 0) {
             this.head.setNext(newNode);
             this.isSorted = true;
         }
 
-        // Case 3: Index bigger than list size or below zero
-        else if (index > this.size || index < 0) {
-            System.out.println("fail");
-            return false;
-        }
-
         // Case 4: Valid parameters
-        else { 
+        else {
             // Sets currentNode to the Node at the index before newNode needs to be placed
-            for (int i = 0; i < index; i++) { 
+            for (int i = 0; i < index; i++) {
                 currentNode = currentNode.getNext();
             }
 
             // Rearranges Nodes to insert newNode into the list
             newNode.setNext(currentNode.getNext());
             currentNode.setNext(newNode);
-
-            // Gets the data of the nodes surrounding newNode
-            dataPrevious = currentNode.getData(); 
-            if (newNode.getNext() != null) {
-                dataNext = newNode.getNext().getData();
-            }
-            
-            // Compares elements to determine if order is preserved
-            // Case 4.1: newNode not last item of list. compares previous and next data.
-            if (dataNext != null) {
-                if (element.compareTo(dataNext) < 0 && element.compareTo(dataPrevious) > 0 && this.isSorted == true) {
-                    System.out.println("order preserved");
-                    this.isSorted = true;
-                }
-            }
-            // Case 4.2: newNode is now last item of list. compares only previous data.
-            else if (element.compareTo(dataPrevious) > 0 && this.isSorted == true) {
-                System.out.println("order preserved");
-                this.isSorted = true;
-            }
-            // Case 4.3: the list becomes unsortec
-            else {
-                this.isSorted = false;
-            }
         }
-
         this.size += 1;
+        updateSorted();
         return true;
     }
      
@@ -169,7 +134,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                     pointer = trailer.getNext();
                 }
             }
-            this.isSorted = false;
+            this.isSorted = true;
         }
     }
 
@@ -178,7 +143,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         Node<T> currentNode = this.head.getNext();
 
         // Case 1: the index is out of bounds
-        if (index > this.size - 1) {
+        if (index > this.size - 1 || index < 0) {
             return null;
         }
 
@@ -234,8 +199,29 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public void pairSwap() {
-        // TODO pairswap
-        
+        //TODO: fix this for is sorted
+        if (this.size != 0) {
+            Node<T> trailer = this.head;
+            Node<T> pointer = trailer.getNext();
+            Node<T> leader = pointer.getNext();
+            double swaps = Math.floor(this.size / 2);
+
+            // Loop that swaps the nodes and leaves the one at the end if length is odd
+            for (int i = 0; i < swaps; i++) {
+                trailer.setNext(leader);
+                pointer.setNext(leader.getNext());
+                leader.setNext(pointer);
+                
+                // Prevents reassignments if the swap was the last one
+                if (swaps - (i+1) != 0.0) { 
+                    trailer = trailer.getNext().getNext();
+                    pointer = pointer.getNext();
+                    leader = pointer.getNext();
+                }
+            }
+
+            updateSorted();
+        }
     }
 
     // TODO: check remove if still sorted?? kekw why tf would sorted even change if it was sorted in the first place
@@ -247,7 +233,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
 
         // Case 1: invalid index
-        if (index > this.size - 1) {
+        if (index > this.size - 1 || index < 0) {
             return null;
         }
 
@@ -263,6 +249,29 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         trailer.setNext(pointer.getNext());
         pointer = pointer.getNext();
 
+        // // Checks to see if list is sorted
+        // if (this.isSorted != true) {
+        //     // Resets trailer and pointer to iterate over the list
+        //     trailer = this.head.getNext();
+        //     pointer = trailer.getNext();
+
+        //     this.isSorted = true; // Set to true by default then the iteration will change it based on if the list is sorted or not
+
+        //     while (pointer != null) {
+        //         //System.out.println("Trailer: " + trailer.getData());
+        //         //System.out.println("pointer: " + pointer.getData());
+        //         //System.out.println("    compare: " + trailer.getData().compareTo(pointer.getData()));
+
+        //         // Checks if for any pair of trailer and pointer if trailer is > than pointer in which case the list would remain unsorted
+        //         if (trailer.getData().compareTo(pointer.getData()) > 0) {
+        //             this.isSorted = false;
+        //         }
+        //         trailer = trailer.getNext();
+        //         pointer = pointer.getNext();
+        //     }
+        // }
+
+        updateSorted();
         this.size -= 1;
         return data;
     }
@@ -279,32 +288,112 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     }
 
     @Override
-    public void sort() {
-        // TODO sort
-        
+    public void sort() { 
+        if (this.isSorted != true) {
+            Node<T> pointer = this.head; 
+            Node<T> testNode = null;
+            T temp;
+    
+            // Loop through each node and then from
+            for (int i = 0; i < this.size; i++) {
+                //System.out.println("Pass: " + i);
+                // Node index will point to node next to
+                // current
+                testNode = pointer.getNext();
+
+                while (testNode != null) {
+                    // If current node's data is greater
+                    // than index's node data, swap the data
+                    // between them
+                    if (pointer.getData() != null && testNode.getData() != null) {
+                        if (pointer.getData().compareTo(testNode.getData()) > 0) { 
+                            //System.out.println("    Swap: " + pointer.getData() + " and " + testNode.getData());
+                            temp = pointer.getData();
+                            pointer.setData(testNode.getData());
+                            testNode.setData(temp);
+                        }
+                    }
+                    //System.out.println("        old testnode: " + testNode);
+                    testNode = testNode.getNext();
+                    //System.out.println("        new testnode: " + testNode);
+                }
+                //System.out.println("        old pointer: " + pointer);
+                pointer = pointer.getNext();
+                //System.out.println("        new pointer: " + pointer);
+            }
+            this.isSorted = true;
+        }
     }
 
+    private void updateSorted() {
+        if (this.size == 1) { // If the size is one, the list is sorted
+            this.isSorted = true;
+        }
+        else {
+            // Resets trailer and pointer to iterate over the list
+            Node<T> trailer = this.head.getNext();
+            Node<T> pointer = trailer.getNext();
+
+            this.isSorted = true; // Set to true by default then the iteration will change it based on if the list is sorted or not
+
+            while (pointer != null) {
+                //System.out.println("    Trailer: " + trailer.getData());
+                //System.out.println("    pointer: " + pointer.getData());
+                //System.out.println("        compare: " + trailer.getData().compareTo(pointer.getData()));
+
+                // Checks if for any pair of trailer and pointer if trailer is > than pointer in which case the list would remain unsorted
+                if (trailer.getData().compareTo(pointer.getData()) > 0) {
+                    //sortedTester = false;
+                    this.isSorted = false;
+                }
+                trailer = trailer.getNext();
+                pointer = pointer.getNext();
+            }
+        }
+        System.out.println("testSorted() - testSorted Result: " + this.isSorted);
+    }
+    
+
+
     public static void main(String[] args) {
-    //     LinkedList<String> list = new LinkedList<String>();
+        LinkedList<String> list = new LinkedList<String>();
+        
+        System.out.println("Size: " + list.size());
+        // list.add("3");
+        // list.add("1");
+        // list.add("4");
+        // list.add("5");
+        // list.add("7");
+        // list.add("6");
+        // list.add("2");
+
+        list.add("b");
+        list.add("a");
+        list.add("d");
+        list.add("c");
+
+        //list.add("20");
+        //list.add("5");
+        //list.add("4");
+        //list.add("0");
+
+        // list.add("3");
+        // list.add("6");
+        // list.add("9");
+        // list.add("7");
+        
+        System.out.println("isSorted: " + list.isSorted());
+
         
 
-    //     list.add("0");
-    //     list.add("1");
-    //     //list.add("2");
-    //     list.add("3");
-    //     list.add("4");
-    //     list.add("5");
-    //     list.add("6");
-        
-    //     // System.out.println(list.remove(0));
-
-    //     System.out.println(list);
-    //    list.add(16, "7");
-    //     System.out.println(list);
+        System.out.println(list);
+        //System.out.println(list.remove(1));
+        //list.pairSwap();
+        System.out.println(list);
 
 
-    //     System.out.println("Size: " + list.size());
-    //     System.out.println("isSorted: " + list.isSorted());
+        System.out.println("Size: " + list.size());
+        System.out.println("isSorted: " + list.isSorted());
 
 
 

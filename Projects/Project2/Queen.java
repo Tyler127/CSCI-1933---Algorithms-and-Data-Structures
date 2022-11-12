@@ -1,3 +1,5 @@
+package Projects.Project2;
+
 public class Queen {
     private int row;
     private int col;

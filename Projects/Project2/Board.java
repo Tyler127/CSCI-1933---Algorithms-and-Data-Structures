@@ -1,3 +1,5 @@
+package Projects.Project2;
+
 import java.lang.Math;
 import java.util.Scanner;
 public class Board {

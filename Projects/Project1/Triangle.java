@@ -1,3 +1,5 @@
+package Projects.Project1;
+
 import java.awt.Color;
 import java.lang.Math;
 

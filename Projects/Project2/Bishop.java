@@ -1,3 +1,5 @@
+package Projects.Project2;
+
 public class Bishop {
     private int row;
     private int col;
