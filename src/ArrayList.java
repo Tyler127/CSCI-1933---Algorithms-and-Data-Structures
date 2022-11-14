@@ -1,10 +1,18 @@
-@SuppressWarnings("all")
+
 public class ArrayList<T extends Comparable<T>> implements List<T> {
+    private boolean isSorted = true;
+    private T[] mainArray = (T[]) new Comparable[2];
+
+    public ArrayList(){}
 
     @Override
     public String toString() {
+        String mainString = "";
         // TODO Auto-generated method stub
-        return super.toString();
+        for(int i = 0; i < this.mainArray.length; i++){
+            mainString += this.mainArray.toString() + "\n";
+        }
+        return mainString;
     }
 
     @Override
@@ -90,5 +98,23 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
         // TODO Auto-generated method stub
         
     }
+
+    private void updateSorted(){
+        if(mainArray.length == 1){//If length is 1, is sorted
+            this.isSorted = true;
+        }
+        else{
+            for(int i = 0; i < mainArray.length - 1; i++){//compares every index to the next one(except the last index as it is already compared), if the next index is smaller than the previous, is not sorted
+                if(this.mainArray[i].compareTo(this.mainArray[i + 1]) > 0){
+                    this.isSorted = false;
+                }
+            }
+        }
+    }
     
+    public static void main(String[] args){
+        ArrayList<String> test = new ArrayList<String>();
+        System.out.println(test.toString());
+    }
+
 }
