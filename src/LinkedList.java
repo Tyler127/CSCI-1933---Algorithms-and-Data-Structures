@@ -199,7 +199,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public void pairSwap() {
-        //TODO: fix this for is sorted
         if (this.size != 0) {
             Node<T> trailer = this.head;
             Node<T> pointer = trailer.getNext();
@@ -219,7 +218,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                     leader = pointer.getNext();
                 }
             }
-
             updateSorted();
         }
     }
@@ -230,7 +228,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         Node<T> trailer = this.head;
         Node<T> pointer = trailer.getNext();
         T data;
-
 
         // Case 1: invalid index
         if (index > this.size - 1 || index < 0) {
@@ -249,28 +246,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         trailer.setNext(pointer.getNext());
         pointer = pointer.getNext();
 
-        // // Checks to see if list is sorted
-        // if (this.isSorted != true) {
-        //     // Resets trailer and pointer to iterate over the list
-        //     trailer = this.head.getNext();
-        //     pointer = trailer.getNext();
-
-        //     this.isSorted = true; // Set to true by default then the iteration will change it based on if the list is sorted or not
-
-        //     while (pointer != null) {
-        //         //System.out.println("Trailer: " + trailer.getData());
-        //         //System.out.println("pointer: " + pointer.getData());
-        //         //System.out.println("    compare: " + trailer.getData().compareTo(pointer.getData()));
-
-        //         // Checks if for any pair of trailer and pointer if trailer is > than pointer in which case the list would remain unsorted
-        //         if (trailer.getData().compareTo(pointer.getData()) > 0) {
-        //             this.isSorted = false;
-        //         }
-        //         trailer = trailer.getNext();
-        //         pointer = pointer.getNext();
-        //     }
-        // }
-
         updateSorted();
         this.size -= 1;
         return data;
@@ -278,7 +253,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public void reverse() {
-        // TODO reverse
+        
         
     }
 
