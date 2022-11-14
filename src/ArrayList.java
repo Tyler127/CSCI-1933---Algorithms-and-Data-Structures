@@ -1,4 +1,4 @@
-
+@SuppressWarnings("unchecked")
 public class ArrayList<T extends Comparable<T>> implements List<T> {
     private boolean isSorted = true;
     private T[] mainArray = (T[]) new Comparable[2];
