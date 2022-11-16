@@ -43,7 +43,6 @@ public class ColorPath {
 
     public static void dfs(int[][] arr, int row, int col, int startColor, int newColor){
         if(row >= arr.length || row < 0 || col < 0 || col >= arr[row].length || arr[row][col] != startColor){
-            
         }
         else{
             arr[row][col] = newColor;

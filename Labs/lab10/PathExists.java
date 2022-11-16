@@ -46,7 +46,21 @@ public class PathExists {
         return false;
     }
 
-    public static boolean dfs(char[][] grid,int[][] usedCoords, int row, int col){
+    public static boolean dfs(char[][] grid,char[][] tracker, int[] startCoords, int row, int col){
+        //cases:
+            //if char is v, but not start
+            //if char is not p
+        if(grid[row][col] == 'v' && row != startCoords[0] && col != startCoords[1]){
+            return true;
+        }
+        if(row >= grid.length || row < 0 || col < 0 || col >= tracker[row].length || tracker[row][col] == 'x' || tracker[row][col] == 'c'){}
+        else{
+            grid[row][col] = 'c';
+            dfs(grid, tracker, startCoords, row + 1, col);
+            if ( row != 0){dfs(grid, tracker, startCoords, row - 1, col);}
+            dfs(grid, tracker, startCoords, row, col + 1);
+            if(col != 0){dfs(grid, tracker, startCoords, row, col - 1);}
+        }
         return false;
     }
 
@@ -57,7 +71,9 @@ public class PathExists {
                     {'x', 'x', 'p', 'p', 'x'}, 
                     {'x', 'x', 'p', 'x', 'x'}, 
                     {'x', 'x', 'p', 'p', 'v'} };
-        boolean result = bfs(grid1, 0, 0);
+        char[][] tracker = grid1;
+        int[] startCoords = new int[]{0, 0};
+        boolean result = dfs(grid1, tracker, startCoords, 0, 0);
         System.out.println(result);
     }
 }
