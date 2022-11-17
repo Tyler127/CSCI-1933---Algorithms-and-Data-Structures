@@ -222,7 +222,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         }
     }
 
-    // TODO: check remove if still sorted?? kekw why tf would sorted even change if it was sorted in the first place
     @Override
     public T remove(int index) {
         Node<T> trailer = this.head;
@@ -253,8 +252,26 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public void reverse() {
-        
-        
+        // Case 1: list is empty or length of 1
+        if (this.size == 0 || this.size == 1) {
+            return;
+        }
+
+        // Case 2: Reverses the list
+        Node<T> trailer = this.head.getNext();
+        Node<T> pointer = trailer.getNext();
+
+        for (int i = 1; i < this.size; i++) { // i starts on 1 because size is length not index
+            //System.out.println("trailer: " + trailer);
+            //System.out.println("pointer " + pointer);
+
+            trailer.setNext(pointer.getNext());
+            pointer.setNext(this.head.getNext());
+            this.head.setNext(pointer);
+
+            pointer = trailer.getNext();
+        }
+        updateSorted();
     }
 
     @Override
@@ -325,7 +342,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                 pointer = pointer.getNext();
             }
         }
-        System.out.println("testSorted() - testSorted Result: " + this.isSorted);
+        //System.out.println("testSorted() - testSorted Result: " + this.isSorted);
     }
     
 
@@ -333,7 +350,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     public static void main(String[] args) {
         LinkedList<String> list = new LinkedList<String>();
         
-        System.out.println("Size: " + list.size());
+        //System.out.println("Size: " + list.size());
         // list.add("3");
         // list.add("1");
         // list.add("4");
@@ -342,10 +359,10 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         // list.add("6");
         // list.add("2");
 
-        list.add("b");
-        list.add("a");
-        list.add("d");
-        list.add("c");
+        //list.add("0");
+        //list.add("1");
+        //list.add("2");
+        //list.add("3");
 
         //list.add("20");
         //list.add("5");
@@ -357,13 +374,14 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         // list.add("9");
         // list.add("7");
         
-        System.out.println("isSorted: " + list.isSorted());
+        //System.out.println("isSorted: " + list.isSorted());
 
         
 
         System.out.println(list);
         //System.out.println(list.remove(1));
         //list.pairSwap();
+        list.reverse();
         System.out.println(list);
 
 
