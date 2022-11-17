@@ -1,4 +1,4 @@
-package Projects.Project1;
+package Project1;
 
 import java.awt.Color;
 import java.lang.Math;

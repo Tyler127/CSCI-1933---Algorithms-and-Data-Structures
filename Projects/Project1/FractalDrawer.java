@@ -1,5 +1,5 @@
 // FractalDrawer class draws a fractal of a shape indicated by user input
-package Projects.Project1;
+package Project1;
 
 import java.util.Scanner;
 import java.lang.Math;
