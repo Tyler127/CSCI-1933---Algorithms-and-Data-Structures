@@ -46,34 +46,35 @@ public class PathExists {
         return false;
     }
 
-    public static boolean dfs(char[][] grid,char[][] tracker, int[] startCoords, int row, int col){
+    public static void dfs(char[][] grid,char[][] tracker, int startRow, int startCol, int row, int col){
         //cases:
             //if char is v, but not start
             //if char is not p
-        if(grid[row][col] == 'v' && row != startCoords[0] && col != startCoords[1]){
-            return true;
-        }
         if(row >= grid.length || row < 0 || col < 0 || col >= tracker[row].length || tracker[row][col] == 'x' || tracker[row][col] == 'c'){}
         else{
+            if(grid[row][col] == 'v' && row != startRow && col != startCol){
+                tracker[0][0] = 'W';
+            }else{
             grid[row][col] = 'c';
-            dfs(grid, tracker, startCoords, row + 1, col);
-            if ( row != 0){dfs(grid, tracker, startCoords, row - 1, col);}
-            dfs(grid, tracker, startCoords, row, col + 1);
-            if(col != 0){dfs(grid, tracker, startCoords, row, col - 1);}
+            dfs(grid, tracker, 0, 0, row + 1, col);//down
+            dfs(grid, tracker, 0, 0, row - 1, col);//up
+            dfs(grid, tracker, 0, 0, row, col + 1);//right
+            dfs(grid, tracker, 0, 0, row, col - 1);//left
+            }
         }
-        return false;
     }
 
     public static void main(String[] args){
         char[][] grid1 = new char[][]{ 
-                    {'v', 'p', 'p', 'p', 'x'}, 
-                    {'x', 'x', 'x', 'p', 'x'}, 
-                    {'x', 'x', 'p', 'p', 'x'}, 
-                    {'x', 'x', 'p', 'x', 'x'}, 
-                    {'x', 'x', 'p', 'p', 'v'} };
+                    {'v', 'p'}, 
+                    {'x', 'v' } };
         char[][] tracker = grid1;
         int[] startCoords = new int[]{0, 0};
-        boolean result = dfs(grid1, tracker, startCoords, 0, 0);
-        System.out.println(result);
+        dfs(grid1, tracker, 0, 0, 0, 0);
+        if(tracker[0][0] == 'W'){
+            System.out.println("victory royale");
+        }else{
+            System.out.println("fart smella");
+        }
     }
 }
