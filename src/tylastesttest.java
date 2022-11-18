@@ -33,30 +33,76 @@ public class tylastesttest {
         System.out.println();
     }
 
+    @Test
+    public void addTest() {
+        List<Integer> list = new LinkedList<>();
+        for (int i=0;i<10;i++) {
+            list.add(i);
+            System.out.println("List: " + list);
+        }
+    }
 
     @Test
     public void pairswap() {
         List<Integer> list = new LinkedList<>();
 
-        for (int i = 0; i<5;i++) {
+        for (int i = 0; i < 5; i++) {
+            
             list.add(i);
+            System.out.println("pre pairswap List: " + list);
+            list.pairSwap();
+            System.out.println("post pairswap List: " + list);
         }
-        System.out.println(list);
-        System.out.println(list.isSorted());
-        list.pairSwap();
-        System.out.println(list);
-        System.out.println(list.isSorted());
-        list.clear();
 
-        for (int i = 0; i < 25; i++) {
-            list.add(i);
-            boolean check = true;
-            for (int k = 1; k < list.size(); k++) {
-                System.out.println(k-1 + " - " + list.get(k-1));
-                check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
-            }
-            System.out.println(check);
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // for (int i = 0; i<5;i++) {
+        //     list.add(i);
+        // }
+        // System.out.println(list);
+        // System.out.println(list.isSorted());
+        // list.pairSwap();
+        // System.out.println(list);
+        // System.out.println(list.isSorted());
+        // list.clear();
+
+        // for (int i = 0; i < 25; i++) {
+        //     list.add(i);
+        //     boolean check = true;
+        //     for (int k = 1; k < list.size(); k++) {
+        //         System.out.println(k-1 + " - " + list.get(k-1));
+        //         check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
+        //     }
+        //     System.out.println(check);
+        // }
 
     }
 
@@ -132,26 +178,26 @@ public class tylastesttest {
         System.out.println("isSorted: " + list.isSorted());
     }
 
-    @Test
-    public void addTest() {
-        List<Integer> list = new LinkedList<>();
+    // @Test
+    // public void addTest() {
+    //     List<Integer> list = new LinkedList<>();
 
-        // add to empty list
-        assertTrue(list.add(0));
+    //     // add to empty list
+    //     assertTrue(list.add(0));
 
-        // cant add nulls 
-        assertFalse(list.add(null));
+    //     // cant add nulls 
+    //     assertFalse(list.add(null));
 
-        // add to last index with index
-        assertFalse(list.add(2,2));
+    //     // add to last index with index
+    //     assertFalse(list.add(2,2));
 
-        // add elements
-        for (int i = 0; i < 25; i++) {
-            assertTrue(list.add(i));
-        }
+    //     // add elements
+    //     for (int i = 0; i < 25; i++) {
+    //         assertTrue(list.add(i));
+    //     }
 
         
-    }
+    // }
         
     
 }

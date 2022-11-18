@@ -197,13 +197,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         // Case 2: Merges the lists
         // loops until one list is empty
         while (this.head.getNext() != null && other.head.getNext() != null) {
-
-            // System.out.println("List 1: " + this);
-            // System.out.println("List 2: " + other);
-
-            // System.out.println("    this head " + this.head.getNext());
-            // System.out.println("    other head " + other.head.getNext());
-
             // If this's first node's data is smaller than other's first node's data -> append that node.
             if (this.head.getNext().getData().compareTo(other.head.getNext().getData()) <= 0) {
                 nodeToAppend = this.head.getNext();
@@ -227,13 +220,9 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                 newTail = newTail.getNext();
                 newSize++;
             }
-
-            // System.out.println("        this head next " + this.head.getNext());
-            // System.out.println("        other head next " + other.head.getNext());
-            // System.out.println("    List 1: " + this);
-            // System.out.println("    List 2: " + other);
         }
 
+        // adds any remaining nodes from this onto the new list
         while (this.head.getNext() != null) {
             nodeToAppend = this.head.getNext();
             this.head.setNext(this.head.getNext().getNext());
@@ -242,6 +231,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             newSize++;
         }
 
+        // adds any remaining nodes from other onto the new list
         while (other.head.getNext() != null) {
             nodeToAppend = other.head.getNext();
             other.head.setNext(other.head.getNext().getNext());
@@ -258,22 +248,21 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     @Override
     public void pairSwap() {
         if (this.size != 0) {
-            Node<T> trailer = this.head;
+            Node<T> trailer = this.head.getNext();
             Node<T> pointer = trailer.getNext();
-            Node<T> leader = pointer.getNext();
-            double swaps = Math.floor(this.size / 2);
+            int swaps = (int) Math.floor(this.size / 2);
 
             // Loop that swaps the nodes and leaves the one at the end if length is odd
             for (int i = 0; i < swaps; i++) {
-                trailer.setNext(leader);
-                pointer.setNext(leader.getNext());
-                leader.setNext(pointer);
-                
+                T tempData = pointer.getData();
+                pointer.setData(trailer.getData());
+                trailer.setData(tempData);
+
                 // Prevents reassignments if the swap was the last one
-                if (swaps - (i+1) != 0.0) { 
+                // swaps - (i+1) = the number of swaps that have occured. if zero, all swaps have been done
+                if (swaps - (i+1) != 0) { 
+                    pointer = pointer.getNext().getNext();
                     trailer = trailer.getNext().getNext();
-                    pointer = pointer.getNext();
-                    leader = pointer.getNext();
                 }
             }
             updateSorted();
