@@ -255,14 +255,14 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
     public void reverse() {//works
         // TODO reversed list IN PLACE
         int loopLength = 0;
-        if(filled % 2 == 1){
+        if(filled % 2 == 1){//checks if array is even size or not, and determines length of loop accordingly
             loopLength = (filled - 1) / 2;
         }else{
             loopLength = filled / 2;
         }
         for(int i = 0; i < loopLength; i ++){
-            int x = (filled - 1) - i;
-            T holder = mainArray[i];
+            int x = (filled - 1) - i;// same distance from back of filled section of list as 'i' is fromthe beginning of the list
+            T holder = mainArray[i];//holds item near beginnning of the list
             mainArray[i] = mainArray[x];
             mainArray[x] = holder;
         }
@@ -276,15 +276,10 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
 
     @Override
     //Source: Insert.java on CSCI1933 Canvas
-    public void sort() {//based on insertion sort from canvas files//works
-        // TODO sort all elements in list, ascending order, using INSERTION SORTING
-        //if is already sorted, do nothing
-        //use compareTo()
-        //update isSorted
+    public void sort() {//based on insertion sort from canvas files
         if(isSorted != true){
             int i, j;
-            T n;
-            int counter = 0;
+            T n;//used to store lower item in list to compare
             for (i = 1; i < filled; i++) {
                 n = mainArray[i];
                 for (j = i-1; j >= 0 && n.compareTo(mainArray[j]) < 0; j--) {
@@ -311,19 +306,4 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
             }
         }
     }
-    
-    public static void main(String[] args){
-        ArrayList<String> test = new ArrayList<String>();
-        System.out.println("empty: " + test.isSorted());
-        test.add("a");
-        System.out.println("a added: " + test.isSorted());
-        test.add("sus");
-        System.out.println("sus added: " + test.isSorted());
-        test.add("a");
-        System.out.println("a added: " + test.isSorted());
-        test.remove(1);
-        System.out.println("sus removed: " + test.isSorted());
-        System.out.println(test.toString());
-    }
-
 }
