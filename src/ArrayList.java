@@ -112,7 +112,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
     public T get(int index) {//works
         // TODO Auto-generated method stub
         T element;
-        if(index > mainArray.length || index < 0){
+        if(index > filled || index < 0){
             return null;
         }else{
         element = mainArray[index];
