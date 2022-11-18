@@ -431,10 +431,19 @@ public class ArrayListTest {
                     list.remove(0);
 
                     boolean check = true;
-
+                    System.out.println(j);
+                    System.out.println(list);
+                    System.out.println("    Sorted: " + list.isSorted());
+                    
                     for (int k = 1; k < list.size(); k++) {
+                        
+                        System.out.println("    Old Check: " + check);
+                        System.out.println(list.get(k).compareTo(list.get(k - 1)));
                         check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
+                        System.out.println("    New Check: " + check);
                     }
+
+                    System.out.println("        Final Check: " + check);
 
                     assertEquals(check, list.isSorted());
                 }
