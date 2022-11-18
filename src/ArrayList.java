@@ -112,7 +112,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
     public T get(int index) {//works
         // TODO Auto-generated method stub
         T element;
-        if(index > mainArray.length){
+        if(index > mainArray.length || index < 0){
             return null;
         }else{
         element = mainArray[index];
@@ -189,7 +189,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
                 }
 
             }
-            this.filled = newArray.length;
+            this.filled = totalFilled;
             this.mainArray = newArray;
             updateSorted();
         }
@@ -218,6 +218,9 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public T remove(int index) {//works
+        if(index < 0 || index >= filled){
+            return null;
+        }
         // TODO removes item at specified index, shifts items to right over to remove nulls
         T toReturn = mainArray[index];
         mainArray[index] = null;

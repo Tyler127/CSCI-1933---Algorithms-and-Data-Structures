@@ -1,8 +1,8 @@
 Method                      ArrayList Runtime       LinkedList Runtime      Explanation
-boolean add(T element)          O(1)                    O(1)              Array: just reassgins a variable or expands list, no loops
+boolean add(T element)          O(1)                    O(1)              Array:Does not deal with any loops. it just checks if the element to be added is null, if the array needs more space, and then adds the element at teh end of the list.
 
-boolean pairSwap()              O(n)                    O(n)              Array:only 1 loop, not nested
+boolean pairSwap()              O(n)                    O(n)              Array:Only had 1 loop, that is half the length of the filled section of the list. Otherwise deals in constants as it holds the itam at j(which is 1 less than i) and then swaps it with i in place.
 
-void merge()                    O(n)                    O(.)              Array:only 1 loop, not nested
+void merge()                    O(n)                    O(.)              Array:Only has 1 loop, and a few if statements to handle cases. Loops as many times as the new array has indexes, and determines if it needs to add an element from the "this" list or the "other" list, based on whichever is smaller to keep the sort order intact.
 
-void reverse()                  O(n)                    O(n)              Array:only 1 loop, not nested
+void reverse()                  O(n)                    O(n)              Array:Only has 1 loop and operates much like the pair swap method, but instead of holding and swapping the next item in the array it takes the item that is the same distance from the end of the filled section as it is from the begininng of the list.
