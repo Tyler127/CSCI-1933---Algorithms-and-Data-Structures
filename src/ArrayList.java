@@ -112,6 +112,9 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
     public T get(int index) {//works
         // TODO Auto-generated method stub
         T element;
+        if(index == this.size()){
+            return null;
+        }
         if(index > filled || index < 0){
             return null;
         }else{
@@ -299,23 +302,24 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
         }
     }
     
-    // public static void main(String[] args){
-    //     ArrayList<String> test = new ArrayList<String>();
-    //     ArrayList<String> test2 = new ArrayList<String>();
-    //     test.add("1");
-    //     test.add("2");
-    //     test2.add("3");
-    //     test2.add("4");
-    //     test.merge(test2);
-    //     //System.out.println(test);
-    //     test.add("sus");
+     public static void main(String[] args){
+         ArrayList<String> test = new ArrayList<String>();
+         ArrayList<String> test2 = new ArrayList<String>();
+         test.add("1");
+         test.add("2");
+         test2.add("3");
+         test2.add("4");
+        test.merge(test2);
+         //System.out.println(test);
+         test.add("sus");
+        System.out.println(test.get(test.size()));
     //     test.reverse();
-    //     //test.pairSwap();
-    //     //String x = test.remove(4);
+         //test.pairSwap();
+         //String x = test.remove(4);
     //     System.out.println(test);
     //     //System.out.println("this be: " + x)
     //     test.clear();
     //     System.out.println(test.size());
-    // }
+     }
 
 }
