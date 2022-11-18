@@ -218,6 +218,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
     @Override
     public T remove(int index) {//works
         if(index < 0 || index >= filled){
+            updateSorted();
             return null;
         }
         // TODO removes item at specified index, shifts items to right over to remove nulls
@@ -230,9 +231,9 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
                 i ++;
             }
             mainArray[i] = null;
+            updateSorted();
         }
         filled --;
-        updateSorted();
         return toReturn;
     }
 
