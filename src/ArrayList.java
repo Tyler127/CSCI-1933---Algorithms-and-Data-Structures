@@ -21,7 +21,6 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
     @Override
     public String toString() {//soemthing is still up, works for string
         String mainString = "";
-        // TODO Auto-generated method stub
         for(int i = 0; i < filled; i++){
             if(i == filled - 1){
                 mainString += this.mainArray[i].toString();
@@ -110,7 +109,6 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public T get(int index) {//works
-        // TODO Auto-generated method stub
         T element;
         if(index > filled || index < 0){
             return null;
@@ -146,13 +144,11 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public boolean isSorted() {//works
-        // TODO Auto-generated method stub
         return isSorted;
     }
 
     @Override
     public void merge(List<T> otherList) {//do after finished sort
-        // TODO Auto-generated method stub
         if(otherList != null){
 
             ArrayList<T> other = (ArrayList<T>) otherList;
@@ -257,7 +253,6 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
         return filled;
     }
 
