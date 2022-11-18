@@ -231,8 +231,8 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
             }
             mainArray[i] = null;
         }
-        updateSorted();
         filled --;
+        updateSorted();
         return toReturn;
     }
 
