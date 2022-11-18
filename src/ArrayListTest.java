@@ -429,8 +429,13 @@ public class ArrayListTest {
                 for (int j = 0; j < 5; j++) list.add(test[r.nextInt(test.length)]);
                 for (int j = 0; j < 5; j++) {
                     list.remove(0);
+
                     boolean check = true;
-                    for (int k = 1; k < list.size(); k++) check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
+
+                    for (int k = 1; k < list.size(); k++) {
+                        check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
+                    }
+
                     assertEquals(check, list.isSorted());
                 }
             }
