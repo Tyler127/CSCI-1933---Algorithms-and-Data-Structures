@@ -443,7 +443,7 @@ public class ArrayListTest {
                         System.out.println("    New Check: " + check);
                     }
 
-                    System.out.println("        Final Check: " + check);
+                    System.out.println("        Final Check: " + check + " Sorted: " + list.isSorted());
 
                     assertEquals(check, list.isSorted());
                 }

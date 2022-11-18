@@ -286,6 +286,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
             this.isSorted = true;
         }
         else{
+            this.isSorted = true;
             for(int i = 0; i < filled - 1; i++){//compares every index to the next one(except the last index as it is already compared), if the next index is smaller than the previous, is not sorted
                 if(mainArray[i + 1] != null){
                     if(this.mainArray[i].compareTo(this.mainArray[i + 1]) > 0){
