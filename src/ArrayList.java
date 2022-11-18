@@ -297,23 +297,23 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
         }
     }
     
-    public static void main(String[] args){
-        ArrayList<String> test = new ArrayList<String>();
-        ArrayList<String> test2 = new ArrayList<String>();
-        test.add("1");
-        test.add("2");
-        test2.add("3");
-        test2.add("4");
-        test.merge(test2);
-        //System.out.println(test);
-        test.add("sus");
-        test.reverse();
-        //test.pairSwap();
-        //String x = test.remove(4);
-        System.out.println(test);
-        //System.out.println("this be: " + x)
-        test.clear();
-        System.out.println(test.size());
-    }
+    // public static void main(String[] args){
+    //     ArrayList<String> test = new ArrayList<String>();
+    //     ArrayList<String> test2 = new ArrayList<String>();
+    //     test.add("1");
+    //     test.add("2");
+    //     test2.add("3");
+    //     test2.add("4");
+    //     test.merge(test2);
+    //     //System.out.println(test);
+    //     test.add("sus");
+    //     test.reverse();
+    //     //test.pairSwap();
+    //     //String x = test.remove(4);
+    //     System.out.println(test);
+    //     //System.out.println("this be: " + x)
+    //     test.clear();
+    //     System.out.println(test.size());
+    // }
 
 }
