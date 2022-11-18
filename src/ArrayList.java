@@ -93,7 +93,12 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
         // save earliest null, when earliest equal is found move ot earliest null and set that index ot be earliest null
         int eNull = 0;
         int origFilled = filled;
-        for(int i = 0; i < origFilled; i++){
+        int checker = 0;
+        for(int i = 0; i < origFilled; i++){//if sorted, and next element is not equal, everything after must be made null anyways
+            if(this.isSorted == true && mainArray[i].compareTo(element) > 0){
+                checker = i;
+                break;
+            }
             if(mainArray[i] != element){//if elements are not equal, removes element and decreases num of spaced filled
                 mainArray[i] = null;
                 this.filled --;
@@ -101,6 +106,13 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
                 mainArray[i] = null;
                 mainArray[eNull] = element;
                 eNull ++;
+            }
+        }
+        if(checker != 0){//used to optimise if sorted is true by cutting off for loop and then setting everything greater than the element to null, can't cut stuff off like linked list
+            while(checker != origFilled){
+                mainArray[checker] = null;
+                filled --;
+                checker ++;
             }
         }
         updateSorted();
@@ -129,6 +141,9 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
             return -1;
         }
         for(int i = 0; i < filled; i ++){
+            if(element.compareTo(mainArray[i]) < 0 && this.isSorted == true){
+                return -1;
+            }
             if(mainArray[i] == element){
                 return i;
             }
