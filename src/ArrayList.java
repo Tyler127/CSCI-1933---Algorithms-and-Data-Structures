@@ -43,11 +43,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
         else if(filled == mainArray.length){//array is full, grows array size
             grow();
         }
-        int pointer = 0;
-        while(mainArray[pointer] != null){//moves pointer up until it finds null index
-            pointer ++;
-        }
-        mainArray[pointer] = element;//assigns element to earliest null point
+        mainArray[filled] = element;//assigns element to earliest null point
         filled ++;//updates number of filled spots
         updateSorted();//checks if sorted
         return true;

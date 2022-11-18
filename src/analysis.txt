@@ -1,8 +1,8 @@
 Method                      ArrayList Runtime       LinkedList Runtime      Explanation
-boolean add(T element)          O(.)                    O(1)              .
+boolean add(T element)          O(1)                    O(1)              Array: just reassgins a variable or expands list, no loops
 
-boolean pairSwap()              O(.)                    O(n)              .
+boolean pairSwap()              O(n)                    O(n)              Array:only 1 loop, not nested
 
-void merge()                    O(.)                    O(.)                 /
+void merge()                    O(n)                    O(.)              Array:only 1 loop, not nested
 
-void reverse()                  O(.)                    O(n)
+void reverse()                  O(n)                    O(n)              Array:only 1 loop, not nested
