@@ -423,9 +423,11 @@ public class ArrayListTest {
             list.clear();
 
             // remove
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 50; j++) list.add(test[r.nextInt(test.length)]);
-                for (int j = 0; j < 50; j++) {
+            //5
+            for (int i = 0; i < 1; i++) {
+                //50 nand 50
+                for (int j = 0; j < 5; j++) list.add(test[r.nextInt(test.length)]);
+                for (int j = 0; j < 5; j++) {
                     list.remove(0);
                     boolean check = true;
                     for (int k = 1; k < list.size(); k++) check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
@@ -443,7 +445,9 @@ public class ArrayListTest {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 250; j++) list.add(test[r.nextInt(test.length)]);
                 list.equalTo(sorted[r.nextInt(sorted.length)]);
+
                 assertTrue(list.isSorted());
+
                 list.clear();
             }
 
