@@ -218,7 +218,6 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
     @Override
     public T remove(int index) {//works
         if(index < 0 || index >= filled){
-            updateSorted();
             return null;
         }
         // TODO removes item at specified index, shifts items to right over to remove nulls
@@ -231,8 +230,8 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
                 i ++;
             }
             mainArray[i] = null;
-            updateSorted();
         }
+        updateSorted();
         filled --;
         return toReturn;
     }
@@ -288,21 +287,27 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
         }
         else{
             for(int i = 0; i < filled - 1; i++){//compares every index to the next one(except the last index as it is already compared), if the next index is smaller than the previous, is not sorted
-                if(this.mainArray[i].compareTo(this.mainArray[i + 1]) > 0){
-                    this.isSorted = false;
+                if(mainArray[i + 1] != null){
+                    if(this.mainArray[i].compareTo(this.mainArray[i + 1]) > 0){
+                        this.isSorted = false;
+                    }
                 }
             }
         }
     }
     
-    //  public static void main(String[] args){
-    //     ArrayList<String> test = new ArrayList<String>();
-    //     System.out.println(test.isSorted);
-    //     test.add("one");
-    //     System.out.println(test.isSorted);
-    //     test.add("a");
-    //     System.out.println(test.isSorted);
-    //     System.out.println(test.toString());
-    //  }
+    public static void main(String[] args){
+        ArrayList<String> test = new ArrayList<String>();
+        System.out.println("empty: " + test.isSorted());
+        test.add("a");
+        System.out.println("a added: " + test.isSorted());
+        test.add("sus");
+        System.out.println("sus added: " + test.isSorted());
+        test.add("a");
+        System.out.println("a added: " + test.isSorted());
+        test.remove(1);
+        System.out.println("sus removed: " + test.isSorted());
+        System.out.println(test.toString());
+    }
 
 }
