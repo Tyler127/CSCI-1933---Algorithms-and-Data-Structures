@@ -368,9 +368,9 @@ public class LinkedListTest {
                     "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             String[] sorted = new String[]{"Jojo's Bizarre Adventure", "Naruto", "One Piece", "Solo Leveling", "The Breaker"};
             Random r = new Random();
-
+                
             // add element
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {                                                                                                   
                 for (int j = 0; j < 10; j++) {
                     list.add(test[r.nextInt(test.length)]);
                     boolean check = true;
@@ -434,22 +434,27 @@ public class LinkedListTest {
 
             // pairSwap
             for (int i = 0; i < 25; i++) {
+                //System.out.println("pre add List: " + list);
                 list.add(test[r.nextInt(test.length)]);
+                //System.out.println("Size: " + list.size());
+                //System.out.println("post add List: " + list);
+
                 list.pairSwap();
                 boolean check = true;
 
-                System.out.println("List: " + list);
-                System.out.println("Size: " + list.size());
+                //System.out.println("Size: " + list.size());
+                //System.out.println("post pair swap List: " + list);
+                
 
                 for (int k = 1; k < list.size(); k++) {
 
-                    System.out.println("    K: " + k + " K-Value: " + list.get(k));
-                    int c = k-1;
-                    System.out.println("    K-1: " + c + " K-1-Value: " + list.get(k-1));
+                    //System.out.println("    K: " + k + " K-Value: " + list.get(k));
+                    //int c = k-1;
+                    //System.out.println("    K-1: " + c + " K-1-Value: " + list.get(k-1));
 
                     check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
                 }
-                System.out.println("        " + check);
+                //System.out.println("        " + check);
                 assertEquals(check, list.isSorted());
             }
             list.clear();
