@@ -108,6 +108,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
                 eNull ++;
             }
         }
+        updateSorted();
         
     }
 
@@ -216,6 +217,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
             mainArray[i] = holder;
             j = j + 2;
         }
+        updateSorted();
     }
 
     @Override
@@ -251,6 +253,7 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
             mainArray[i] = mainArray[x];
             mainArray[x] = holder;
         }
+        updateSorted();
     }
 
     @Override
