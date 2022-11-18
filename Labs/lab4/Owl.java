@@ -1,3 +1,5 @@
+package lab4;
+
 public class Owl{
     private String name;
     private int age;

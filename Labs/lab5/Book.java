@@ -1,3 +1,5 @@
+package lab5;
+
 public class Book implements Comparable<Book> {
     private String title;
     private String author;

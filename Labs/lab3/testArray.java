@@ -1,3 +1,4 @@
+package lab3;
 import java.util.Scanner;//imports scanner class
 
 public class testArray{

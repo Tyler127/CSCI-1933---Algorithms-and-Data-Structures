@@ -1,3 +1,5 @@
+package lab7;
+
 public class Lab7Node {
 	private Lab7Node next;
 	private int index;

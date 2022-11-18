@@ -1,3 +1,5 @@
+package lab3;
+
 import java.util.Scanner;
 public class Max {
     public static int recursiveMaxDigit(int num){

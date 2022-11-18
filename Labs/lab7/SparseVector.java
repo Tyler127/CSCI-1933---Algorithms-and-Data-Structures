@@ -1,3 +1,5 @@
+package lab7;
+
 public class SparseVector {
 
 	private Lab7Node head;

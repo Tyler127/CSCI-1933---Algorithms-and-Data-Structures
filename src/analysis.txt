@@ -1,0 +1,8 @@
+Method                      ArrayList Runtime       LinkedList Runtime      Explanation
+boolean add(T element)          O(.)                    O(1)              .
+
+boolean pairSwap()              O(.)                    O(n)              .
+
+void merge()                    O(.)                    O(.)                 /
+
+void reverse()                  O(.)                    O(n)

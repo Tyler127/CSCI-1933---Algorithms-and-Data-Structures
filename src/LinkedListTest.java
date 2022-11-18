@@ -297,6 +297,7 @@ public class LinkedListTest {
             HashMap<String, Integer> expected = new HashMap<>(), actual = new HashMap<>(); // occurrences maps
 
             // add to list and map occurrences
+            //250
             for (int i = 0; i < 250; i++) {
                 list1.add(test1[r.nextInt(test1.length)]);
                 list2.add(test2[r.nextInt(test2.length)]);
@@ -304,11 +305,16 @@ public class LinkedListTest {
                 expected.put(list2.get(i), expected.getOrDefault(list2.get(i), 0) + 1);
             }
 
+           
             // merge lists
             list1.merge(list2);
+            //System.out.println("new list: " + list1);
             assertEquals(500, list1.size()); // ensure size update
+            // 500
             for (int i = 0; i < 500; i++) {
                 actual.put(list1.get(i), actual.getOrDefault(list1.get(i), 0) + 1); // comparison map
+                //System.out.println(list1.get(i));
+                //System.out.println("Compare: " + list1.get(i).compareTo(list1.get(i)));
                 if (i != 0) assertTrue(list1.get(i).compareTo(list1.get(i)) >= -2); // ensure merged list is sorted
             }
             for (String key : expected.keySet()) assertEquals(expected.get(key), actual.get(key)); // maps should match
@@ -427,12 +433,23 @@ public class LinkedListTest {
             }
 
             // pairSwap
-            for (int i = 0; i < 250; i++) {
+            for (int i = 0; i < 25; i++) {
                 list.add(test[r.nextInt(test.length)]);
                 list.pairSwap();
                 boolean check = true;
-                for (int k = 1; k < list.size(); k++) check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
 
+                System.out.println("List: " + list);
+                System.out.println("Size: " + list.size());
+
+                for (int k = 1; k < list.size(); k++) {
+
+                    System.out.println("    K: " + k + " K-Value: " + list.get(k));
+                    int c = k-1;
+                    System.out.println("    K-1: " + c + " K-1-Value: " + list.get(k-1));
+
+                    check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
+                }
+                System.out.println("        " + check);
                 assertEquals(check, list.isSorted());
             }
             list.clear();

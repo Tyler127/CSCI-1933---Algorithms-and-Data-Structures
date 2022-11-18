@@ -1,9 +1,6 @@
-
-
-import javax.print.attribute.IntegerSyntax;
-
 public class LinkedList<T extends Comparable<T>> implements List<T> {
     private Node<T> head;
+    private Node<T> tail;
     private boolean isSorted = true;
     private int size = 0;
 
@@ -16,7 +13,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public String toString() {
-        String outputString = "toString() - output string: ";
+        String outputString = "";
         Node<T> currentNode = this.head.getNext();
 
         // Add each element to the string until the node points to null
@@ -34,51 +31,39 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public boolean add(T element) {
-        Node<T> currentNode = this.head;
         Node<T> newNode = new Node<T>(element);
 
         // Case 1: element is null
-        if (element == null) {
-            return false;
-        }
-
-        // Case 2: head points to nothing
-        if (currentNode.getNext() == null) {
-            this.head.setNext(newNode); // sets head to the now second node
-            this.isSorted = true;
-        }
-
-        // Case 3: head points to a Node. Must loop to find end of list.
-        else {
-            // loop until the last element is found (when the Node points to null)
-            while (currentNode.getNext() != null) {
-                currentNode = currentNode.getNext();
-            }
-            currentNode.setNext(newNode); // set next for last element to the new Node
-        }
-        //System.out.println("    added element: " + element);
-        //System.out.println("        add presortcheck update: " + this.isSorted);
+        if (element == null) return false;
         
+
+        // Case 2: list has no nodes
+        if (this.head.getNext() == null) {
+            this.head.setNext(newNode);
+            this.tail = newNode;
+        }
+
+        // Case 3: adds newNode to end of list
+        else {
+            this.tail.setNext(newNode);
+            this.tail = this.tail.getNext();
+        }
+
         this.size += 1;
         updateSorted();
         return true;
     }
-    
+
     @Override
     public boolean add(int index, T element) {
         Node<T> currentNode = this.head; // start on head so if index = 0 element can become first Node such that head points to newNode
         Node<T> newNode = new Node<T>(element);
 
         // Case 1: element is null
-        if (element == null) {
-            return false;
-        }
+        if (element == null) return false;
 
         // Case 2: Index bigger than list size or below zero
-        if (index >= this.size || index < 0) {
-            //System.out.println("fail");
-            return false;
-        }
+        if (index >= this.size || index < 0) return false;
 
         // Case 3: Adding first Node
         if (this.size == 0 && index == 0) {
@@ -104,7 +89,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
      
     @Override
     public void clear() {
-        // Make head point to nothing (hope javer cleans it up?)
         this.head.setNext(null);
         this.isSorted = true;
         this.size = 0;
@@ -112,7 +96,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     
     @Override
     public void equalTo(T element) {
-        // TODO: optimize equalTo with isSorted?
         if (element != null) { // Only runs if element is not null
             Node<T> trailer = this.head;
             Node<T> pointer = trailer.getNext();
@@ -133,6 +116,16 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                     trailer = pointer;
                     pointer = trailer.getNext();
                 }
+
+                // Optimizes the method using isSorted:
+                // if sorted and pointer -> element and pointer.next -> not element 
+                // then chop off rest of nodes because all elements are accounted for
+                if (this.isSorted) {
+                    if (pointer.getData() == element && pointer.getNext().getData() != element) {
+                        pointer.setNext(null);
+                        return;
+                    }
+                }
             }
             this.isSorted = true;
         }
@@ -143,9 +136,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         Node<T> currentNode = this.head.getNext();
 
         // Case 1: the index is out of bounds
-        if (index > this.size - 1 || index < 0) {
-            return null;
-        }
+        if (index > this.size - 1 || index < 0) return null;
 
         // Case 2: the index is whithin bounds
         for (int i = 0; i < index; i++) {
@@ -161,9 +152,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
        int index = 0;
     
        // Case 0: element is null; exit right away
-       if (element == null) {
-            return -1;
-       }
+       if (element == null) return -1;
        
        // Case 1: loop until a Node is found with value matching element
        while (currentNode != null) {
@@ -193,8 +182,77 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public void merge(List<T> otherList) {
-        // TODO merge
+        // Case 1: otherList is null
+        if (otherList == null) return;
+
+        LinkedList<T> other = (LinkedList<T>) otherList;
+        this.sort();
+        other.sort();
+
+        Node<T> newHead = new Node<T>(null);
+        Node<T> newTail = new Node<T>(null);;
+        Node<T> nodeToAppend;
+        int newSize = 0;
         
+        // Case 2: Merges the lists
+        // loops until one list is empty
+        while (this.head.getNext() != null && other.head.getNext() != null) {
+
+            // System.out.println("List 1: " + this);
+            // System.out.println("List 2: " + other);
+
+            // System.out.println("    this head " + this.head.getNext());
+            // System.out.println("    other head " + other.head.getNext());
+
+            // If this's first node's data is smaller than other's first node's data -> append that node.
+            if (this.head.getNext().getData().compareTo(other.head.getNext().getData()) <= 0) {
+                nodeToAppend = this.head.getNext();
+                this.head.setNext(this.head.getNext().getNext());
+            } 
+            // Other's first node must be smaller -> append that node.
+            else {
+                nodeToAppend = other.head.getNext();
+                other.head.setNext(other.head.getNext().getNext());
+            }
+
+            // list doesn't exist -> create new head and set tail to new node
+            if (newHead.getNext() == null) {
+                newHead.setNext(nodeToAppend);
+                newTail = newHead.getNext();
+                newSize++;
+            }
+            // list exists -> set and move tail
+            else {
+                newTail.setNext(nodeToAppend);
+                newTail = newTail.getNext();
+                newSize++;
+            }
+
+            // System.out.println("        this head next " + this.head.getNext());
+            // System.out.println("        other head next " + other.head.getNext());
+            // System.out.println("    List 1: " + this);
+            // System.out.println("    List 2: " + other);
+        }
+
+        while (this.head.getNext() != null) {
+            nodeToAppend = this.head.getNext();
+            this.head.setNext(this.head.getNext().getNext());
+            newTail.setNext(nodeToAppend);
+            newTail = newTail.getNext();
+            newSize++;
+        }
+
+        while (other.head.getNext() != null) {
+            nodeToAppend = other.head.getNext();
+            other.head.setNext(other.head.getNext().getNext());
+            newTail.setNext(nodeToAppend);
+            newTail = newTail.getNext();
+            newSize++;
+        }
+
+        this.head = newHead;
+        this.size = newSize;
+        updateSorted();
     }
 
     @Override
@@ -281,6 +339,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public void sort() { 
+        // Increases efficiency is the list is sorted by not resorting it.
         if (this.isSorted != true) {
             Node<T> pointer = this.head; 
             Node<T> testNode = null;
@@ -342,7 +401,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                 pointer = pointer.getNext();
             }
         }
-        //System.out.println("testSorted() - testSorted Result: " + this.isSorted);
     }
     
 
@@ -374,8 +432,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         // list.add("9");
         // list.add("7");
         
-        //System.out.println("isSorted: " + list.isSorted());
-
         
 
         System.out.println(list);
@@ -387,39 +443,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
         System.out.println("Size: " + list.size());
         System.out.println("isSorted: " + list.isSorted());
-
-
-
-
-         // LinkedList<Integer> list = new LinkedList<Integer>();
-        // //System.out.println(list);
-
-        // list.add(3);
-        
-        // list.add(3);
-        // list.add(4);
-        // list.add(5);
-        // list.add(36);
-        // // System.out.println(list);
-        // // System.out.println(list.size());
-
-        // list.clear();
-        // System.out.println(list);
-        // System.out.println(list.size());
-         //    System.out.println(list);
-    //    System.out.println(list.indexOf("3"));
-    //    System.out.println(list.indexOf("conna moment"));
-    //    System.out.println(list.indexOf("0"));
-    //    System.out.println(list.indexOf("dddd"));
-    //    System.out.println(list.indexOf(null));
-    //    list.add(2, "susgayballs");
-        // list.equalTo("conna moment");
-        // System.out.println(list);
-        // System.out.println(list.get(6));
-        // System.out.println(list.get(7));
-        // System.out.println(list.get(0));
-        // System.out.println(list.get(2));
-      
+ 
     }
-    
 }

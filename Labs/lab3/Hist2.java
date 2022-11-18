@@ -1,3 +1,5 @@
+package lab3;
+
 public class Hist2{
     public int upperbound;
     public int lowerbound;
