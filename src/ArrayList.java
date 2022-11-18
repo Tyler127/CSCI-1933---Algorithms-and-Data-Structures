@@ -287,31 +287,21 @@ public class ArrayList<T extends Comparable<T>> implements List<T> {
         }
         else{
             for(int i = 0; i < filled - 1; i++){//compares every index to the next one(except the last index as it is already compared), if the next index is smaller than the previous, is not sorted
-                if(this.mainArray[i].compareTo(this.mainArray[i + 1]) < 0){
+                if(this.mainArray[i].compareTo(this.mainArray[i + 1]) > 0){
                     this.isSorted = false;
                 }
             }
         }
     }
     
-     public static void main(String[] args){
-         ArrayList<String> test = new ArrayList<String>();
-         ArrayList<String> test2 = new ArrayList<String>();
-         test.add("1");
-         test.add("2");
-         test2.add("3");
-         test2.add("4");
-        test.merge(test2);
-         //System.out.println(test);
-         test.add("sus");
-        System.out.println(test.get(test.size()));
-    //     test.reverse();
-         //test.pairSwap();
-         //String x = test.remove(4);
-    //     System.out.println(test);
-    //     //System.out.println("this be: " + x)
-    //     test.clear();
-    //     System.out.println(test.size());
-     }
+    //  public static void main(String[] args){
+    //     ArrayList<String> test = new ArrayList<String>();
+    //     System.out.println(test.isSorted);
+    //     test.add("one");
+    //     System.out.println(test.isSorted);
+    //     test.add("a");
+    //     System.out.println(test.isSorted);
+    //     System.out.println(test.toString());
+    //  }
 
 }
