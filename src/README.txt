@@ -16,12 +16,14 @@ Assumptions:
     - Using Java 11
 
 Additional Features:
+    - None
 
 Bugs and Defects:
     - None known
 
 Outside Sources:
     - Insertion Sort from 1933 Canvas Page
+    - Reverse Linked List from 1933 Canvas Page
 
 
 
