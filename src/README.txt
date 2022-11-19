@@ -11,6 +11,7 @@ Connor:
 
 How to Compile/Run:
     - Compiled and Tested in VS Code and IntelliJ
+    - Runs only using JUnit tests
 
 Assumptions:
     - Using Java 11
