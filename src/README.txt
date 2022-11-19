@@ -5,13 +5,12 @@ Connor Kanten - kante060
 Contributions:
 Tyler:
     - LinkedList.java
-    - 
 
 Connor:
     - ArrayList.java
-    - 
 
 How to Compile/Run:
+    - Compiled and Tested in VS Code 
 
 Assumptions:
 

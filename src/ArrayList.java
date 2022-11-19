@@ -1,5 +1,7 @@
 import java.beans.IndexedPropertyChangeEvent;
 
+// Written by LARS6653 and KANTE060
+
 @SuppressWarnings("unchecked")
 public class ArrayList<T extends Comparable<T>> implements List<T> {
     private boolean isSorted = true;

@@ -1,9 +1,10 @@
+// Written by LARS6653 and KANTE060
+
 public class LinkedList<T extends Comparable<T>> implements List<T> {
     private Node<T> head;
     private Node<T> tail;
     private boolean isSorted = true;
     private int size = 0;
-
 
     public LinkedList() {
         head = new Node<T>(null);
@@ -156,6 +157,12 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
        
        // Case 1: loop until a Node is found with value matching element
        while (currentNode != null) {
+        
+            // Optimizes the method by ending loop early if the next data is > than element.
+            if (this.isSorted == true && element.compareTo(currentNode.getData()) < 0) {
+                return -1;
+            }
+
             if (element == currentNode.getData()) {
                 return index;
             }
@@ -300,18 +307,13 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     @Override
     public void reverse() {
         // Case 1: list is empty or length of 1
-        if (this.size == 0 || this.size == 1) {
-            return;
-        }
+        if (this.size == 0 || this.size == 1) return;
 
         // Case 2: Reverses the list
         Node<T> trailer = this.head.getNext();
         Node<T> pointer = trailer.getNext();
 
         for (int i = 1; i < this.size; i++) { // i starts on 1 because size is length not index
-            //System.out.println("trailer: " + trailer);
-            //System.out.println("pointer " + pointer);
-
             trailer.setNext(pointer.getNext());
             pointer.setNext(this.head.getNext());
             this.head.setNext(pointer);
@@ -328,23 +330,19 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public void sort() { 
-        // Increases efficiency is the list is sorted by not resorting it.
+        // Increases efficiency is the list is sorted by not resorting it if already sorted.
         if (this.isSorted != true) {
             Node<T> pointer = this.head; 
             Node<T> testNode = null;
             T temp;
     
-            // Loop through each node and then from
+            // Loops throught the list starting at pointer
             for (int i = 0; i < this.size; i++) {
-                //System.out.println("Pass: " + i);
-                // Node index will point to node next to
-                // current
                 testNode = pointer.getNext();
 
+                // Loops through the list again starting at testNode
                 while (testNode != null) {
-                    // If current node's data is greater
-                    // than index's node data, swap the data
-                    // between them
+                    // If pointer's data is bigger than testNodes's swap the data
                     if (pointer.getData() != null && testNode.getData() != null) {
                         if (pointer.getData().compareTo(testNode.getData()) > 0) { 
                             //System.out.println("    Swap: " + pointer.getData() + " and " + testNode.getData());
@@ -353,13 +351,9 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                             testNode.setData(temp);
                         }
                     }
-                    //System.out.println("        old testnode: " + testNode);
                     testNode = testNode.getNext();
-                    //System.out.println("        new testnode: " + testNode);
                 }
-                //System.out.println("        old pointer: " + pointer);
                 pointer = pointer.getNext();
-                //System.out.println("        new pointer: " + pointer);
             }
             this.isSorted = true;
         }
@@ -390,48 +384,5 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                 pointer = pointer.getNext();
             }
         }
-    }
-    
-
-
-    public static void main(String[] args) {
-        LinkedList<String> list = new LinkedList<String>();
-        
-        //System.out.println("Size: " + list.size());
-        // list.add("3");
-        // list.add("1");
-        // list.add("4");
-        // list.add("5");
-        // list.add("7");
-        // list.add("6");
-        // list.add("2");
-
-        //list.add("0");
-        //list.add("1");
-        //list.add("2");
-        //list.add("3");
-
-        //list.add("20");
-        //list.add("5");
-        //list.add("4");
-        //list.add("0");
-
-        // list.add("3");
-        // list.add("6");
-        // list.add("9");
-        // list.add("7");
-        
-        
-
-        System.out.println(list);
-        //System.out.println(list.remove(1));
-        //list.pairSwap();
-        list.reverse();
-        System.out.println(list);
-
-
-        System.out.println("Size: " + list.size());
-        System.out.println("isSorted: " + list.isSorted());
- 
     }
 }

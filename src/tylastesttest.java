@@ -33,6 +33,19 @@ public class tylastesttest {
         System.out.println();
     }
 
+    @Test 
+    public void indexOfTest() {
+        List<Integer> list = new LinkedList<>();
+
+        list.add(1);
+        list.add(3);
+        list.add(5);
+        list.add(7);
+
+        System.out.println(list);
+        System.out.println("output: " + list.indexOf(6));
+    }
+
     @Test
     public void addTest() {
         List<Integer> list = new LinkedList<>();
