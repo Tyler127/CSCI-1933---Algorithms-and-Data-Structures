@@ -10,13 +10,15 @@ Connor:
     - ArrayList.java
 
 How to Compile/Run:
-    - Compiled and Tested in VS Code 
+    - Compiled and Tested in VS Code and IntelliJ
 
 Assumptions:
+    - Using Java 11
 
 Additional Features:
 
 Bugs and Defects:
+    - None known
 
 Outside Sources:
     - Insertion Sort from 1933 Canvas Page
