@@ -1,3 +1,5 @@
+
+
 public class King {
     private int row;
     private int col;

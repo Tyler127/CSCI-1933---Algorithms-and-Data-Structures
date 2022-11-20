@@ -1,9 +1,11 @@
-public class Node {
-	private Node next;
+package lab7;
+
+public class Lab7Node {
+	private Lab7Node next;
 	private int index;
 	private double value;
 
-	public Node(int idx, double val){
+	public Lab7Node(int idx, double val){
 		index = idx;
 		value = val;
 		next = null;
@@ -12,8 +14,8 @@ public class Node {
 	public double getValue(){ return value; }
 	public int getIndex(){ return index; }
 
-	public Node getNext(){ return next; }
-	public void setNext( Node other ){ next = other; }
+	public Lab7Node getNext(){ return next; }
+	public void setNext( Lab7Node other ){ next = other; }
 
 	public String toString(){ return ""+value; }
 }

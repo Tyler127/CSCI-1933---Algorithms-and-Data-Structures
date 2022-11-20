@@ -1,3 +1,5 @@
+package Project1;
+
 import java.awt.*;
 import java.util.concurrent.*;
  
@@ -8,6 +10,7 @@ import java.util.ListIterator;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 
+@SuppressWarnings("all")
 public class Canvas extends JApplet {
 
 	

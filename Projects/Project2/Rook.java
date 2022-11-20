@@ -1,3 +1,5 @@
+
+
 public class Rook {
     private int row;
     private int col;

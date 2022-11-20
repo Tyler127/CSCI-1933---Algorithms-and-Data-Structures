@@ -1,3 +1,5 @@
+
+
 public class Bishop {
     private int row;
     private int col;

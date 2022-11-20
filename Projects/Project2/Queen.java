@@ -1,3 +1,5 @@
+
+
 public class Queen {
     private int row;
     private int col;

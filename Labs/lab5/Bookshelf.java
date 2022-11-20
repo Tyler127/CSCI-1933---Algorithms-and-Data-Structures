@@ -1,3 +1,5 @@
+package lab5;
+
 class Bookshelf{
     private Book[] BookList = new Book[20];
     // private int NextEmpty = 0;

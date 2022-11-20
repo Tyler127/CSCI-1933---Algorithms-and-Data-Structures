@@ -1,3 +1,5 @@
+package lab3;
+
 public class Histogram{
     public int upperbound;
     public int lowerbound;

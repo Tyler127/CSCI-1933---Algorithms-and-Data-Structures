@@ -1,3 +1,5 @@
+
+
 public class Knight {
     private int row;
     private int col;

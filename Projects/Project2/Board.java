@@ -1,3 +1,5 @@
+
+
 import java.lang.Math;
 import java.util.Scanner;
 public class Board {
@@ -48,6 +50,7 @@ public class Board {
      * @param endCol The column of the end position.
      * @return true if the piece is successfully moved and false if the piece was not moved.
      */
+    @SuppressWarnings("all")
     public boolean movePiece(int startRow, int startCol, int endRow, int endCol) {
         Piece movingPiece = this.getPiece(startRow, startCol);
         
@@ -236,6 +239,7 @@ public class Board {
      * @param endCol The column of the end position.
      * @return true if all 4 conditions are true. false if any is not true.
      */
+    @SuppressWarnings("unused")
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
         // These variables aren't used for any statements but were used to debug.
         boolean inBounds= false;
