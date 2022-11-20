@@ -1,3 +1,5 @@
+package lab8;
+
 public class Car extends Vehicle{
     private double mpg;
     public Car(){

@@ -1,3 +1,5 @@
+package lab9;
+
 public class Stack<T extends Comparable<T>> {
     private int size;
     private int inStack;

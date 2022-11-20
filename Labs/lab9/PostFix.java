@@ -1,3 +1,5 @@
+package lab9;
+
 public class PostFix {
     static double evaluate(String[] expression){
         Stack<Double> stack = new Stack<Double>(expression.length);//change size to arbitrary(such as 4 for example in main) to cause stack exception error

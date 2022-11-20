@@ -1,4 +1,6 @@
-import java.util.Stack;
+package lab9;
+
+//import java.util.Stack;
 
 public class StackException extends Exception{
     private int size;

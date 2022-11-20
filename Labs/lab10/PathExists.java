@@ -1,3 +1,5 @@
+package lab10;
+
 import java.util.*;
 
 public class PathExists {

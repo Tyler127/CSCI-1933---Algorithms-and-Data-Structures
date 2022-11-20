@@ -1,3 +1,5 @@
+package lab8;
+
 public class Train extends Vehicle{
     private double mpg;
     public Train(){

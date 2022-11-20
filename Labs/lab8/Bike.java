@@ -1,3 +1,5 @@
+package lab8;
+
 public class Bike implements Drivable {
     public void movingForward(){
         System.out.println("Bike moving Forward");

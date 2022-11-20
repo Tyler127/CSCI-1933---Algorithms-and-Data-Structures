@@ -1,3 +1,5 @@
+package lab10;
+
 /**
  * Author: Noah Park on 04.11.2021.
  */

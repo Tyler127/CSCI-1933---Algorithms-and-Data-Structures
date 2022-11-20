@@ -35,6 +35,40 @@ public class tylastesttest {
     }
 
     @Test
-    public void pairswap() {
+    public void printTest() {
+        MyMaze maze = new MyMaze(2, 5, 1, 3);
+        maze.printMaze();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Test
+    public void randomTest() {
+        Random r = new Random();
+
+        for (int i = 0; i<5; i++) {
+            int randInt = r.nextInt(0, 5);
+            //System.out.println(randInt);
+        }
     }
 }

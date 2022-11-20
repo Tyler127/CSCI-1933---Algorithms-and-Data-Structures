@@ -1,3 +1,5 @@
+package lab8;
+
 public class Helicopter extends Vehicle{
     private double mpg;
     public Helicopter(){

@@ -1,3 +1,5 @@
+package lab8;
+
 public class VehicleTester {
     public static void main(String[] args){
         Car car = new Car(30.0);

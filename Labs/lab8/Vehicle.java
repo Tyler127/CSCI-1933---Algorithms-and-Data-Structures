@@ -1,3 +1,5 @@
+package lab8;
+
 public abstract class Vehicle implements Comparable<Vehicle> {
     public abstract void movingForward();
     public abstract void movingBackward();
@@ -5,7 +7,7 @@ public abstract class Vehicle implements Comparable<Vehicle> {
 
     public void start(){System.out.println("Starting Vehicle Engine..");}
     public void stop(){System.out.println("Stopping Vehicle Engine..");}
-    protected static int nVehicles = 0;
+    protected int nVehicles = 0;
 
     /**
      * this method returns true if and only if o is the same type
@@ -24,12 +26,11 @@ public abstract class Vehicle implements Comparable<Vehicle> {
         }
     }
 
-    public static final int getNumVehicles() {
-        return nVehicles;
-    }
+    // public static final int getNumVehicles() {
+    //     return nVehicles;
+    // }
 
     // This method is used for sorting vehicles by their MPG.
-    // TODO: Implement this method for Milestone 3
     public int compareTo(Vehicle v) {
         int x;
         if (this.getMPG() < v.getMPG()){
