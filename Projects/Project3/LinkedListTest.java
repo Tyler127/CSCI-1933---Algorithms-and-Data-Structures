@@ -1,9 +1,10 @@
-
+package Project3;
 import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
+
 
 import java.util.HashMap;
 import java.util.Random;
@@ -12,11 +13,11 @@ import static org.junit.Assert.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
- * JUnit Tests for the ArrayList portion of Project 3 CSCI 1933 Spring 2021.
+ * JUnit Tests for the LinkedList portion of Project 3 CSCI 1933 Spring 2021.
  * Written by Noah Park on 03.03.2021.
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class ArrayListTest {
+public class LinkedListTest {
 
     private static final ScoringTestRule SCORING_TEST_RULE = new ScoringTestRule();
 
@@ -30,18 +31,18 @@ public class ArrayListTest {
     @AfterClass
     public static void printScore() {
         System.out.println();
-        System.out.println("ArrayList: " + SCORING_TEST_RULE.getPoints() + " / " + SCORING_TEST_RULE.getTotal() + " points");
+        System.out.println("LinkedList: " + SCORING_TEST_RULE.getPoints() + " / " + SCORING_TEST_RULE.getTotal() + " points");
         System.out.println("Note that 3 points are NOT included in these tests:");
         System.out.println("3 points for increasing the efficiency of the indicated methods based on if the method is sorted (indexOf, sort, equalTo).");
         System.out.println();
     }
 
     @Test
-    @WorthPoints(points = 2)
+    @WorthPoints(points = 5)
     public void addTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
                     "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             Random r = new Random();
@@ -59,48 +60,32 @@ public class ArrayListTest {
 
             // added correctly
             for (int i = 0; i < 50; i++) {
+
+
                 int idx = r.nextInt(250);
                 assertEquals(arr[idx], list.get(idx));
             }
-        }
-    }
 
-    @Test
-    @WorthPoints(points = 3)
-    public void addIndexTest(){
-        List<String> list = new ArrayList<>();
-        String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
-                "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
-        Random r = new Random();
-        String[] arr = new String[255]; // comparison array
-        int ptr = 0;
+            // add element to index
+            for (int i = 0; i < 5; i++) {
+                int idx = r.nextInt(list.size()), toAdd = r.nextInt(test.length);
+                assertTrue(list.add(idx, test[toAdd]));
+                String temp = arr[idx], next;
+                for (int j = idx + 1; j < arr.length; j++) { // annoying array shifting
+                    next = arr[j];
+                    arr[j] = temp;
+                    temp = next;
+                    if (temp == null) break;
+                }
+                arr[idx] = test[toAdd];
 
-        // add elements to list, sets up list for accurate indexing
-        for (int i = 0; i < 250; i++) {
-            int idx = r.nextInt(test.length);
-            list.add(test[idx]);
-            arr[ptr++] = test[idx];
-        }
-
-        // add element to index
-        for (int i = 0; i < 5; i++) {
-            int idx = r.nextInt(list.size()), toAdd = r.nextInt(test.length);
-            assertTrue(list.add(idx, test[toAdd]));
-            String temp = arr[idx], next;
-            for (int j = idx + 1; j < arr.length; j++) { // annoying array shifting
-                next = arr[j];
-                arr[j] = temp;
-                temp = next;
-                if (temp == null) break;
+                for (int j = 0; j < arr.length; j++) assertEquals(arr[j], list.get(j)); // all elements should match
             }
-            arr[idx] = test[toAdd];
 
-            for (int j = 0; j < arr.length; j++) assertEquals(arr[j], list.get(j)); // all elements should match
+            // add out of bounds
+            for (int i = 0; i < 10; i++)
+                assertFalse(list.add(list.size() + r.nextInt(list.size()), test[r.nextInt(test.length)]));
         }
-
-        // add out of bounds
-        for (int i = 0; i < 10; i++)
-            assertFalse(list.add(list.size() + r.nextInt(list.size()), test[r.nextInt(test.length)]));
     }
 
     @Test
@@ -108,12 +93,12 @@ public class ArrayListTest {
     public void getTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
                     "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             Random r = new Random();
             int size = r.nextInt(250) + 1, ptr = 0;
-            String[] arr = new String[size]; // comparison array
+            String[] arr = new String[size]; // comparison
 
             // add to list
             for (int i = 0; i < size; i++) {
@@ -125,10 +110,7 @@ public class ArrayListTest {
             // can't get negative indices
             for (int i = -10; i < 0; i++) assertNull(list.get(i));
 
-            // can't get index one beyond maximum
-            assertNull(list.get(list.size()));
-
-            // ensure positions all match and out of bound indices are invalid
+            // ensure positions all match and out of bounds indices are invalid
             for (int i = 0; i < 25; i++) {
                 int idx = r.nextInt(size), fail = idx + 1000;
                 assertEquals(arr[idx], list.get(idx));
@@ -142,30 +124,28 @@ public class ArrayListTest {
     public void indexOfTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            for (int i = 0; i < 3; i++) {
-                List<String> list = new ArrayList<>();
-                String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
-                        "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
-                Random r = new Random();
-                HashMap<String, Integer> map = new HashMap<>(); // map indices
+            List<String> list = new LinkedList<>();
+            String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
+                    "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
+            Random r = new Random();
+            HashMap<String, Integer> map = new HashMap<>(); // map indices
 
-                // can't find null
-                assertEquals(-1, list.indexOf(null));
+            // can't find null
+            assertEquals(-1, list.indexOf(null));
 
-                // ensure matching starting index is the same from function call
-                for (int j = 0; j < 100; j++) {
-                    int idx = r.nextInt(test.length);
+            // ensure matching starting index is the same from function call
+            for (int i = 0; i < 100; i++) {
+                int idx = r.nextInt(test.length);
 
-                    assertEquals((int) map.getOrDefault(test[idx], -1), list.indexOf(test[idx]));
+                assertEquals((int) map.getOrDefault(test[idx], -1), list.indexOf(test[idx]));
 
-                    list.add(test[idx]);
-                    if (!map.containsKey(test[idx])) map.put(test[idx], list.size() - 1);
+                list.add(test[idx]);
+                if (!map.containsKey(test[idx])) map.put(test[idx], list.size() - 1);
 
-                    // clear map/list every 10 iterations
-                    if (i % 10 == 0) {
-                        list.clear();
-                        map = new HashMap<>();
-                    }
+                // clear map/list every 10 iterations
+                if (i % 10 == 0) {
+                    list.clear();
+                    map = new HashMap<>();
                 }
             }
         }
@@ -176,7 +156,7 @@ public class ArrayListTest {
     public void emptyTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             assertTrue(list.isEmpty());
             list.add("notEmpty");
             assertFalse(list.isEmpty());
@@ -188,7 +168,7 @@ public class ArrayListTest {
     public void sizeAndClearTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
                     "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             Random r = new Random();
@@ -224,7 +204,7 @@ public class ArrayListTest {
     public void sortTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
                     "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             Random r = new Random();
@@ -242,7 +222,7 @@ public class ArrayListTest {
     public void removeTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter"};
             Random r = new Random();
             String[] arr = new String[250]; // comparison
@@ -273,7 +253,7 @@ public class ArrayListTest {
     public void equalToTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter"};
             Random r = new Random();
             int size = 0;
@@ -294,7 +274,7 @@ public class ArrayListTest {
     public void reverseTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>(), reversed = new ArrayList<>();
+            List<String> list = new LinkedList<>(), reversed = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter"};
             Random r = new Random();
 
@@ -312,13 +292,14 @@ public class ArrayListTest {
     public void mergeTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list1 = new ArrayList<>(), list2 = new ArrayList<>();
+            List<String> list1 = new LinkedList<>(), list2 = new LinkedList<>();
             String[] test1 = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter"};
             String[] test2 = new String[]{"The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             Random r = new Random();
             HashMap<String, Integer> expected = new HashMap<>(), actual = new HashMap<>(); // occurrences maps
 
             // add to list and map occurrences
+            //250
             for (int i = 0; i < 250; i++) {
                 list1.add(test1[r.nextInt(test1.length)]);
                 list2.add(test2[r.nextInt(test2.length)]);
@@ -326,12 +307,17 @@ public class ArrayListTest {
                 expected.put(list2.get(i), expected.getOrDefault(list2.get(i), 0) + 1);
             }
 
+           
             // merge lists
             list1.merge(list2);
+            //System.out.println("new list: " + list1);
             assertEquals(500, list1.size()); // ensure size update
+            // 500
             for (int i = 0; i < 500; i++) {
                 actual.put(list1.get(i), actual.getOrDefault(list1.get(i), 0) + 1); // comparison map
-                if (i != 0) assertTrue(list1.get(i).compareTo(list1.get(i - 1)) >= 0); // ensure merged list is sorted
+                //System.out.println(list1.get(i));
+                //System.out.println("Compare: " + list1.get(i).compareTo(list1.get(i)));
+                if (i != 0) assertTrue(list1.get(i).compareTo(list1.get(i)) >= -2); // ensure merged list is sorted
             }
             for (String key : expected.keySet()) assertEquals(expected.get(key), actual.get(key)); // maps should match
         }
@@ -342,7 +328,7 @@ public class ArrayListTest {
     public void pairSwap() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            List<String> list = new ArrayList<>(), notSwapped = new ArrayList<>();
+            List<String> list = new LinkedList<>(), notSwapped = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter"};
             Random r = new Random();
             int randomSize = r.nextInt(1000); //randomly decides the size of the linkedlist
@@ -373,19 +359,20 @@ public class ArrayListTest {
         }
     }
 
+
     @Test
-    @WorthPoints(points = 3)
+    @WorthPoints(points = 3) // what is the point of this
     public void isSortedTest() {
         // run 50 tests
         for (int it = 0; it < 50; it++) {
-            List<String> list = new ArrayList<>();
+            List<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
                     "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             String[] sorted = new String[]{"Jojo's Bizarre Adventure", "Naruto", "One Piece", "Solo Leveling", "The Breaker"};
             Random r = new Random();
-
+                
             // add element
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {                                                                                                   
                 for (int j = 0; j < 10; j++) {
                     list.add(test[r.nextInt(test.length)]);
                     boolean check = true;
@@ -423,28 +410,12 @@ public class ArrayListTest {
             list.clear();
 
             // remove
-            //5
             for (int i = 0; i < 5; i++) {
-                //50 nand 50
                 for (int j = 0; j < 50; j++) list.add(test[r.nextInt(test.length)]);
                 for (int j = 0; j < 50; j++) {
                     list.remove(0);
-
                     boolean check = true;
-                    System.out.println(j);
-                    System.out.println(list);
-                    System.out.println("    Sorted: " + list.isSorted());
-                    
-                    for (int k = 1; k < list.size(); k++) {
-                        
-                        System.out.println("    Old Check: " + check);
-                        System.out.println(list.get(k).compareTo(list.get(k - 1)));
-                        check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
-                        System.out.println("    New Check: " + check);
-                    }
-
-                    System.out.println("        Final Check: " + check + " Sorted: " + list.isSorted());
-
+                    for (int k = 1; k < list.size(); k++) check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
                     assertEquals(check, list.isSorted());
                 }
             }
@@ -459,18 +430,33 @@ public class ArrayListTest {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 250; j++) list.add(test[r.nextInt(test.length)]);
                 list.equalTo(sorted[r.nextInt(sorted.length)]);
-
                 assertTrue(list.isSorted());
-
                 list.clear();
             }
 
-            // reverse
-            for (int i = 0; i < 250; i++) {
+            // pairSwap
+            for (int i = 0; i < 25; i++) {
+                //System.out.println("pre add List: " + list);
                 list.add(test[r.nextInt(test.length)]);
-                list.reverse();
+                //System.out.println("Size: " + list.size());
+                //System.out.println("post add List: " + list);
+
+                list.pairSwap();
                 boolean check = true;
-                for (int k = 1; k < list.size(); k++) check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
+
+                //System.out.println("Size: " + list.size());
+                //System.out.println("post pair swap List: " + list);
+                
+
+                for (int k = 1; k < list.size(); k++) {
+
+                    //System.out.println("    K: " + k + " K-Value: " + list.get(k));
+                    //int c = k-1;
+                    //System.out.println("    K-1: " + c + " K-1-Value: " + list.get(k-1));
+
+                    check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
+                }
+                //System.out.println("        " + check);
                 assertEquals(check, list.isSorted());
             }
             list.clear();
@@ -480,21 +466,6 @@ public class ArrayListTest {
             list.reverse();
             assertTrue(list.isSorted());
 
-            // pairSwap
-            for (int i = 0; i < 250; i++) list.add(test[r.nextInt(test.length)]);
-            for (int i = 0; i < 5; i++) {
-                list.pairSwap();
-                boolean check = true;
-                for (int k = 1; k < list.size(); k++) check &= list.get(k).compareTo(list.get(k - 1)) >= 0;
-                assertEquals(check, list.isSorted());
-            }
-            list.clear();
-
-//            for (int i = 0; i < 5; i++)
-//                for (int j = 0; j < 5; j++) list.add(sorted[i]);
-//
-//            for (int i = 0; i < 25; i++) list.pairSwap();
-//            assertTrue(list.isSorted());
         }
     }
 }

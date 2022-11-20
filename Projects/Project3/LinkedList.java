@@ -1,3 +1,5 @@
+package Project3;
+
 // Written by LARS6653 and KANTE060
 
 public class LinkedList<T extends Comparable<T>> implements List<T> {
@@ -148,7 +150,6 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
     @Override
     public int indexOf(T element) {
-       // TODO: optimize indexOf with isSorted?
        Node<T> currentNode = this.head.getNext();
        int index = 0;
     
