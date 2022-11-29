@@ -14,6 +14,15 @@ public class BinaryTree<V extends Comparable<V>> {
     }
     private void printInOrderHelper(Node<V> node) {
         // TODO: Fill in definition
+        if(node == null){
+        }else{
+            //left first
+            printInOrderHelper(node.getLeft());
+            //then prints node itself
+            System.out.print(node.getValue() + " ");
+            //then goes right
+            printInOrderHelper(node.getRight());
+        }
     }
 
     public void printPreorder(){
@@ -21,6 +30,15 @@ public class BinaryTree<V extends Comparable<V>> {
     }
     private void printPreorderHelper(Node<V> node) {
         // TODO: Fill in definition
+        if(node == null){
+        }else{
+            //node itself
+            System.out.print(node.getValue() + " ");
+            //left
+            printPreorderHelper(node.getLeft());
+            //right
+            printPreorderHelper(node.getRight());
+        }
     }
 
     public void printPostorder() {
@@ -28,11 +46,57 @@ public class BinaryTree<V extends Comparable<V>> {
     }
     private void printPostorderHelper(Node<V> node) {
         // TODO: Fill in definition
+        if(node == null){
+        }else{
+            //left
+            printPostorderHelper(node.getLeft());
+            //right
+            printPostorderHelper(node.getRight());
+            //node itself
+            System.out.print(node.getValue() + " ");
+        }
+    }
+
+    private int counter = 0;
+
+    public void counterHelper(Node<V> node){
+        if(node == null){
+        }else{
+            //left
+            counterHelper(node.getLeft());
+            //right
+            counterHelper(node.getRight());
+            //node itself
+            this.counter++;
+        }
+    }
+    private int indexTracker = 0;
+    private V[] methodArray = (V[]) new Comparable[0];
+    public void arrayHelper(Node<V> node){
+        if(node == null){
+        }else{
+            //left
+            arrayHelper(node.getLeft());
+            //right
+            arrayHelper(node.getRight());
+            //node itself
+            this.methodArray[indexTracker] = node.getValue();
+            this.indexTracker++;
+        }
     }
 
     public V[] flatten() {
         // TODO: Fill in definition
-        return null;
+        //changes array to be correct size
+        this.counter = 0;
+        counterHelper(root);
+        methodArray = (V[]) new Comparable[counter];
+
+        arrayHelper(root);
+
+        sort(methodArray);
+
+        return methodArray;
     }
 
     // bubble sort
@@ -58,9 +122,19 @@ public class BinaryTree<V extends Comparable<V>> {
         invertHelper(root);
     }
 
-    public Node<V> invertHelper(Node<V> node) {
+    public void invertHelper(Node<V> node) {
         // TODO: Fill in definition
-        return null;
+        if(node == null){
+        }else{
+            //left
+            invertHelper(node.getLeft());
+            //right
+            invertHelper(node.getRight());
+            //node itself
+            Node<V> holder = node.getLeft();
+            node.setLeft(node.getRight());
+            node.setRight(holder);
+        }
     }
 
     public boolean containsSubtree(BinaryTree<V> other) {
@@ -80,17 +154,17 @@ public class BinaryTree<V extends Comparable<V>> {
                         new Node<Integer>(5, null, null)),
                 new Node<Integer>(3, null, null)));
 
-        // Milestone 1 (Traversing)
-        System.out.println("--- Milestone 1 ---");
-        System.out.print("Expected: 4 2 5 1 3" + System.lineSeparator() + "Actual: ");
-        p1Tree.printInorder();
-        System.out.println(System.lineSeparator());
-        System.out.print("Expected: 1 2 4 5 3" + System.lineSeparator() + "Actual: ");
-        p1Tree.printPreorder();
-        System.out.println(System.lineSeparator());
-        System.out.print("Expected: 4 5 2 3 1" + System.lineSeparator() + "Actual: ");
-        p1Tree.printPostorder();
-        System.out.println();
+        // // Milestone 1 (Traversing)
+        // System.out.println("--- Milestone 1 ---");
+        // System.out.print("Expected: 4 2 5 1 3" + System.lineSeparator() + "Actual: ");
+        // p1Tree.printInorder();
+        // System.out.println(System.lineSeparator());
+        // System.out.print("Expected: 1 2 4 5 3" + System.lineSeparator() + "Actual: ");
+        // p1Tree.printPreorder();
+        // System.out.println(System.lineSeparator());
+        // System.out.print("Expected: 4 5 2 3 1" + System.lineSeparator() + "Actual: ");
+        // p1Tree.printPostorder();
+        // System.out.println();
 
         // Milestone 2 (flatten) -- expected output: 1 2 3 4 5
         /*
@@ -103,9 +177,8 @@ public class BinaryTree<V extends Comparable<V>> {
         }
         System.out.println();
         */
-
         // Milestone 3 (invert)
-        /*
+        
         System.out.println(System.lineSeparator() + "--- Milestone 3 ---");
 
         p1Tree.invert();
@@ -119,7 +192,7 @@ public class BinaryTree<V extends Comparable<V>> {
         System.out.print("Expected: 3 5 4 2 1" + System.lineSeparator() + "Actual: ");
         p1Tree.printPostorder();
         System.out.println();
-        */
+        
 
         // Milestone 4 (containsSubtree)
         /*
