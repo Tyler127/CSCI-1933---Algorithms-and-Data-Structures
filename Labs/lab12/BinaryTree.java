@@ -141,7 +141,21 @@ public class BinaryTree<V extends Comparable<V>> {
         // TODO: Fill in definition
         return false;
     }
-    
+
+    public int getMaxDepth(Node<V> node){
+        if(node.getLeft() == null && node.getRight() == null){
+            return 1;
+        }
+        if(node.getLeft() == null){
+            return 1 + getMaxDepth(node.getRight());
+        }
+        if(node.getRight() == null){
+            return 1 + getMaxDepth(node.getLeft());
+        }
+        else{
+            return 1 + Math.max(getMaxDepth(node.getLeft()), getMaxDepth(node.getRight()));
+        }
+    }
 
     // Main contains tests for each milestone.
     // Do not modify existing tests.
@@ -179,6 +193,7 @@ public class BinaryTree<V extends Comparable<V>> {
         */
         // Milestone 3 (invert)
         
+        /* 
         System.out.println(System.lineSeparator() + "--- Milestone 3 ---");
 
         p1Tree.invert();
@@ -192,6 +207,7 @@ public class BinaryTree<V extends Comparable<V>> {
         System.out.print("Expected: 3 5 4 2 1" + System.lineSeparator() + "Actual: ");
         p1Tree.printPostorder();
         System.out.println();
+        */
         
 
         // Milestone 4 (containsSubtree)
