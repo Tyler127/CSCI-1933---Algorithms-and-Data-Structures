@@ -27,14 +27,60 @@ public class MyMaze{
     }
 
     public static int[] getInput() {
+        Scanner scanna = new Scanner(System.in);
+        int[] mazeValues = new int[4];
+        boolean validInputs = false;
+        Random r = new Random();
 
-        return null;
+        while(!validInputs) {
+            System.out.println("Enter the Amount of Rows (max 5): ");
+            String stringRows = scanna.nextLine();
+            System.out.println("End the Amount of Columns for the Maze (max 20): ");
+            String stringCols = scanna.nextLine();
+
+            // Test if the input is valid
+            // Conditions: row and col are integers, row and col < 0, row <=5 and col <= 20
+            if (stringRows.length() == 1 && Character.isDigit(stringRows.charAt(0))) {
+                int intRows = Integer.parseInt(stringRows);
+                if (intRows > 0 && intRows <= 5) {
+                    int intCols;
+                    /* Test if stringCol is an integer.
+                        if exception thrown it is a string -> set to 0 */ 
+                    try {
+                        intCols = Integer.parseInt(stringCols);
+                    }
+                    catch (NumberFormatException e) {
+                        intCols = 0;
+                    }
+
+                    if (intCols > 0 && intCols <= 20) {
+                        validInputs = true; // all conditions for validInputs met 
+                        mazeValues[0] = intRows;
+                        mazeValues[1] = intCols;
+                        scanna.close();
+                    }
+                }
+            }
+            if (!validInputs) System.out.println("Invalid Input: Try entering new values!");
+        }
+
+        // Randomly assigns start and end row
+        mazeValues[2] = r.nextInt(1, mazeValues[0]);
+        mazeValues[3] = r.nextInt(1, mazeValues[1]);
+        System.out.println(mazeValues[2]);
+        System.out.println(mazeValues[3]);
+        
+        return mazeValues;
     }
 
     // TODO: make this have no inputs
-    public static MyMaze makeMaze(int rows, int cols, int startRow, int endRow) {
+    public static MyMaze makeMaze() {
         // Get user inputs for maze size
         int[] mazeValues = getInput();
+        int rows = mazeValues[0];
+        int cols = mazeValues[1];
+        int startRow = mazeValues[2];
+        int endRow = mazeValues[3];
 
         // Initialize empty maze
         MyMaze mymaze = new MyMaze(rows, cols, startRow, endRow);
@@ -150,7 +196,6 @@ public class MyMaze{
             if (topNeighbor.getVisited() == true) {
                 topNeighbor = null;
             }
-            //topNeighbor.setVisited(true); // test code remove this
         }
         //System.out.println("Top Neighbor: " + topNeighbor);
         
@@ -160,7 +205,6 @@ public class MyMaze{
             if (bottomNeighbor.getVisited() == true) {
                 bottomNeighbor = null;
             }
-            //bottomNeighbor.setVisited(true); // test code remove this
         }
         //System.out.println("Bottom Neighbor: " + bottomNeighbor);
 
@@ -170,7 +214,6 @@ public class MyMaze{
             if (leftNeighbor.getVisited() == true) {
                 leftNeighbor = null;
             }
-            //leftNeighbor.setVisited(true); // test code remove this
         }
         //System.out.println("Left Neighbor: " + leftNeighbor);
 
@@ -180,7 +223,6 @@ public class MyMaze{
             if (rightNeighbor.getVisited() == true) {
                 rightNeighbor = null;
             }
-            //rightNeighbor.setVisited(true); // test code remove this
         }
         //System.out.println("Right Neighbor: " + rightNeighbor);
 
@@ -416,7 +458,7 @@ public class MyMaze{
 
         //MyMaze maze = new MyMaze(3, 5, 1, 3);
         //maze.printMaze();
-        MyMaze maze = makeMaze(5, 5, 1, 3);
-        maze.solveMaze();
+        MyMaze maze = makeMaze();
+        //maze.solveMaze();
     }
 }
