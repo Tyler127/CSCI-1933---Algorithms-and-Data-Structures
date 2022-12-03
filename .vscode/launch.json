@@ -9,6 +9,13 @@
             "name": "Launch MyMaze",
             "request": "launch",
             "mainClass": "MyMaze",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
+            "name": "Launch MyMaze",
+            "request": "launch",
+            "mainClass": "MyMaze",
             "projectName": "CSCI 1933 - Algorithms and Data Structures_77b9966d"
         },
         {
