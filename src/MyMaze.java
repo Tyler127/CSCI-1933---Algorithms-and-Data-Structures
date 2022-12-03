@@ -2,6 +2,7 @@
 // x500s:
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class MyMaze{
     Cell[][] maze;
@@ -19,66 +20,195 @@ public class MyMaze{
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.println(i + " " + j);
+                //System.out.println(i + " " + j);
                 this.maze[i][j] = new Cell();
             }
         }
     }
 
-
-    /* TODO: Create a new maze using the algorithm found in the writeup. */
+    // TODO: make this have no inputs
     public static MyMaze makeMaze(int rows, int cols, int startRow, int endRow) {
-        // Makes empty maze
+        // Initialize empty maze
         MyMaze mymaze = new MyMaze(rows, cols, startRow, endRow);
+        mymaze.maze[startRow-1][0].setVisited(true); // set start cell to visited
 
-        // Makes stacks
-        Stack1Gen<String> directionStack = new Stack1Gen<String>();
-        Stack1Gen<Cell> cellStack = new Stack1Gen<Cell>();
-        cellStack.push(mymaze.maze[startRow][0]);
+        // Initialize stack
+        Stack1Gen<int[]> indexStack = new Stack1Gen<int[]>();
+        int[] startLocation = new int[2];
+        startLocation[0] = startRow - 1;
+        startLocation[1] = 0;
+        indexStack.push(startLocation);
 
-        // Initializes Random
-        Random r = new Random();
-        int randInt;
+        int iterations=0;
 
-        // Loop variables
-        Cell currentCell;
-        int currentRow = startRow;
-        int currentCol = 0;
-        Cell topNeighbor;
-        Cell bottomNeighbor;
-        Cell leftNeighbor;
-        Cell rightNeighbor;
+        // Loop until there is no more possible moves
+        while (indexStack.isEmpty() != true) {
+            iterations++;
+            int[] currentIndex = indexStack.top();
+            int currentRow = currentIndex[0];
+            int currentCol = currentIndex[1];
+            Cell currentCell = mymaze.maze[currentRow][currentCol];
 
-        while (cellStack.isEmpty() != true) {
-            
-            randInt = r.nextInt(0,3);
-            currentCell = cellStack.top();
-            currentCell.setVisited(true);
+            //System.out.println("currentRow: " + currentRow);
+            //System.out.println("currentCol: " + currentCol);
 
-            // Assigns the cell's neighbors using the current cell's location
-            if (currentRow > 0) {
-                topNeighbor = mymaze.maze[currentRow][currentCol];
+            String nextMove = determineMove(rows - 1, cols - 1, currentRow, currentCol, mymaze);
+            //System.out.println(nextMove);
+
+            Cell nextCell;
+            int[] nextCellIndex = new int[2];
+            switch (nextMove) {
+                // No possible move (dead end)
+                case "N":
+                    indexStack.pop();
+                    break;
+
+                // Move up
+                case "T":
+                    nextCell = mymaze.maze[currentRow - 1][currentCol];
+                    nextCell.setVisited(true);
+                    nextCell.setBottom(false);
+                    nextCellIndex[0] = currentRow - 1;
+                    nextCellIndex[1] = currentCol;
+                    indexStack.push(nextCellIndex);
+                    break;
+
+                // Move right
+                case "R":
+                    nextCell = mymaze.maze[currentRow][currentCol + 1];
+                    nextCell.setVisited(true);
+                    currentCell.setRight(false);
+                    nextCellIndex[0] = currentRow;
+                    nextCellIndex[1] = currentCol + 1;
+                    indexStack.push(nextCellIndex);
+                    break;
+
+                // Move Down
+                case "B":
+                    nextCell = mymaze.maze[currentRow + 1][currentCol];
+                    nextCell.setVisited(true);
+                    currentCell.setBottom(false);
+                    nextCellIndex[0] = currentRow + 1;
+                    nextCellIndex[1] = currentCol;
+                    indexStack.push(nextCellIndex);
+                    break;
+
+                // Move left
+                case "L":
+                    nextCell = mymaze.maze[currentRow][currentCol - 1];
+                    nextCell.setVisited(true);
+                    nextCell.setRight(false);
+                    nextCellIndex[0] = currentRow;
+                    nextCellIndex[1] = currentCol - 1;
+                    indexStack.push(nextCellIndex);
+                    break;
             }
-
-            if (currentCell.getRight() == false){}
-            
-
-            // check if any neighbors are unvisited
-
-            // if any unvisited.. use random number to pick one
-            
-            // push that neighbor cell to stack
-
-            // update current row and col
-
-            // update lastdirection
-
-            // end loop iteration
-            
         }
 
-
+        // Set every cell to unvisited
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                mymaze.maze[i][j].setVisited(false);
+            }
+        }
+        
+        mymaze.maze[endRow-1][cols-1].setRight(false); // remove right border on exit cell
+        mymaze.printMaze();
+        System.out.println(iterations);
         return null;
+    }
+
+    private static String determineMove(int rows, int cols, int currentRow, int currentCol, MyMaze mymaze) {
+        // Cells
+        Cell topNeighbor = null;
+        Cell bottomNeighbor = null;
+        Cell leftNeighbor = null;
+        Cell rightNeighbor = null;
+
+        /*
+           Neighbor cells start as null
+           Then updated to their location if in bounds
+           Then if cell visited -> neighbor = null; 
+        */ 
+
+        // System.out.println("currentRow: " + currentRow);
+        // System.out.println("Rows: " + rows);
+        // System.out.println("currentCol: " + currentCol);
+
+        // Assigns the cell's neighbors using the current cell's location
+        // Top 
+        if (currentRow > 0) {
+            topNeighbor = mymaze.maze[currentRow-1][currentCol];
+            if (topNeighbor.getVisited() == true) {
+                topNeighbor = null;
+            }
+            //topNeighbor.setVisited(true); // test code remove this
+        }
+        //System.out.println("Top Neighbor: " + topNeighbor);
+        
+        // Bottom
+        if (currentRow < rows) {
+            bottomNeighbor = mymaze.maze[currentRow+1][currentCol];
+            if (bottomNeighbor.getVisited() == true) {
+                bottomNeighbor = null;
+            }
+            //bottomNeighbor.setVisited(true); // test code remove this
+        }
+        //System.out.println("Bottom Neighbor: " + bottomNeighbor);
+
+        // Left
+        if (currentCol > 0) {
+            leftNeighbor = mymaze.maze[currentRow][currentCol-1];
+            if (leftNeighbor.getVisited() == true) {
+                leftNeighbor = null;
+            }
+            //leftNeighbor.setVisited(true); // test code remove this
+        }
+        //System.out.println("Left Neighbor: " + leftNeighbor);
+
+        // Right
+        if (currentCol < cols) {
+            rightNeighbor = mymaze.maze[currentRow][currentCol+1];
+            if (rightNeighbor.getVisited() == true) {
+                rightNeighbor = null;
+            }
+            //rightNeighbor.setVisited(true); // test code remove this
+        }
+        //System.out.println("Right Neighbor: " + rightNeighbor);
+
+        // Case 1: Returns N if no valid directional moves
+        if (topNeighbor == null && bottomNeighbor == null && 
+        leftNeighbor == null && rightNeighbor == null) {
+            return "N";
+        } 
+        // Case 2: Chooses random ints until one is chosen that matches a direction that exists
+        else {
+            // Initializes Random
+            Random r = new Random();
+            int rInt;
+
+            while (true) {
+                rInt = r.nextInt(0,4); // 0-3
+                //System.out.println(randInt);
+                // Returns a 
+                if (rInt == 0 && topNeighbor != null) {
+                    //System.out.println("T");
+                    return "T";
+                }
+                if (rInt == 1 && rightNeighbor != null) {
+                    //System.out.println("R");
+                    return "R";
+                }
+                if (rInt == 2 && bottomNeighbor != null) {
+                    //System.out.println("B");
+                    return "B";
+                }
+                if (rInt == 3 && leftNeighbor != null) {
+                    //System.out.println("L");
+                    return "L";
+                }
+            }
+        }
     }
 
     public void printMaze() {
@@ -136,15 +266,21 @@ public class MyMaze{
             }
 
             // Case 2: Cell Row
-            String stringToAppend; 
-            // Creates a separate string for each cell in the row and appends each to finalString
             if (i != 0 && i % 2 != 0) {
+                String stringToAppend;  // Creates a separate string for each cell.
+
                 for (int j = 0; j < this.cols; j++) {
-                    // If first col, |. otherwise empty
-                    if (j == 0) {
-                        stringToAppend = "|";
-                    } else {
-                        stringToAppend = "";
+                    // Case 2.1: on start row and col. -> adds start opening
+                    if (trueRow == this.startRow-1 && j == 0) {
+                        stringToAppend = " ";
+                    } 
+                    // Case 2.2: on any other col -> adds left boundary
+                    else {
+                        if (j == 0) {
+                            stringToAppend = "|";
+                        } else {
+                            stringToAppend = "";
+                        }
                     }
 
                     // System.out.println("trueRow: " + trueRow);
@@ -185,7 +321,8 @@ public class MyMaze{
     public static void main(String[] args){
         /* Use scanner to get user input for maze level, then make and solve maze */
 
-        MyMaze maze = new MyMaze(3, 5, 1, 3);
-        maze.printMaze();
+        //MyMaze maze = new MyMaze(3, 5, 1, 3);
+        //maze.printMaze();
+        makeMaze(10, 10, 1, 5);
     }
 }

@@ -10,15 +10,12 @@ import java.util.Random;
 import static org.junit.Assert.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
-/**
- * JUnit Tests for the LinkedList portion of Project 3 CSCI 1933 Spring 2021.
- * Written by Noah Park on 03.03.2021.
- */
+
 @FixMethodOrder(NAME_ASCENDING)
 public class tylastesttest {
 
     @Rule
-    public Timeout globalTimeOut = Timeout.seconds(15);
+    public Timeout globalTimeOut = Timeout.seconds(25);
 
 
     @AfterClass
@@ -36,8 +33,9 @@ public class tylastesttest {
 
     @Test
     public void printTest() {
-        MyMaze maze = new MyMaze(2, 5, 1, 3);
-        maze.printMaze();
+        // MyMaze maze = new MyMaze(2, 5, 1, 3);
+        // maze.printMaze();
+        MyMaze.makeMaze(20,40,2, 1);
 
     }
 
