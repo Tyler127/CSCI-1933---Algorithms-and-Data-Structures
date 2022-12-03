@@ -326,54 +326,79 @@ public class MyMaze{
                 //becomes current working cell
             System.out.println();
             int[] workingCoords = queue.remove();
+            int cRow = workingCoords[0];//current row
+            int cCol = workingCoords[1];//current col
             System.out.println("new working cell");
-            maze[workingCoords[0]][workingCoords[1]].setVisited(true);
-            System.out.println("visited at: " + workingCoords + " set to true");
+            maze[cRow][cCol].setVisited(true);
+            System.out.println("visited at: " + cRow + "," + cCol + " set to true");
             //if current cell is the finish point, break loop, maze has been solved
                 //print something like "maze solved"
             System.out.println("checking if maze finished");
-            if(workingCoords[0] == endRow && workingCoords[1] == cols - 1){
-                System.out.println("maze finished!");
-                break;
+            if(cRow == endRow){
+                System.out.println("at end row");
+                if(cCol == maze[cRow].length - 1){
+                    System.out.println("at end col");
+                    System.out.println("Maze Finished!!");
+                    maze[cCol][cRow].setVisited(true);
+                    printMaze();
+                    break;
+                }
             }
             // //queue all reachable neighbors
             //     //check barriers in cell above, cell to the left, if viable add those cells to queue
-            if(workingCoords[0] != 0){
+            if(cRow != 0){
                 System.out.println("row not 0, checking cell above");
-                if(maze[workingCoords[0] - 1][workingCoords[1]].getBottom() == false && maze[workingCoords[0] - 1][workingCoords[1]].getVisited() == false){//checks bottom of cell above and if visited
-                    System.out.println("up cell viable");
-                    coordSaver[1] = workingCoords[1];
-                    coordSaver[0] = coordSaver[0] - 1;
-                    queue.add(coordSaver);
-                }
+                if(maze[cRow - 1][cCol].getBottom() == false){
+                    System.out.println("bototm of above cell false");
+                    if(maze[cRow - 1][cCol].getVisited() == false){
+                        System.out.println("above cell not visited");
+                        System.out.println("up cell viable");
+                        int[] toAdd = new int[]{cRow - 1, cCol};
+                        queue.add(toAdd);
+                        }
+                    }
             }
-            if(workingCoords[1] != 0){
-                System.out.println("col not 0, checking cell to left");
-                if(maze[workingCoords[0]][workingCoords[1] - 1].getRight() == false && maze[workingCoords[0]][workingCoords[1] - 1].getVisited() == false){//checks right of cell left and if visited
-                    System.out.println("left cell viable");
-                    coordSaver[0] = workingCoords[0];
-                    coordSaver[1] = coordSaver[1] - 1;
-                    queue.add(coordSaver);
-                }
+            if(cCol != 0){
+                System.out.println("col not 0, checking cell left");
+                if(maze[cRow][cCol - 1].getRight() == false){
+                    System.out.println("right of left cell false");
+                    if(maze[cRow][cCol - 1].getVisited() == false){
+                        System.out.println("left cell not visited");
+                        System.out.println("left cell viable");
+                        int[] toAdd = new int[]{cRow, cCol - 1};
+                        queue.add(toAdd);
+                        }
+                    }
             }
             //     //check right and bottom barriers of current working cell. if viable add right/ below cell to queue
             System.out.println("checking cell below");
-            if(maze[workingCoords[0]][workingCoords[1]].getBottom() == false && workingCoords[0] + 1 != maze.length && maze[workingCoords[0] + 1][workingCoords[1]].getVisited() == false){//check bottom barrier, and if would be out of bounds
-                System.out.println("bottom cell viable");
-                coordSaver[1] = workingCoords[1];
-                coordSaver[0] = coordSaver[0] + 1;
-                queue.add(coordSaver);
+            if(maze[cRow][cCol].getBottom() == false){
+                System.out.println("bottom of cell false");
+                if(cRow + 1 < maze.length){
+                    System.out.println("will not go out of bounds");
+                    if(maze[cRow + 1][cCol].getVisited() == false){
+                        System.out.println("below cell not visited");
+                        System.out.println("cell viable");
+                        int[] toAdd = new int[]{cRow + 1, cCol};
+                        queue.add(toAdd);
+                    }
+                }
             }
             System.out.println("checking cell to right");
-            if(maze[workingCoords[0]][workingCoords[1]].getRight() == false && workingCoords[1] + 1 != maze[workingCoords[0]].length && maze[workingCoords[0]][workingCoords[1] + 1].getVisited() == false){//check bottom barrier, and if would be out of bounds
-                System.out.println("right cell viable");
-                coordSaver[0] = workingCoords[0];
-                coordSaver[1] = coordSaver[1] + 1;
-                queue.add(coordSaver);
+            if(maze[cRow][cCol].getRight() == false){
+                System.out.println("right of cell false");
+                if(cCol + 1 < maze[cRow].length){
+                    System.out.println("will not go out of bounds");
+                    if(maze[cRow][cCol + 1].getVisited() == false){
+                        System.out.println("below cell not visited");
+                        System.out.println("cell viable");
+                        int[] toAdd = new int[]{cRow, cCol + 1};
+                        queue.add(toAdd);
+                    }
+                }
             }
         }
         //at end of funtion, call printMaze
-        printMaze();
     }
 
     public static void main(String[] args){
