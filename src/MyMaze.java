@@ -26,8 +26,16 @@ public class MyMaze{
         }
     }
 
+    public static int[] getInput() {
+
+        return null;
+    }
+
     // TODO: make this have no inputs
     public static MyMaze makeMaze(int rows, int cols, int startRow, int endRow) {
+        // Get user inputs for maze size
+        int[] mazeValues = getInput();
+
         // Initialize empty maze
         MyMaze mymaze = new MyMaze(rows, cols, startRow, endRow);
         mymaze.maze[startRow-1][0].setVisited(true); // set start cell to visited
@@ -320,6 +328,7 @@ public class MyMaze{
         Q1Gen<int[]> queue = new Q1Gen<int[]>();
         int[] coordSaver = new int[]{startRow - 1, 0};
         queue.add(coordSaver);
+
         //loop through until queue is empty
         while(queue.length() != 0){
             //dequeue the front index of the queue and mark the visited attribute as true
@@ -328,18 +337,19 @@ public class MyMaze{
             int[] workingCoords = queue.remove();
             int cRow = workingCoords[0];//current row
             int cCol = workingCoords[1];//current col
-            System.out.println("new working cell");
             maze[cRow][cCol].setVisited(true);
-            System.out.println("visited at: " + cRow + "," + cCol + " set to true");
+
+            System.out.println("new working cell");
+            System.out.println("    visited at: " + (cRow+1) + "," + (cCol+1) + " set to true");
+
             //if current cell is the finish point, break loop, maze has been solved
                 //print something like "maze solved"
-            System.out.println("checking if maze finished");
-            if(cRow == endRow){
-                System.out.println("at end row");
+            System.out.println("        checking if maze finished");
+            if(cRow == endRow - 1){
+                System.out.println("            at end row");
                 if(cCol == maze[cRow].length - 1){
-                    System.out.println("at end col");
+                    System.out.println("            at end col");
                     System.out.println("Maze Finished!!");
-                    maze[cCol][cRow].setVisited(true);
                     printMaze();
                     break;
                 }
@@ -406,7 +416,7 @@ public class MyMaze{
 
         //MyMaze maze = new MyMaze(3, 5, 1, 3);
         //maze.printMaze();
-        MyMaze maze = makeMaze(10, 10, 1, 5);
+        MyMaze maze = makeMaze(5, 5, 1, 3);
         maze.solveMaze();
     }
 }
