@@ -364,9 +364,8 @@ public class MyMaze{
         System.out.println(finalString);
     }
 
-    /* TODO: Solve the maze using the algorithm found in the writeup. */
-    public void solveMaze() {//FINDS VIABLE CELLS INCONSISTENTLY, UNSURE WHY. TRY SAVING MORE VARIABLES OT REDUCE TPEING ERRORS< REFORMAT IF NEEDED.
-        //initialize a queue with the start inded(startRow, 0)
+    public void solveMaze() {
+        //initialize a queue with the start index
         Q1Gen<int[]> queue = new Q1Gen<int[]>();
         int[] coordSaver = new int[]{startRow - 1, 0};
         queue.add(coordSaver);
@@ -460,6 +459,6 @@ public class MyMaze{
         //MyMaze maze = new MyMaze(3, 5, 1, 3);
         //maze.printMaze();
         MyMaze maze = makeMaze();
-        //maze.solveMaze();
+        maze.solveMaze();
     }
 }
