@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch TextScan",
+            "request": "launch",
+            "mainClass": "TextScan",
+            "projectName": "CSCI 1933 - Algorithms and Data Structures_77b9966d"
+        },
+        {
+            "type": "java",
             "name": "Launch BinaryTree",
             "request": "launch",
             "mainClass": "BinaryTree",
