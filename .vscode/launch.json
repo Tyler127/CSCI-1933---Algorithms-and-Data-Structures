@@ -6,17 +6,17 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch MyMaze",
+            "name": "Launch BinaryTree",
             "request": "launch",
-            "mainClass": "MyMaze",
+            "mainClass": "BinaryTree",
             "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
         },
         {
             "type": "java",
-            "name": "Launch MyMaze",
+            "name": "Launch LinkedList",
             "request": "launch",
-            "mainClass": "MyMaze",
-            "projectName": "CSCI 1933 - Algorithms and Data Structures_77b9966d"
+            "mainClass": "LinkedList",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
         },
         {
             "type": "java",
