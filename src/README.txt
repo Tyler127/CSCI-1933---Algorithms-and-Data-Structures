@@ -4,14 +4,13 @@ Connor Kanten - kante060
 
 Contributions:
 Tyler:
-    -getInput()
     -makeMaze()
     -printMaze()
     -determineMove() helper function
-
-
+    
 Connor:
-    -solveMaze function
+    -solveMaze()
+    -getInput() helper function
 
 How to Compile/Run:
 

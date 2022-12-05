@@ -1,9 +1,12 @@
+package Other;
 
 import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
+
+//import MyMaze;
 
 import java.util.Random;
 
@@ -27,7 +30,7 @@ public class tylastesttest {
 
     @Test
     public void constructorTest() {
-        MyMaze maze = new MyMaze(2, 5, 1, 3);
+        //MyMaze maze = new MyMaze(2, 5, 1, 3);
 
     }
 
@@ -35,7 +38,7 @@ public class tylastesttest {
     public void printTest() {
         // MyMaze maze = new MyMaze(2, 5, 1, 3);
         // maze.printMaze();
-        MyMaze.makeMaze(20,40,2, 1);
+        //MyMaze.makeMaze(20,40,2, 1);
 
     }
 
