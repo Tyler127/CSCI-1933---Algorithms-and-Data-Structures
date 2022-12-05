@@ -13,15 +13,19 @@ Connor:
     -getInput() helper function
 
 How to Compile/Run:
+    - Run the main method of MyMaze.java and enter valid row and col amounts
 
 Assumptions:
+    - None
 
 Additional Features:
+    - None
 
 Bugs and Defects:
+    - None known
 
 Outside Sources:
-    - 
+    - None
 
 
 
