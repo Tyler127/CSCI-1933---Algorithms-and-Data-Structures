@@ -1,9 +1,8 @@
+package Project4;
+
 // NGen.java
-// A *simplified* generic node class for use with generic higher
-// level data structures
-// List functions such as addInOrder() are handled at the "list" level
-// Uses generic data
-// Revised 10/2020
+// A *simplified* generic node class for use with Stack1Gen class 
+// and other data structures as desired; uses generics for the data
 
 public class NGen <T> {
   
@@ -11,7 +10,7 @@ public class NGen <T> {
     
     public NGen () {}
 
-    public NGen (T o, NGen <T> link) {
+    public NGen (T o, NGen<T> link) {
         data = o;
         next = link;
     }
@@ -26,17 +25,17 @@ public class NGen <T> {
         data = o;
     }
 
-    public NGen <T> getNext() {
+    public NGen<T> getNext() {
         return next;
     }
 
-    public void setNext(NGen <T> link) {
+    public void setNext(NGen<T> link) {
         next = link;
     }
 
     // instance variables
 
     private T data;
-    private NGen <T> next;
+    private NGen<T> next;
 
 }  // NGen class

@@ -1,3 +1,5 @@
+package Project4;
+
 // Stack1Gen.java
 // The StackGen Interface is implemented using linked list
 // The linked list used is a simple generic node class called NGen.  (See NGen.java)

@@ -1,3 +1,5 @@
+package Project4;
+
 /*
     A Maze is made up of Cells
  */
