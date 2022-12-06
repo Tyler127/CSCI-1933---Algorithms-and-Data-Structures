@@ -1,9 +1,61 @@
+import java.time.chrono.MinguoChronology;
 import java.util.Arrays;
 public class BinaryTree {
 
     // TODO complete this method
     public static boolean isValid(int[] arr) {
-      return false;
+      //1st check: if perfect
+      int depth = findDepth(arr);
+      int holder = (int) Math.pow(2.0, depth);
+      if(holder != arr.length){return false;}
+      
+      System.out.println("RIGHT CHECK--------------");
+      boolean rightCheck = helper(arr, 2000000000, arr[1], 3);
+      System.out.println("LEFT CHECK-----------------------");
+      boolean leftCheck = helper(arr, arr[1], -2000000000, 2);
+
+      if((rightCheck == false) || (leftCheck == false)){
+        System.out.println("vlaid change");
+        return false;
+      }
+
+      return true;
+    }
+
+    public static boolean helper(int[] arr, int max, int min, int index){
+      //base 1: index over length
+      if(index >= arr.length){
+        return true;
+      }
+      System.out.println("current test: " + (arr[index]));
+      System.out.println("min: " + min);
+      System.out.println("max: " + max);
+
+      //base 2: greater / equal rule violated
+      //check against min
+      if(arr[index] < min){
+        System.out.println("index val less than min -> set to false");
+        return false;
+      }
+      //check agaisnt max
+      if(arr[index] > max){
+        System.out.println("index val greater than min -> set to false");
+        return false;
+      }
+      System.out.println("\n");
+      //go to left go to right
+      return helper(arr, arr[index], min, index * 2) && helper(arr, max, arr[index], (index * 2) + 1);
+    }
+
+    public static int findDepth(int[] arr){
+      int loopLength = arr.length;
+      int loopTracker = 1;
+      int counter = 0;
+      while(loopTracker < loopLength){
+        counter ++;
+        loopTracker = loopTracker * 2;
+      }
+      return counter;
     }
 
     public static void main (String args[]) {
