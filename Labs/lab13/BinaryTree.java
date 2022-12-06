@@ -65,9 +65,9 @@ public class BinaryTree {
       int[] arr3 = new int[]{-1,11,3,33,2,8,10,44};
       int[] arr4 = new int[]{-1,55,44,77,33,48,54,95,22,34,45,57,53,70,85,98};
 
-      System.out.println("arr1 valid: " + isValid(arr1));  // expected: true
-      System.out.println("arr2 valid: " + isValid(arr2));  // expected: true
-      System.out.println("arr3 valid: " + isValid(arr3));  // expected: false
-      System.out.println("arr4 valid: " + isValid(arr4));  // expected: false
+      System.out.println("-------------------------------------> arr1 valid: " + isValid(arr1));  // expected: true
+      System.out.println("-------------------------------------> arr2 valid: " + isValid(arr2));  // expected: true
+      System.out.println("-------------------------------------> arr3 valid: " + isValid(arr3));  // expected: false
+      System.out.println("-------------------------------------> arr4 valid: " + isValid(arr4));  // expected: false
     }
 }
