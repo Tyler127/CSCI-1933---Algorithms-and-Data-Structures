@@ -13,7 +13,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 
 @FixMethodOrder(NAME_ASCENDING)
-public class tests {
+public class tylastesttest {
 
     //@Rule
     //public Timeout globalTimeOut = Timeout.seconds(25);
@@ -109,6 +109,15 @@ public class tests {
         HashTable<String> hashTable = new HashTable<>(150);
         hashTable.type = "SPECIFIC";
         hashTable.addWordsFromFile("src/gettysburg.txt");
+        hashTable.display();
+    }
+
+    @Test
+    public void loremSpecificTest() {
+        System.out.println("----------LOREM TEST specific----------");
+        HashTable<String> hashTable = new HashTable<>(500);
+        hashTable.type = "GENERAL";
+        hashTable.addWordsFromFile("src/lorem.txt");
         hashTable.display();
     }
 
