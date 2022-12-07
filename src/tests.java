@@ -13,7 +13,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 
 @FixMethodOrder(NAME_ASCENDING)
-public class tylastesttest {
+public class tests {
 
     //@Rule
     //public Timeout globalTimeOut = Timeout.seconds(25);
