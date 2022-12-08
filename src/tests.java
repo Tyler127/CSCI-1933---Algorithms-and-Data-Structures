@@ -129,6 +129,15 @@ public class tests {
         hashTable.display();
     }
 
+    @Test
+    public void keywordsConnaTest() {
+        System.out.println("----------KEYWORDS TEST general----------");
+        HashTable<String> hashTable = new HashTable<>(150);
+        hashTable.type = "CONNA";
+        hashTable.addWordsFromFile("src/keywords.txt");
+        hashTable.display();
+    }
+
 
 
 

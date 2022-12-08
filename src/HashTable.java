@@ -62,6 +62,20 @@ public class HashTable<T>{
         return hashReturn;
     }
 
+    public int connaHash(T item) {
+        int hashReturn = 0;
+        if(item instanceof String) {
+            String[] chars = ((String) item).split("");
+            for(String string : chars) {
+                hashReturn += string.charAt(0);
+                hashReturn = hashReturn * 7919;
+            }
+            hashReturn = hashReturn % hashTable.length;
+
+            if(hashReturn < 0) hashReturn = Math.abs(hashReturn);
+        }
+    }
+
     // The add method which adds an item to the hash table using your best performing hash function
     // Does NOT add duplicate items
     public void add(T item) {
@@ -72,6 +86,7 @@ public class HashTable<T>{
         NGen<T> head = null;
         if (this.type.equals("GENERAL")) head = this.hashTable[this.hash1(item)];
         else if (this.type.equals("SPECIFIC")) head = this.hashTable[this.hash2(item)];
+        else if (this.type.equals("CONNA")) head = this.hashTable[this.connaHash(item)];
 
         // Case 2: head points to nothing
         if (head.getNext() == null) head.setNext(new NGen<>(item, null));
