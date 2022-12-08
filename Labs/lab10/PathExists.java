@@ -71,7 +71,7 @@ public class PathExists {
                     {'v', 'p'}, 
                     {'x', 'v' } };
         char[][] tracker = grid1;
-        int[] startCoords = new int[]{0, 0};
+        //int[] startCoords = new int[]{0, 0};
         dfs(grid1, tracker, 0, 0, 0, 0);
         if(tracker[0][0] == 'W'){
             System.out.println("victory royale");

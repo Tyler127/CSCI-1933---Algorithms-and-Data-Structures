@@ -1,3 +1,5 @@
+package lab13;
+
 import java.util.Arrays;
 public class BinaryTree {
 

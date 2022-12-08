@@ -1,3 +1,5 @@
+package lab12;
+
 public class BinaryTree<V extends Comparable<V>> {
     private Node<V> root;
 
@@ -70,6 +72,7 @@ public class BinaryTree<V extends Comparable<V>> {
             this.counter++;
         }
     }
+    
     private int indexTracker = 0;
     private V[] methodArray = (V[]) new Comparable[0];
     public void arrayHelper(Node<V> node){
