@@ -1,3 +1,5 @@
+package lab12;
+
 public class Node<V extends Comparable<V>> {
     private V value;
     private Node<V> left, right;

@@ -1,10 +1,11 @@
+package lab11;
+
 import org.junit.AfterClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
-import java.util.HashMap;
 import java.util.Random;
 
 import static org.junit.Assert.*;
@@ -38,7 +39,7 @@ public class Lab11Test {
     public void removeEveryTest() {
         // run 1000 tests
         for (int it = 0; it < 1000; it++) {
-            LinkedList<String> list = new LinkedList();
+            LinkedList<String> list = new LinkedList<>();
             String[] test = new String[]{"One Piece", "Fullmetal Alchemist", "Attack On Titan", "Tokyo Ghoul", "Haikyuu!!", "Mob Psycho", "Hunter x Hunter",
                     "The Promised Neverland", "Solo Leveling", "The Breaker", "One Punch Man", "Dragon Ball Z", "JoJo's Bizarre Adventure", "Yuri!!! on ICE"};
             Random r = new Random();

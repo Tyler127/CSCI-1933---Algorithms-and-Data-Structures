@@ -1,4 +1,4 @@
-
+package lab11;
 public class LinkedList<T extends Comparable<T>> implements Comparable<LinkedList<T>> {
 
         public Node<T> head;
@@ -82,7 +82,6 @@ public class LinkedList<T extends Comparable<T>> implements Comparable<LinkedLis
             return s.toString();
         }
 
-        // TODO: removeEvery()
         public void removeEvery(int n) {
             Node<T> trailer = this.head;
             Node<T> pointer = this.head.getNext();
@@ -93,9 +92,6 @@ public class LinkedList<T extends Comparable<T>> implements Comparable<LinkedLis
             System.out.println("LoopTimes: " + loopTimes);
 
             // while (pointer.getNext() != null) {
-
-
-
             // }
 
             for (int i = 0; i < loopTimes; i++) {

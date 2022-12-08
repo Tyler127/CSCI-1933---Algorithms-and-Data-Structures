@@ -1,8 +1,6 @@
 import org.junit.*;
 import org.junit.rules.Timeout;
 
-//import MyMaze;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Random;
@@ -43,6 +41,7 @@ public class tests {
                 }
 
             }
+            scanna.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -162,13 +161,13 @@ public class tests {
 
 
 
-    @Test
-    public void randomTest() {
-        Random r = new Random();
+    // @Test
+    // public void randomTest() {
+    //     Random r = new Random();
 
-        for (int i = 0; i<5; i++) {
-            int randInt = r.nextInt(0, 5);
-            //System.out.println(randInt);
-        }
-    }
+    //     for (int i = 0; i<5; i++) {
+    //         int randInt = r.nextInt(0, 5);
+    //         //System.out.println(randInt);
+    //     }
+    // }
 }

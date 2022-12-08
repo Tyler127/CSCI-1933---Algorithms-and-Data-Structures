@@ -1,8 +1,6 @@
-import java.time.chrono.MinguoChronology;
-import java.util.Arrays;
+package lab13;
 public class BinaryTree {
 
-    // TODO complete this method
     public static boolean isValid(int[] arr) {
       //1st check: if perfect
       int depth = findDepth(arr);
