@@ -82,7 +82,6 @@ public class LinkedList<T extends Comparable<T>> implements Comparable<LinkedLis
             return s.toString();
         }
 
-        // TODO: removeEvery()
         public void removeEvery(int n) {
             Node<T> trailer = this.head;
             Node<T> pointer = this.head.getNext();

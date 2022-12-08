@@ -1,9 +1,6 @@
 package lab13;
-
-import java.util.Arrays;
 public class BinaryTree {
 
-    // TODO complete this method
     public static boolean isValid(int[] arr) {
       //1st check: if perfect
       int depth = findDepth(arr);
