@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch HashTable",
+            "request": "launch",
+            "mainClass": "HashTable",
+            "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
+        },
+        {
+            "type": "java",
             "name": "Launch TextScan",
             "request": "launch",
             "mainClass": "TextScan",
