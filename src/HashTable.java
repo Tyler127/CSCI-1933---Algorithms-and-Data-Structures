@@ -62,6 +62,9 @@ public class HashTable<T>{
         return hashReturn;
     }
 
+    //Adds the ASCII of each character to the total, then multiplies and mods the total by large primes to result in a series of remainders, for each character in the string
+    //prime numbers are best for hashing as the chance of different letters coming out to the same index is lessened
+    //the restriction of table size does reduce how effective the use of prime numbers is
     public int hash3(T item) {
         int hashReturn = 0;
         if(item instanceof String) {
@@ -91,6 +94,7 @@ public class HashTable<T>{
             //If the value goes over the max is automatically becomes negative, in that event the absolute value is taken to keep within table boundaries
             if(hashReturn < 0) hashReturn = Math.abs(hashReturn);
         }
+        //after all characters have been added and hashed, total is returned
         return hashReturn;
     }
 
@@ -201,10 +205,22 @@ public class HashTable<T>{
     // TODO: Create a hash table, store all words from "canterbury.txt", and display the table
     //  Create another hash table, store all words from "keywords.txt", and display the table
     public static void main(String args[]) {
-        System.out.println("----------GETTYSBURG TEST hash3----------");
+        System.out.println("----------GETTYSBURG TEST GENERAL----------");
         HashTable<String> hashTable = new HashTable<>(150);
-        hashTable.type = "HASH3";
+        hashTable.type = "GENERAL";
         hashTable.addWordsFromFile("src/gettysburg.txt");
         hashTable.display();
+
+        System.out.println("----------KEYWORDS TEST SPECIFIC----------");
+        HashTable<String> hashTable2 = new HashTable<>(500);
+        hashTable2.type = "SPECIFIC";
+        hashTable2.addWordsFromFile("src/keywords.txt");
+        hashTable2.display();
+
+        System.out.println("----------GETTYSBURG TEST HASH3---");
+        HashTable<String> hashTable3 = new HashTable<>(150);
+        hashTable3.type = "HASH3";
+        hashTable3.addWordsFromFile("src/gettysburg.txt");
+        hashTable3.display();
     }
 }
