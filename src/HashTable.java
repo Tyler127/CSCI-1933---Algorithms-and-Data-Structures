@@ -74,7 +74,9 @@ public class HashTable<T>{
 
             if(hashReturn < 0) hashReturn = Math.abs(hashReturn);
         }
+        return hashReturn;
     }
+
 
     // The add method which adds an item to the hash table using your best performing hash function
     // Does NOT add duplicate items
