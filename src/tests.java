@@ -129,7 +129,7 @@ public class tests {
     }
 
     @Test
-    public void keywordsConnaTest() {
+    public void keywordsHash3Test() {
         System.out.println("----------KEYWORDS TEST general----------");
         HashTable<String> hashTable = new HashTable<>(150);
         hashTable.type = "CONNA";

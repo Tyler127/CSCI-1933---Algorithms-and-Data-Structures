@@ -62,18 +62,36 @@ public class HashTable<T>{
         return hashReturn;
     }
 
-    public int connaHash(T item) {
+    public int hash3(T item) {
         int hashReturn = 0;
         if(item instanceof String) {
+            //splits String into list of individual string characters
             String[] chars = ((String) item).split("");
-            for(String string : chars) {
+            for(String string : chars) {//goes through list
+                //adds the char to the total int(char is automatically converted into ASCII value if directly put to an int)
                 hashReturn += string.charAt(0);
+                //multiplies by a large prime number
                 hashReturn = hashReturn * 7919;
+                //mods by a slightly smaller prime number
+                hashReturn = hashReturn % 7717;
+                //another prime
+                hashReturn = hashReturn * 7549;
+                //mod another prime
+                hashReturn = hashReturn % 7351;
+                //another prime
+                hashReturn = hashReturn * 7159;
+                //adding next prime INCREASES average length  
+                // skill issue + 1 
+                //hashReturn = hashReturn % 6967;
+
             }
+            //hashreturn is modded by table length to keep within table bounds
             hashReturn = hashReturn % hashTable.length;
 
+            //If the value goes over the max is automatically becomes negative, in that event the absolute value is taken to keep within table boundaries
             if(hashReturn < 0) hashReturn = Math.abs(hashReturn);
         }
+        return hashReturn;
     }
 
     // The add method which adds an item to the hash table using your best performing hash function
@@ -86,7 +104,7 @@ public class HashTable<T>{
         NGen<T> head = null;
         if (this.type.equals("GENERAL")) head = this.hashTable[this.hash1(item)];
         else if (this.type.equals("SPECIFIC")) head = this.hashTable[this.hash2(item)];
-        else if (this.type.equals("CONNA")) head = this.hashTable[this.connaHash(item)];
+        else if (this.type.equals("HASH3")) head = this.hashTable[this.hash3(item)];
 
         // Case 2: head points to nothing
         if (head.getNext() == null) head.setNext(new NGen<>(item, null));
@@ -183,7 +201,10 @@ public class HashTable<T>{
     // TODO: Create a hash table, store all words from "canterbury.txt", and display the table
     //  Create another hash table, store all words from "keywords.txt", and display the table
     public static void main(String args[]) {
-
-
+        System.out.println("----------GETTYSBURG TEST hash3----------");
+        HashTable<String> hashTable = new HashTable<>(150);
+        hashTable.type = "HASH3";
+        hashTable.addWordsFromFile("src/gettysburg.txt");
+        hashTable.display();
     }
 }
