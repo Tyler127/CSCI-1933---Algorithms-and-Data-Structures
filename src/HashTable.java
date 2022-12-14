@@ -11,15 +11,12 @@ public class HashTable<T>{
         for (int i = 0; i < length; i++) hashTable[i] = new NGen<>();
     }
 
+    /*
+        This hash starts with 13 then multiplies by the character then divides by 23.
+        Then, multiplies and divided by 2 sets of coprime numbers.
+        Then, mods by the table length and takes the absolute value.
+    */
     public int hash1(T item) {
-        /*
-        Multiplicative hashing: (usually on numbers but used the concept of coprime numbers here)
-        Standard multiplicative hashing uses the formula:
-        hash(K) = (aK mod W) / (W/table length)
-        which produces a hash value in {0,...,table length - 1}.
-        The value 'a' is an appropriately chosen value that should be relatively prime to 'W';
-        it should be large and its binary representation a random mix of 1's and 0's.
-         */
         int hashReturn = 13;
         if (item instanceof String) {
             String[] chars = ((String) item).split("");
@@ -43,29 +40,13 @@ public class HashTable<T>{
         return hashReturn;
     }
 
+    /*
+        Adds the ASCII of each character to the total, 
+        then multiplies and mods the total by large primes to result in a series of remainders, for each character in the string.
+        prime numbers are best for hashing as the chance of different letters coming out to the same index is lessened
+        the restriction of table size does reduce how effective the use of prime numbers is
+    */
     public int hash2(T item) {
-        int hashReturn = 0;
-        if (item instanceof String) {
-            String[] chars = ((String) item).split("");
-            for (String string : chars) {
-                hashReturn += string.charAt(0);
-                //hashReturn = hashReturn * 97879;
-                hashReturn = hashReturn * 999451;
-                //hashReturn = hashReturn ^ string.charAt(0) >>> 3;
-            }
-            // Mod hash return, so it is always within the index range of the hashTable
-            hashReturn = hashReturn % hashTable.length;
-
-            // If the hash function went over the int max value, take absolute value of the mod
-            if (hashReturn < 0) hashReturn = Math.abs(hashReturn);
-        }
-        return hashReturn;
-    }
-
-    //Adds the ASCII of each character to the total, then multiplies and mods the total by large primes to result in a series of remainders, for each character in the string
-    //prime numbers are best for hashing as the chance of different letters coming out to the same index is lessened
-    //the restriction of table size does reduce how effective the use of prime numbers is
-    public int hash3(T item) {
         int hashReturn = 0;
         if(item instanceof String) {
             //splits String into list of individual string characters
@@ -73,15 +54,10 @@ public class HashTable<T>{
             for(String string : chars) {//goes through list
                 //adds the char to the total int(char is automatically converted into ASCII value if directly put to an int)
                 hashReturn += string.charAt(0);
-                //multiplies by a large prime number
                 hashReturn = hashReturn * 7919;
-                //mods by a slightly smaller prime number
                 hashReturn = hashReturn % 7717;
-                //another prime
                 hashReturn = hashReturn * 7549;
-                //mod another prime
                 hashReturn = hashReturn % 7351;
-                //another prime
                 hashReturn = hashReturn * 7159;
                 //adding next prime INCREASES average length  
                 // skill issue + 1 
@@ -98,9 +74,34 @@ public class HashTable<T>{
         return hashReturn;
     }
 
+    /*
+        This hash is an implementation of the djb2 hash function created by Dan Bernstein. 
+        No output is printed with this function! It was used for comparison to our hashes.
+        Works by starting with 5391.
+        Then, loops over the string and multiplies by 33 and adds the character.
+        Then, multiplies and divided by 2 sets of coprime numbers.
+        Then, mods by the table length and takes the absolute value.
+    */
+    public int djb2Hash(T item) {
+        int hashReturn = 5391;
+        if (item instanceof String) {
+            String[] chars = ((String) item).split("");
+            for (String string : chars) {
+                hashReturn = (hashReturn * 33) + string.charAt(0);
+            }
+            // Mod hash return, so it is always within the index range of the hashTable
+            hashReturn = hashReturn % hashTable.length;
 
-    // The add method which adds an item to the hash table using your best performing hash function
-    // Does NOT add duplicate items
+            // If the hash function went over the int max value, take absolute value of the mod
+            if (hashReturn < 0) hashReturn = Math.abs(hashReturn);
+        }
+        return hashReturn;
+    }
+
+    /*  
+        The add method which adds an item to the hash table using your best performing hash function
+        Does NOT add duplicate items
+    */
     public void add(T item) {
         // Case 1: Item is null
         if (item == null) return;
@@ -109,7 +110,7 @@ public class HashTable<T>{
         NGen<T> head = null;
         if (this.type.equals("GENERAL")) head = this.hashTable[this.hash1(item)];
         else if (this.type.equals("SPECIFIC")) head = this.hashTable[this.hash2(item)];
-        else if (this.type.equals("HASH3")) head = this.hashTable[this.hash3(item)];
+        else if (this.type.equals("DJB2")) head = this.hashTable[this.djb2Hash(item)];
 
         // Case 2: head points to nothing
         if (head.getNext() == null) head.setNext(new NGen<>(item, null));
@@ -154,8 +155,10 @@ public class HashTable<T>{
         }
     }
 
-    // The display method which prints the indices of the hash table and the number of words "hashed"
-    // to each index.
+    /*  
+        The display method which prints the indices of the hash table and the number of words "hashed"
+        to each index.
+    */
     public void display() {
         int numUniqueWords = 0;
         int longestChain = 0;
@@ -203,25 +206,53 @@ public class HashTable<T>{
 
     public NGen<T>[] getHashTable() {return this.hashTable;}
 
-    // TODO: Create a hash table, store all words from "canterbury.txt", and display the table
-    //  Create another hash table, store all words from "keywords.txt", and display the table
+    // Create a hash table, store all words from "canterbury.txt", and display the table
+    // Create another hash table, store all words from "keywords.txt", and display the table
     public static void main(String args[]) {
-        System.out.println("----------GETTYSBURG TEST GENERAL----------");
+        /*
+        ------------------ ANALYSIS: -------------------------
+            - Each individual hash function is explained above the method. 
+
+        ATTEMPTS:
+            - The first hash function we attempted was simply adding all of the characters
+                together and then modding that sum by the table length.
+
+            - The second hash function attempt, for each char in the input string,
+                we added the char multiplied by the length of the string.
+                Then modded the sum by the table length.
+
+            - After deciding to multiply by big prime numbers and coprime numbers, we added in the abs value
+                of the mod to prevent negative results because the sums were going above
+                the max value for integers.
+        
+        PERFORMANCE:
+            - For the hash1 and hash2 we used (general and specific respectively), 
+                hash1 performed around the same as hash2 for the general gettysburg txt file
+                with a max chain length of 4 vs 5. 
+                The performance was similar for the specific keywords txt file, with hash1 and hash2
+                both having a max chain length of 2. Although the hash2 had a slight but negligible 
+                advantage with 1.04 average collision length compared to hash1's 1.08.
+
+            - So either hash function would have been effective for either use case. We chose 
+                hash1 for general and hash2 for specific.
+
+            - We used even, odd, and prime numbers for the table lengths while testing.
+                We came to the conclusion that there isn't much of an advantage to 
+                hand-picking a specific table length, as the advantages for doing so
+                was often just a difference of 1 in max chain length
+
+        */
+
+        System.out.println("----------GETTYSBURG TEST (GENERAL)----------");
         HashTable<String> hashTable = new HashTable<>(150);
         hashTable.type = "GENERAL";
         hashTable.addWordsFromFile("src/gettysburg.txt");
         hashTable.display();
 
-        System.out.println("----------KEYWORDS TEST SPECIFIC----------");
+        System.out.println("----------KEYWORDS TEST (SPECIFIC)----------");
         HashTable<String> hashTable2 = new HashTable<>(500);
         hashTable2.type = "SPECIFIC";
         hashTable2.addWordsFromFile("src/keywords.txt");
         hashTable2.display();
-
-        System.out.println("----------GETTYSBURG TEST HASH3---");
-        HashTable<String> hashTable3 = new HashTable<>(150);
-        hashTable3.type = "HASH3";
-        hashTable3.addWordsFromFile("src/gettysburg.txt");
-        hashTable3.display();
     }
 }

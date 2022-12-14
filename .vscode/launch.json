@@ -9,6 +9,13 @@
             "name": "Launch HashTable",
             "request": "launch",
             "mainClass": "HashTable",
+            "projectName": "CSCI 1933 - Algorithms and Data Structures_77b9966d"
+        },
+        {
+            "type": "java",
+            "name": "Launch HashTable",
+            "request": "launch",
+            "mainClass": "HashTable",
             "projectName": "CSCI-1933---Algorithms-and-Data-Structures_52878bc1"
         },
         {
