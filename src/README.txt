@@ -20,7 +20,7 @@ Assumptions:
     - None
 
 Additional Features:
-    - None
+    - Displaying the hashtable also shows which keys are mapped to that index.
 
 Bugs and Defects:
     - None known
